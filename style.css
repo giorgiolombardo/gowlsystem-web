@@ -88,7 +88,7 @@ h1 {
 .hero-actions {
     display: flex;
     gap: 1rem;
-    margin-top: 0.5srem;
+    margin-top: 0.5rem;
 }
 
 .btn {
@@ -119,6 +119,32 @@ h1 {
 .btn-secondary:hover {
     background-color: rgba(255, 255, 255, 0.1);
     color: #ffffff;
+}
+
+/* Stile per la nuova sezione di presentazione */
+.about-section {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 8px;
+    padding: 2rem;
+}
+
+.about-section h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 1rem;
+}
+
+.about-section p {
+    color: #94a3b8;
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+}
+
+.about-section p:last-child {
+    margin-bottom: 0;
 }
 
 .features-grid {
@@ -179,4 +205,11 @@ h1 {
 
 .site-footer a:hover {
     color: #ffffff;
+}
+
+.footer-social {
+    margin-top: 0.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
 }
