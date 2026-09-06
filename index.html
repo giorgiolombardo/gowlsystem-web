@@ -3,70 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>gOWLsystem - Precision Viticulture & VRA Pipeline</title>
+    <title>gOWLsystem — Integrated VRA & Field Logistics Engine</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+
     <div class="page-wrapper">
-        <header>
-            <div class="logo-area">
-                <a href="#" class="logo">gOWLsystem</a>
-                <span class="status-badge">System Online</span>
+        <header class="site-header">
+            <div class="logo">g<span>OWL</span>system</div>
+            <div class="badge-status">
+                <span class="status-dot"></span> System Online
             </div>
         </header>
 
-        <main>
-            <section class="hero-section">
+        <main class="hero-section">
+            <div class="hero-content">
                 <h1>Precision Viticulture & Prescription Mapping</h1>
                 <p class="subtitle">Advanced VRA engine and field logistics workflows designed for data-driven agricultural management.</p>
-                <div class="hero-actions">
+                
+                <div class="action-buttons">
                     <a href="#features" class="btn btn-primary">Scopri le Funzioni</a>
                     <a href="mailto:info@gowlsystem.com" class="btn btn-secondary">Contatta il Team</a>
                 </div>
-            </section>
-
-            <section class="about-section">
-                <h2>Il Progetto</h2>
-                <p>
-                    <strong>gOWLsystem</strong> nasce per integrare il rilievo fotogrammetrico da drone e l'analisi geospaziale avanzata nei processi operativi della viticoltura moderna. Sfruttando indici di vigore vegetativo (VARI, NDVI) e modelli di architettura della chioma, la piattaforma automatizza la generazione di mappe di prescrizione a dosaggio variabile (VRA) e file geospaziali multi-formato (ISO-XML, Shapefile, GeoJSON, KML/KMZ).
-                </p>
-                <p>
-                    L'obiettivo è ottimizzare gli interventi agronomici — dalla concimazione fogliare alla difesa fitosanitaria — garantendo la massima compatibilità sia con le console di bordo delle macchine agricole sia con dispositivi portatili, tablet e droni per la navigazione e il monitoraggio diretto in campo.
-                </p>
-            </section>
+            </div>
 
             <section id="features" class="features-grid">
                 <div class="feature-card">
+                    <div class="icon">🛰️</div>
                     <h3>VRA Pipeline</h3>
-                    <p>Elaborazione dati geospaziali e generazione automatizzata di mappe e layer nei formati ISO-XML, Shapefile, GeoJSON e KML/KMZ per droni e device mobili.</p>
-                    <a href="#" class="card-link">Esplora Pipeline &rarr;</a>
+                    <p>Elaborazione dati geospaziali e generazione automatizzata di mappe di prescrizione multi-formato (ISO-XML, Shapefile, GeoJSON).</p>
+                    <div style="margin-top: 15px;">
+                        <a href="https://github.com/giorgiolombardo/pipeline_del_sistema_goWL" target="_blank" rel="noopener noreferrer" style="color: #4ade80; text-decoration: none; font-weight: 600; font-size: 0.9rem;">Esplora Pipeline &rarr;</a>
+                    </div>
+                </div>
+
+                <div class="feature-card beta-card">
+                    <div class="icon">🗺️</div>
+                    <h3>Viewer VRA <span class="beta-tag">BETA</span></h3>
+                    <p>Interfaccia di anteprima interattiva per la visualizzazione rapida dei livelli di vigore e dei layer agronomici.</p>
+                    <a href="#" class="link-disabled" title="Disponibile a breve">Anteprima in arrivo &rarr;</a>
                 </div>
 
                 <div class="feature-card">
-                    <h3>Viewer VRA <span style="font-size: 0.75rem; background: #d97706; color: #fff; padding: 0.1rem 0.4rem; border-radius: 3px; vertical-align: middle; margin-left: 5px;">BETA</span></h3>
-                    <p>Interfaccia di anteprima interattiva per la visualizzazione rapida dei livelli di vigore e dei layer agronomici su qualsiasi schermo.</p>
-                    <a href="#" class="card-link" style="color: #64748b; cursor: not-allowed;">Anteprima in arrivo &rarr;</a>
-                </div>
-
-                <div class="feature-card">
+                    <div class="icon">🚜</div>
                     <h3>Field Logistics</h3>
                     <p>Integrazione ottimizzata dei flussi operativi per macchine agricole, tablet da campo e monitoraggio continuo dello sviluppo vegetativo.</p>
-                    <a href="#" class="card-link">Dettagli Logistica &rarr;</a>
+                    <div style="margin-top: 15px;">
+                        <a href="mailto:info@gowlsystem.com" style="color: #4ade80; text-decoration: none; font-weight: 600; font-size: 0.9rem;">Dettagli Logistica &rarr;</a>
+                    </div>
                 </div>
             </section>
         </main>
 
         <footer class="site-footer">
             <p>&copy; 2026 Giorgio Lombardo &bull; <a href="mailto:info@gowlsystem.com">info@gowlsystem.com</a></p>
-            <div class="footer-social">
-                <a href="https://github.com/giorgiolombardo" target="_blank">GitHub</a>
-                <a href="https://www.linkedin.com" target="_blank">LinkedIn</a>
-            </div>
+            <p style="margin-top: 8px;"><a href="https://github.com/giorgiolombardo/pipeline_del_sistema_goWL" target="_blank">GitHub</a> &bull; <a href="https://linkedin.com" target="_blank">LinkedIn</a></p>
         </footer>
     </div>
+
 </body>
 </html>
-
