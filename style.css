@@ -1,4 +1,3 @@
-cat << 'EOF' > style.css
 * {
     margin: 0;
     padding: 0;
@@ -132,6 +131,9 @@ body {
     border-radius: 14px;
     padding: 30px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    text-align: left;
+    max-width: 1000px;
+    width: 100%;
 }
 
 .features-grid {
@@ -227,8 +229,3 @@ body {
         text-align: center;
     }
 }
-EOF
-
-git add style.css index.html
-git commit -m "Aggiornato style.css con look coerente per about-section e card features"
-git push origin principale
