@@ -1,4 +1,4 @@
-/* Reset e impostazioni di base */
+cat << 'EOF' > style.css
 * {
     margin: 0;
     padding: 0;
@@ -7,219 +7,228 @@
 
 body {
     font-family: 'Inter', sans-serif;
-    background-color: #0f1410;
-    color: #e2e8f0;
-    line-height: 1.6;
+    background-color: #09090b;
+    color: #f4f4f5;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
 
 .page-wrapper {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 2rem;
-    width: 100%;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 0 24px;
 }
 
-/* Header */
 .site-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-bottom: 2rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 32px 0;
 }
 
 .logo {
     font-size: 1.5rem;
     font-weight: 700;
-    letter-spacing: -0.5px;
-    color: #ffffff;
+    letter-spacing: -0.025em;
+    color: #fff;
 }
 
 .logo span {
-    color: #10b981; /* Verde agritech */
+    color: #4ade80;
 }
 
 .badge-status {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 8px;
+    background: #18181b;
+    border: 1px solid #27272a;
+    padding: 6px 14px;
+    border-radius: 9999px;
     font-size: 0.85rem;
-    background: rgba(16, 185, 129, 0.1);
-    color: #34d399;
-    padding: 0.35rem 0.85rem;
-    border-radius: 50px;
-    border: 1px solid rgba(16, 185, 129, 0.2);
+    color: #a1a1aa;
 }
 
 .status-dot {
     width: 8px;
     height: 8px;
-    background-color: #10b981;
+    background-color: #4ade80;
     border-radius: 50%;
-    box-shadow: 0 0 8px #10b981;
+    box-shadow: 0 0 8px rgba(74, 222, 128, 0.6);
 }
 
-/* Hero Section */
 .hero-section {
     flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 4rem 0;
+    align-items: center;
     text-align: center;
+    padding: 40px 0 80px 0;
 }
 
 .hero-content h1 {
-    font-size: clamp(2rem, 4vw, 3.2rem);
-    font-weight: 700;
-    color: #ffffff;
-    margin-bottom: 1rem;
-    letter-spacing: -1px;
+    font-size: 3rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    margin-bottom: 20px;
+    color: #fff;
+    max-width: 900px;
 }
 
 .subtitle {
-    font-size: clamp(1rem, 2vw, 1.2rem);
-    color: #94a3b8;
-    max-width: 700px;
-    margin: 0 auto 2.5rem auto;
+    font-size: 1.15rem;
+    color: #a1a1aa;
+    max-width: 650px;
+    margin-bottom: 36px;
+    line-height: 1.6;
 }
 
-/* Pulsanti */
 .action-buttons {
     display: flex;
-    gap: 1rem;
+    gap: 16px;
     justify-content: center;
-    margin-bottom: 4rem;
-    flex-wrap: wrap;
+    margin-bottom: 40px;
 }
 
 .btn {
-    padding: 0.75rem 1.75rem;
+    padding: 12px 24px;
     border-radius: 8px;
-    font-weight: 500;
+    font-weight: 600;
+    font-size: 0.95rem;
     text-decoration: none;
     transition: all 0.2s ease;
-    font-size: 0.95rem;
 }
 
 .btn-primary {
-    background-color: #10b981;
-    color: #064e3b;
-    font-weight: 600;
+    background-color: #fff;
+    color: #09090b;
 }
 
 .btn-primary:hover {
-    background-color: #34d399;
-    transform: translateY(-1px);
+    background-color: #e4e4e7;
 }
 
 .btn-secondary {
-    background-color: rgba(255, 255, 255, 0.05);
-    color: #ffffff;
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    background-color: #18181b;
+    color: #fff;
+    border: 1px solid #27272a;
 }
 
 .btn-secondary:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: #27272a;
+    border-color: #3f3f46;
 }
 
-/* Griglia delle Funzionalità */
+.about-section {
+    background: #121215;
+    border: 1px solid #222225;
+    border-radius: 14px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
 .features-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+    width: 100%;
+    margin-top: 40px;
     text-align: left;
 }
 
 .feature-card {
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    padding: 2rem;
-    border-radius: 12px;
+    background: #121215;
+    border: 1px solid #222225;
+    border-radius: 14px;
+    padding: 28px;
     transition: transform 0.2s ease, border-color 0.2s ease;
-    position: relative;
-    z-index: 1;
 }
 
 .feature-card:hover {
     transform: translateY(-3px);
-    border-color: rgba(16, 185, 129, 0.4);
+    border-color: #3f3f46;
 }
 
 .feature-card .icon {
     font-size: 1.8rem;
-    margin-bottom: 1rem;
+    margin-bottom: 16px;
 }
 
 .feature-card h3 {
-    font-size: 1.15rem;
-    color: #ffffff;
-    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #fff;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 10px;
 }
 
 .feature-card p {
-    font-size: 0.9rem;
-    color: #94a3b8;
-    line-height: 1.5;
-}
-
-/* Link interattivi dentro le card */
-.feature-card a {
-    position: relative;
-    z-index: 2;
-    display: inline-block;
-    color: #4ade80;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 0.9rem;
-    margin-top: 1rem;
-}
-
-.feature-card a:hover {
-    text-decoration: underline;
+    font-size: 0.95rem;
+    color: #a1a1aa;
+    line-height: 1.6;
 }
 
 .beta-tag {
-    font-size: 0.65rem;
-    background: #f59e0b;
-    color: #78350f;
-    padding: 0.15rem 0.4rem;
+    background: rgba(234, 179, 8, 0.15);
+    color: #facc15;
+    font-size: 0.7rem;
+    padding: 2px 6px;
     border-radius: 4px;
     font-weight: 700;
-    vertical-align: middle;
+    letter-spacing: 0.05em;
+    border: 1px solid rgba(234, 179, 8, 0.3);
 }
 
 .link-disabled {
     display: inline-block;
-    margin-top: 1rem;
-    font-size: 0.85rem;
-    color: #64748b;
+    margin-top: 16px;
+    color: #71717a;
     text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: default;
 }
 
-/* Footer */
 .site-footer {
     text-align: center;
-    padding-top: 2rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
-    font-size: 0.85rem;
-    color: #64748b;
+    padding: 32px 0;
+    color: #71717a;
+    font-size: 0.9rem;
+    border-top: 1px solid #18181b;
 }
 
 .site-footer a {
-    color: #94a3b8;
+    color: #a1a1aa;
     text-decoration: none;
 }
 
 .site-footer a:hover {
-    color: #ffffff;
+    color: #fff;
 }
+
+@media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: 2.2rem;
+    }
+    .action-buttons {
+        flex-direction: column;
+    }
+    .btn {
+        width: 100%;
+        text-align: center;
+    }
+}
+EOF
+
+git add style.css index.html
+git commit -m "Aggiornato style.css con look coerente per about-section e card features"
+git push origin principale
