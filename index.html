@@ -1,3 +1,4 @@
+cat << 'EOF' > index.html
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -30,13 +31,23 @@
                 </div>
             </div>
 
+            <section class="about-section" style="max-width: 800px; margin: 40px auto 20px auto; padding: 0 20px; text-align: left; color: #a1a1aa; line-height: 1.7;">
+                <h2 style="color: #fff; font-size: 1.5rem; margin-bottom: 15px;">Il Progetto</h2>
+                <p style="margin-bottom: 15px;">
+                    <strong>gOWLsystem</strong> nasce per integrare il rilievo fotogrammetrico da drone e l'analisi geospaziale avanzata nei processi operativi della viticoltura moderna. Sfruttando indici di vigore vegetativo (VARI, NDVI) e modelli di architettura della chioma, la piattaforma automatizza la generazione di mappe di prescrizione a dosaggio variabile (VRA) e file geospaziali multi-formato.
+                </p>
+                <p>
+                    L'obiettivo è ottimizzare gli interventi agronomici — dalla concimazione fogliare alla difesa fitosanitaria — garantendo la massima compatibilità sia con le console di bordo delle macchine agricole sia con i dispositivi mobili per il monitoraggio diretto in campo.
+                </p>
+            </section>
+
             <section id="features" class="features-grid">
                 <div class="feature-card">
                     <div class="icon">🛰️</div>
                     <h3>VRA Pipeline</h3>
-                    <p>Elaborazione dati geospaziali e generazione automatizzata di mappe di prescrizione multi-formato (ISO-XML, Shapefile, GeoJSON).</p>
+                    <p>Elaborazione dati geospaziali e generazione automatizzata di mappe di prescrizione multi-formato (ISO-XML, Shapefile, GeoJSON, KML/KMZ).</p>
                     <div style="margin-top: 15px;">
-                        <a href="https://github.com/giorgiolombardo/pipeline_del_sistema_goWL" target="_blank" rel="noopener noreferrer" style="color: #4ade80; text-decoration: none; font-weight: 600; font-size: 0.9rem;">Esplora Pipeline &rarr;</a>
+                        <button onclick="document.getElementById('pipeline-modal').style.display='flex'" style="background: #27272a; border: 1px solid #3f3f46; color: #4ade80; cursor: pointer; padding: 8px 16px; border-radius: 6px; font-weight: 600; font-size: 0.9rem;">Esplora Pipeline &rarr;</button>
                     </div>
                 </div>
 
@@ -48,21 +59,38 @@
                 </div>
 
                 <div class="feature-card">
-                    <div class="icon">🚜</div>
+                    <div class="icon">⚙️</div>
                     <h3>Field Logistics</h3>
-                    <p>Integrazione ottimizzata dei flussi operativi per macchine agricole, tablet da campo e monitoraggio continuo dello sviluppo vegetativo.</p>
-                    <div style="margin-top: 15px;">
-                        <a href="mailto:info@gowlsystem.com" style="color: #4ade80; text-decoration: none; font-weight: 600; font-size: 0.9rem;">Dettagli Logistica &rarr;</a>
-                    </div>
+                    <p>Integrazione ottimizzata dei flussi operativi per macchine agricole, report PDF operativi per il lavoro in campo e pacchetti <code>.zip</code> dedicati al QCdc.</p>
                 </div>
             </section>
         </main>
 
+        <!-- Finestra Modale Esplora Pipeline -->
+        <div id="pipeline-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 9999; justify-content: center; align-items: center; padding: 20px;" onclick="if(event.target === this) this.style.display='none';">
+          <div style="background: #18181b; color: #fff; max-width: 700px; width: 100%; padding: 30px; border-radius: 12px; position: relative; max-height: 85vh; overflow-y: auto; border: 1px solid #27272a; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);">
+            <button onclick="document.getElementById('pipeline-modal').style.display='none'" style="position: absolute; top: 20px; right: 20px; background: none; border: none; color: #a1a1aa; font-size: 1.8rem; cursor: pointer; line-height: 1;">&times;</button>
+            
+            <h2 style="margin-bottom: 20px; font-size: 1.6rem; color: #4ade80;">Flusso Operativo gOWLsystem</h2>
+            <ul style="list-style-type: none; padding: 0; line-height: 1.8;">
+              <li style="margin-bottom: 15px;"><strong>1. Acquisizione e Pre-elaborazione</strong> — Integrazione dei rilievi fotogrammetrici da drone (RGB e multispettrali), suddivisione e georeferenziazione dei raster per preparare ortofoto ad alta risoluzione pronte all'analisi spaziale.</li>
+              <li style="margin-bottom: 15px;"><strong>2. Elaborazione Indici di Vigore</strong> — Calcolo automatico degli indici vegetativi (come VARI e NDVI) e dei modelli di architettura della chioma per mappare lo stato di salute e la vigoria reale del vigneto.</li>
+              <li style="margin-bottom: 15px;"><strong>3. Generazione Prescrizioni Agronomiche (VRA)</strong> — Elaborazione mirata degli interventi — dalla concimazione fogliare e geolocalizzata alla difesa fitosanitaria e al controllo delle infestanti — trasformando i dati agronomici in mappe a dosaggio variabile.</li>
+              <li style="margin-bottom: 15px;"><strong>4. Automazione GIS e Standardizzazione</strong> — Gestione automatizzata dei layer territoriali e conversione nei formati standard internazionali compatibili con le console di bordo delle macchine agricole e i dispositivi mobili da campo (ISO-XML, Shapefile, GeoJSON, KML/KMZ).</li>
+              <li><strong>5. Controllo e Operatività in Campo</strong> — Validazione complessiva del flusso operativo, generazione della documentazione di cantiere in formato PDF dedicata agli operatori e creazione del pacchetto <code>.zip</code> per il Registro dei Trattamenti e il Quaderno di Campagna Elettronico (QCdc).</li>
+            </ul>
+          </div>
+        </div>
+
         <footer class="site-footer">
             <p>&copy; 2026 Giorgio Lombardo &bull; <a href="mailto:info@gowlsystem.com">info@gowlsystem.com</a></p>
-            <p style="margin-top: 8px;"><a href="https://github.com/giorgiolombardo/pipeline_del_sistema_goWL" target="_blank">GitHub</a> &bull; <a href="https://linkedin.com" target="_blank">LinkedIn</a></p>
         </footer>
     </div>
 
 </body>
 </html>
+EOF
+
+git add index.html
+git commit -m "Rimosso link errato da Field Logistics card"
+git push origin principale
