@@ -211,6 +211,7 @@ body {
 .site-footer a {
     color: #a1a1aa;
     text-decoration: none;
+    transition: color 0.2s ease;
 }
 
 .site-footer a:hover {
