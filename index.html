@@ -1,32 +1,60 @@
-<section id="beta-access" class="beta-section">
-    <div class="beta-panel">
-        <div class="beta-intro">
-            <h2>Richiedi l'Accesso Prioritario</h2>
-            <p>Nessuno spam. Solo l'invito al rilascio della Beta e anteprime geospaziali.</p>
-        </div>
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ardilla Violeta | L'Hub Geospaziale Italiano</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="page-wrapper">
+        <header class="site-header">
+            <div class="logo">Ardilla <span>Violeta</span></div>
+        </header>
         
-        <form action="https://formspree.io/f/xnpndrrb" method="POST" class="beta-form">
-            
-            <div class="field">
-                <label for="email">La tua Email</label>
-                <input type="email" id="email" name="email" required placeholder="nome@esempio.it">
+        <main class="hero-section">
+            <div class="hero-content">
+                <h1>Mappando l'ecosistema GIS in Italia</h1>
+                <p class="subtitle">Lo spazio digitale per chi progetta con i Dati Geografici. Connettiamo professionisti GIS, analisti territoriali e sviluppatori.</p>
             </div>
 
-            <div class="field">
-                <label for="profile">Qual è il tuo profilo?</label>
-                <select id="profile" name="profile" required>
-                    <option value="" disabled selected>Seleziona il tuo profilo...</option>
-                    <option value="Professionista / Azienda">Professionista / Azienda</option>
-                    <option value="Studente / Ricercatore">Studente / Ricercatore</option>
-                </select>
-            </div>
+            <!-- Sezione del form di accesso Beta -->
+            <section id="beta-access" class="beta-section">
+                <div class="beta-panel">
+                    <div class="beta-intro">
+                        <h2>Richiedi l'Accesso Prioritario</h2>
+                        <p>Nessuno spam. Solo l'invito al rilascio della Beta e anteprime geospaziali.</p>
+                    </div>
+                    
+                    <form action="https://formspree.io/f/xnpndrrb" method="POST" class="beta-form">
+                        <div class="field">
+                            <label for="email">La tua Email</label>
+                            <input type="email" id="email" name="email" required placeholder="nome@esempio.it">
+                        </div>
 
-            <div class="field">
-                <label for="notes">Note o aspettative (facoltativo)</label>
-                <textarea id="notes" name="notes" rows="3" placeholder="Raccontaci brevemente di cosa ti occupi..."></textarea>
-            </div>
+                        <div class="field">
+                            <label for="profile">Qual è il tuo profilo?</label>
+                            <select id="profile" name="profile" required>
+                                <option value="" disabled selected>Seleziona il tuo profilo...</option>
+                                <option value="Professionista / Azienda">Professionista / Azienda</option>
+                                <option value="Studente / Ricercatore">Studente / Ricercatore</option>
+                            </select>
+                        </div>
 
-            <button type="submit" class="btn btn-primary beta-submit">Ottieni l'accesso prioritario</button>
-        </form>
+                        <div class="field">
+                            <label for="notes">Note o aspettative (facoltativo)</label>
+                            <textarea id="notes" name="notes" rows="3" placeholder="Raccontaci brevemente di cosa ti occupi..."></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary beta-submit">Ottieni l'accesso prioritario</button>
+                    </form>
+                </div>
+            </section>
+        </main>
+
+        <footer class="site-footer">
+            <p>&copy; 2026 Ardilla Violeta. Tutti i diritti riservati.</p>
+        </footer>
     </div>
-</section>
+</body>
+</html>
