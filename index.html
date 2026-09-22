@@ -125,6 +125,19 @@
             color: #fff;
         }
 
+        .section-title-link {
+            color: #fff;
+            text-decoration: none;
+            border-bottom: 2px dashed var(--accent-green);
+            transition: color 0.2s, border-color 0.2s;
+            cursor: pointer;
+        }
+
+        .section-title-link:hover {
+            color: var(--accent-green);
+            border-bottom-style: solid;
+        }
+
         .info-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
@@ -157,6 +170,114 @@
             color: var(--text-muted);
             font-size: 1rem;
             margin: 0;
+        }
+
+        /* Modale a scomparsa (Lightbox/Popup) */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(5, 8, 15, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem;
+            box-sizing: border-box;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: #111827;
+            border: 1px solid rgba(46, 164, 79, 0.3);
+            border-radius: 24px;
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 2.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+            position: relative;
+            text-align: left;
+            animation: modalPop 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes modalPop {
+            0% { transform: scale(0.95); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .modal-close:hover {
+            background: var(--accent-glow);
+            color: #fff;
+            border-color: var(--accent-green);
+        }
+
+        .modal-header h3 {
+            color: #fff;
+            font-size: 1.75rem;
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+
+        .modal-intro {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1.5rem;
+        }
+
+        .modal-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .modal-step-item h4 {
+            color: #fff;
+            font-size: 1.1rem;
+            margin: 0 0 0.35rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .modal-step-item h4 span {
+            color: var(--accent-green);
+            font-family: monospace;
+        }
+
+        .modal-step-item p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin: 0;
+            line-height: 1.6;
         }
 
         /* Video Showcase */
@@ -317,6 +438,7 @@
             .hero-section h1 { font-size: 2.25rem; }
             .beta-section { padding: 2rem; }
             .mission-box { padding: 1.5rem; }
+            .modal-content { padding: 1.5rem; }
         }
     </style>
 </head>
@@ -349,7 +471,9 @@
 
             <!-- Sezione Pipeline & Schema -->
             <section id="pipeline" class="pipeline-section">
-                <h2 class="section-title">Come Funziona la Pipeline</h2>
+                <h2 class="section-title">
+                    <a href="#" id="openPipelineModal" class="section-title-link" title="Clicca per esplorare la pipeline nel dettaglio">Come Funziona la Pipeline</a>
+                </h2>
                 <div class="info-grid">
                     <div class="info-card">
                         <h3>01. Rilievi Drone & Satellitari</h3>
@@ -357,7 +481,7 @@
                     </div>
                     <div class="info-card">
                         <h3>02. Elaborazione GIS & VRA</h3>
-                        <p>Analisi spaziale e modellazione dei dati all'interno dell'ambiente GIS, per tradurre lo stato effettivo della coltura in mappe di prescrizione agronomica a rateo variabile (VRA) mirate e calibrate.</p>
+                        <p>Analisi spaziale e modellazione dei dati all'interno dell'ambiente GIS, per tradurre lo stato effettivo della coltura in mappe di prescrizione agronomica mirate a supportare tutte le operazioni a rateo variabile.</p>
                     </div>
                     <div class="info-card">
                         <h3>03. Export Nativo ISO-XML</h3>
@@ -365,6 +489,41 @@
                     </div>
                 </div>
             </section>
+
+            <!-- Modale a scomparsa della Pipeline -->
+            <div id="pipelineModal" class="modal-overlay">
+                <div class="modal-content">
+                    <button id="closePipelineModal" class="modal-close">&times;</button>
+                    <div class="modal-header">
+                        <h3>gOWLsystem Pipeline</h3>
+                    </div>
+                    <div class="modal-intro">
+                        Un flusso di lavoro digitale e automatizzato pensato per trasformare i dati aerei in strumenti operativi concreti, applicabile non solo alla viticoltura di precisione ma a qualsiasi coltura agricola e alla gestione agroforestale. La pipeline unisce il rilievo con drone all'analisi territoriale avanzata, traducendo lo stato reale della vegetazione in indicazioni agronomiche mirate, fruibili sia tramite report PDF per il lavoro in campo sia attraverso pacchetti di dati georeferenziati (.zip) pronti per i terminali di bordo dei trattori e per la tracciabilità aziendale.
+                    </div>
+                    <div class="modal-steps">
+                        <div class="modal-step-item">
+                            <h4><span>1.</span> Rilievo Aereo e Acquisizione Dati</h4>
+                            <p>Impiego di droni (UAS) per effettuare voli programmati e raccogliere immagini ad altissima risoluzione e dati geospaziali di qualsiasi appezzamento agricolo o area agroforestale.</p>
+                        </div>
+                        <div class="modal-step-item">
+                            <h4><span>2.</span> Fotogrammetria e Modellazione del Territorio</h4>
+                            <p>Elaborazione dei rilievi per generare ortofoto dettagliate e modelli tridimensionali del terreno e della vegetazione (DTM, DSM), offrendo una panoramica completa dello stato del suolo e della copertura vegetale, applicabile a colture arboree, erbacee e boschi.</p>
+                        </div>
+                        <div class="modal-step-item">
+                            <h4><span>3.</span> Analisi dello Stato Vegetativo</h4>
+                            <p>Elaborazione delle informazioni territoriali per estrarre la vigoria e lo stato di salute generale delle piante, evidenziando le differenze di sviluppo all'interno di qualsiasi campo o bosco.</p>
+                        </div>
+                        <div class="modal-step-item">
+                            <h4><span>4.</span> Generazione Mappe di Prescrizione (VRA)</h4>
+                            <p>Traduzione dei dati raccolti in indicazioni agronomiche mirate a rateo variabile, per distribuire risorse o interventi in modo mirato dove la vegetazione ne ha realmente bisogno.</p>
+                        </div>
+                        <div class="modal-step-item">
+                            <h4><span>5.</span> Esportazione Standard e Archiviazione</h4>
+                            <p>Conversione finale dei dati in formati pronti all'uso: file PDF di sintesi per l'operatore in campo e pacchetti .ZIP completi (con tracciati compatibili per le macchine agricole e la documentazione utile) per la gestione e la tracciabilità delle attività.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <!-- Sezione Video Demo / Viewer -->
             <section id="viewer" class="video-section">
@@ -427,5 +586,39 @@
             <p>&copy; 2026 gowlsystem.com — L'Hub Geospaziale e VRA per l'Agricoltura. Tutti i diritti riservati.</p>
         </footer>
     </div>
+
+    <!-- Script per la gestione del modale -->
+    <script>
+        const modal = document.getElementById('pipelineModal');
+        const openBtn = document.getElementById('openPipelineModal');
+        const closeBtn = document.getElementById('closePipelineModal');
+
+        openBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Blocca lo scroll del body
+        });
+
+        closeBtn.addEventListener('click', () => {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+
+        // Chiusura cliccando fuori dal box del modale
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Chiusura con tasto ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+    </script>
 </body>
 </html>
