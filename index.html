@@ -3,8 +3,270 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>gOWLsystem — Richiesta Accesso Beta Viewer</title>
+    <title>gOWLsystem — GIS & VRA Pipeline</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: rgba(17, 24, 39, 0.7);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --accent-green: #2ea44f;
+            --accent-glow: rgba(46, 164, 79, 0.2);
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        .page-wrapper {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        .site-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 3rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: #fff;
+        }
+
+        .logo span {
+            color: var(--accent-green);
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 3rem auto;
+        }
+
+        .hero-content h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, #fff, var(--text-muted));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+        }
+
+        /* Grid della Pipeline */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .info-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 2rem;
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(46, 164, 79, 0.4);
+        }
+
+        .info-card h3 {
+            color: #fff;
+            margin-top: 0;
+            margin-bottom: 0.75rem;
+            font-size: 1.25rem;
+        }
+
+        .info-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin: 0;
+        }
+
+        /* Sezione Video */
+        .video-section {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .video-section h2 {
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+            color: #fff;
+        }
+
+        .video-container {
+            max-width: 950px;
+            margin: 0 auto;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
+            border: 1px solid var(--border-color);
+            background: #000;
+        }
+
+        .video-container video {
+            width: 100%;
+            height: auto;
+            display: block;
+            max-height: 500px;
+            object-fit: cover;
+        }
+
+        /* Sezione Beta Viewer */
+        .beta-section {
+            max-width: 750px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 3rem;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 15px 30px -10px rgba(0,0,0,0.5);
+        }
+
+        .badge-beta {
+            display: inline-block;
+            background: var(--accent-glow);
+            color: var(--accent-green);
+            padding: 0.35rem 1rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            border: 1px solid rgba(46, 164, 79, 0.3);
+        }
+
+        .beta-header h2 {
+            font-size: 2rem;
+            margin: 1rem 0 0.5rem 0;
+            color: #fff;
+        }
+
+        .beta-header p {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        .beta-perks {
+            list-style: none;
+            padding: 0;
+            margin: 1.5rem 0 2rem 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .beta-perks li {
+            color: var(--text-main);
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .beta-perks li::before {
+            content: "✓";
+            color: var(--accent-green);
+            font-weight: bold;
+        }
+
+        /* Form Styling */
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.85rem 1rem;
+            background: rgba(10, 14, 23, 0.8);
+            border: 1px solid var(--border-color);
+            color: #fff;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            box-sizing: border-box;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-green);
+            box-shadow: 0 0 0 3px var(--accent-glow);
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 1rem;
+            background: var(--accent-green);
+            color: white;
+            border: none;
+            font-weight: 600;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.2s ease, transform 0.1s ease;
+            margin-top: 1rem;
+        }
+
+        .btn-submit:hover {
+            background: #26893c;
+        }
+
+        .btn-submit:active {
+            transform: scale(0.99);
+        }
+
+        .site-footer {
+            text-align: center;
+            padding: 3rem 0 1rem 0;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border-color);
+            margin-top: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 2rem; }
+            .beta-section { padding: 1.5rem; }
+        }
+    </style>
 </head>
 <body>
     <div class="page-wrapper">
@@ -12,27 +274,50 @@
             <div class="logo">g<span>OWL</span>system</div>
         </header>
         
-        <main class="hero-section" id="beta-access">
-            <div class="beta-container">
+        <main class="hero-section">
+            <div class="hero-content">
+                <h1>Mappando l'ecosistema GIS in Agricoltura</h1>
+                <p class="subtitle">La pipeline software modulare che collega i rilievi di telerilevamento aereo ai formati macchina per la concimazione a rateo variabile (VRA).</p>
+            </div>
+
+            <!-- Sezione Pipeline / Info -->
+            <section class="info-section">
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h3>Integrazione WebODM & QGIS</h3>
+                        <p>Elaborazione avanzata di indici di vegetazione multispettrali (NDVI, VARI) direttamente dai rilievi effettuati con droni, trasformando i dati grezzi in informazioni agronomiche azionabili.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>Esportazione VRA Nativa</h3>
+                        <p>Generazione fluida di formati macchina standardizzati e pronti all'uso, inclusi pacchetti ISO-XML TaskData e Shapefile per la distribuzione di input a rateo variabile in campo.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Video Dimostrativo -->
+            <section class="video-section">
+                <h2>Anteprima del Viewer in Azione</h2>
+                <div class="video-container">
+                    <video src="public/videos/demo_viewer.mp4" autoplay loop muted playsinline></video>
+                </div>
+            </section>
+
+            <!-- Sezione BETA VIEWER -->
+            <section id="beta-access" class="beta-section">
                 <div class="beta-header">
                     <span class="badge-beta">BETA VIEWER</span>
-                    <h1>Richiesta accesso Beta</h1>
+                    <h2>Richiedi l'accesso Beta</h2>
                     <p>
                         Richiedi l'accesso anticipato al Viewer gOWLsystem per caricare, testare e verificare i file delle mappe VRA (formati ZIP, KMZ, KML, GeoJSON). Diventa Beta Tester compilando il modulo sottostante.
                     </p>
                     <ul class="beta-perks">
                         <li>Caricamento e verifica file mappe VRA (ZIP, KMZ, KML, GeoJSON)</li>
-                        <li>Feedback su GIS, ISO-XML e flussi di campo</li>
-                        <li>Priorità sulla roadmap del Viewer</li>
+                        <li>Feedback mirato su GIS, ISO-XML e flussi di campo</li>
+                        <li>Priorità diretta sulla roadmap di sviluppo del Viewer</li>
                     </ul>
                 </div>
 
-                <!-- VIDEO DIMOSTRATIVO DEL VIEWER -->
-                <div class="video-container" style="margin: 2rem 0; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3); background: #111;">
-                    <video src="public/videos/demo_viewer.mp4" autoplay loop muted playsinline style="width: 100%; height: auto; display: block; max-height: 400px; object-fit: cover;"></video>
-                </div>
-
-                <!-- MODULO DI ISCRIZIONE FORMSPREE -->
+                <!-- Modulo di Iscrizione Formspree -->
                 <form class="beta-form" action="https://formspree.io/f/xnpndrrb" method="POST">
                     <div class="form-group">
                         <label for="email">Email di contatto *</label>
@@ -61,13 +346,13 @@
                         <textarea id="expectations" name="expectations" rows="3" placeholder="Cosa vorresti risolvere con VRA o GIS? (facoltativo)"></textarea>
                     </div>
 
-                    <button type="submit" class="btn btn-primary btn-submit">Richiedi accesso Beta</button>
+                    <button type="submit" class="btn-submit">Richiedi accesso Beta</button>
                 </form>
-            </div>
+            </section>
         </main>
 
         <footer class="site-footer">
-            <p>&copy; gowlsystem.com — Tutti i diritti riservati.</p>
+            <p>&copy; 2026 gowlsystem.com — Tutti i diritti riservati.</p>
         </footer>
     </div>
 </body>
