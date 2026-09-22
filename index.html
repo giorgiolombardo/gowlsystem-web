@@ -1,197 +1,31 @@
-<!DOCTYPE html>
-<html lang="it">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>gOWLsystem — Integrated VRA & Field Logistics Engine</title>
-    <meta name="description" content="Viewer gOWLsystem: carica, testa e verifica mappe VRA (ZIP, KMZ, KML, GeoJSON) prima del campo. Pipeline e logistica per agricoltura di precisione.">
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-</head>
-<body>
-
-    <div class="page-wrapper">
-        <header class="site-header">
-            <div class="logo">g<span>OWL</span>system</div>
-            <nav class="site-nav" aria-label="Principale">
-                <a href="#features">Funzioni</a>
-                <a href="#beta-access">Beta</a>
-            </nav>
-            <div class="badge-status">
-                <span class="status-dot"></span> System Online
-            </div>
-        </header>
-
-        <main class="hero-section">
-            <div class="hero-content">
-                <h1>Precision Viticulture & Prescription Mapping</h1>
-                <p class="subtitle">Carica, testa e verifica le mappe di prescrizione VRA (ZIP, KMZ, KML, GeoJSON) prima del monitor di bordo — insieme alla pipeline GIS e alla logistica di campo.</p>
-
-                <div class="action-buttons">
-                    <a href="#beta-access" class="btn btn-primary">Diventa Beta Tester</a>
-                    <a href="#features" class="btn btn-secondary">Scopri le Funzioni</a>
-                </div>
-
-                <figure class="hero-demo" aria-label="Demo Viewer VRA">
-                    <div class="video-frame">
-                        <video
-                            class="demo-video"
-                            autoplay
-                            loop
-                            muted
-                            playsinline
-                            preload="metadata"
-                            poster=""
-                        >
-                            <source src="public/videos/demo_viewer.mp4" type="video/mp4">
-                            Il tuo browser non supporta la riproduzione video.
-                        </video>
-                    </div>
-                    <figcaption class="video-caption">
-                        Demo Viewer — ispezione mappe VRA (non è un indice di vigore)
-                    </figcaption>
-                </figure>
+<section id="beta-access" class="beta-section">
+    <div class="beta-container">
+        <h2>Richiedi l'Accesso Prioritario</h2>
+        <p>Nessuno spam. Solo l'invito al rilascio della Beta e anteprime geospaziali.</p>
+        
+        <!-- Sostituisci YOUR_FORM_ID con l'ID effettivo fornito da Formspree -->
+        <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="beta-form">
+            
+            <div class="form-group">
+                <label for="email">La tua Email</label>
+                <input type="email" id="email" name="email" required placeholder="nome@esempio.it">
             </div>
 
-            <section class="about-section">
-                <h2 style="color: #fff; font-size: 1.5rem; margin-bottom: 15px;">Il Progetto</h2>
-                <p style="margin-bottom: 15px;">
-                    <strong>gOWLsystem</strong> nasce per integrare il rilievo fotogrammetrico da drone e l'analisi geospaziale avanzata nei processi operativi della viticoltura moderna. Sfruttando indici di vigore vegetativo (VARI, NDVI) e modelli di architettura della chioma, la piattaforma automatizza la generazione di mappe di prescrizione a dosaggio variabile (VRA) e file geospaziali multi-formato.
-                </p>
-                <p>
-                    L'obiettivo è ottimizzare gli interventi agronomici — dalla concimazione fogliare alla difesa fitosanitaria — garantendo la massima compatibilità sia con le console di bordo delle macchine agricole sia con i dispositivi mobili per il monitoraggio diretto in campo.
-                </p>
-            </section>
-
-            <section id="features" class="features-grid">
-                <div class="feature-card">
-                    <div class="icon">🛰️</div>
-                    <h3>VRA Pipeline</h3>
-                    <p>Elaborazione dati geospaziali e generazione automatizzata di mappe di prescrizione multi-formato (ISO-XML, Shapefile, GeoJSON, KML/KMZ).</p>
-                    <div style="margin-top: 15px;">
-                        <button type="button" onclick="document.getElementById('pipeline-modal').style.display='flex'" style="background: #27272a; border: 1px solid #3f3f46; color: #4ade80; cursor: pointer; padding: 8px 16px; border-radius: 6px; font-weight: 600; font-size: 0.9rem;">Esplora Pipeline &rarr;</button>
-                    </div>
-                </div>
-
-                <div class="feature-card beta-card">
-                    <div class="icon">🗺️</div>
-                    <h3>Viewer VRA <span class="beta-tag">BETA</span></h3>
-                    <p>Tool web per caricare, testare e verificare i file delle mappe VRA (ZIP, KMZ, KML, GeoJSON): geometrie, zone di dose e compatibilità prima dell'uso in cabina. Non calcola indici di vigore.</p>
-                    <a href="#beta-access" class="link-beta">Richiedi accesso anticipato &rarr;</a>
-                </div>
-
-                <div class="feature-card">
-                    <div class="icon">⚙️</div>
-                    <h3>Field Logistics</h3>
-                    <p>Integrazione ottimizzata dei flussi operativi per macchine agricole, report PDF operativi per il lavoro in campo e pacchetti <code>.zip</code> dedicati al QCdc.</p>
-                </div>
-            </section>
-        </main>
-
-        <section id="beta-access" class="beta-section" aria-labelledby="beta-heading">
-            <div class="beta-panel">
-                <div class="beta-intro">
-                    <span class="beta-tag">BETA VIEWER</span>
-                    <h2 id="beta-heading">Richiesta accesso Beta</h2>
-                    <p>
-                        Richiedi l'accesso anticipato al Viewer gOWLsystem: lo strumento per
-                        <strong>caricare, testare e verificare</strong> le mappe di prescrizione VRA
-                        nei formati ZIP, KMZ, KML e GeoJSON — non un viewer di indici di vigore.
-                        Compila il form e ricevi conferma immediata a schermo: nessun account richiesto.
-                    </p>
-                    <ul class="beta-bullets">
-                        <li>Upload e controllo file VRA (ZIP / KMZ / KML / GeoJSON)</li>
-                        <li>Verifica geometrie e target dose prima del campo</li>
-                        <li>Feedback su GIS, ISO-XML e flussi operativi</li>
-                    </ul>
-                    <p class="beta-demo-link">
-                        <a href="#features">↑ Guarda la demo video sopra</a>
-                    </p>
-                </div>
-
-                <!--
-                  Formspree: sostituisci YOUR_FORM_ID con l'ID del form (vedi .github/beta-tester/SETUP.md).
-                  Invio AJAX → conferma a schermo, senza login.
-                -->
-                <form
-                    id="beta-form"
-                    class="beta-form"
-                    action="https://formspree.io/f/YOUR_FORM_ID"
-                    method="POST"
-                    novalidate
-                >
-                    <input type="hidden" name="_subject" value="[gOWLsystem] Richiesta Beta Tester Viewer">
-                    <input type="hidden" name="source" value="gowlsystem.com/#beta-access">
-                    <input type="text" name="_gotcha" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">
-
-                    <div class="field">
-                        <label for="beta-email">Email di contatto <span aria-hidden="true">*</span></label>
-                        <input id="beta-email" name="email" type="email" required autocomplete="email" placeholder="nome@studio.it">
-                    </div>
-
-                    <div class="field">
-                        <label for="beta-professione">Professione <span aria-hidden="true">*</span></label>
-                        <select id="beta-professione" name="professione" required>
-                            <option value="" disabled selected>Seleziona il tuo profilo</option>
-                            <option value="Agronomo / Consulente">Agronomo / Consulente</option>
-                            <option value="Tecnico GIS / Telerilevamento">Tecnico GIS / Telerilevamento</option>
-                            <option value="Viticoltore / Imprenditore Agricolo">Viticoltore / Imprenditore Agricolo</option>
-                            <option value="Altro">Altro</option>
-                        </select>
-                    </div>
-
-                    <div class="field">
-                        <label for="beta-motivazione">Nota motivazionale</label>
-                        <textarea id="beta-motivazione" name="motivazione" rows="3" placeholder="Perché vuoi testare gOWLsystem? (facoltativo)"></textarea>
-                    </div>
-
-                    <div class="field">
-                        <label for="beta-aspettative">Feedback / Aspettative</label>
-                        <textarea id="beta-aspettative" name="aspettative" rows="3" placeholder="Cosa vorresti risolvere con VRA o GIS? (facoltativo)"></textarea>
-                    </div>
-
-                    <p class="privacy-note">
-                        Nessun account richiesto. L'email è usata solo per la gestione del programma Beta.
-                        Nessuna newsletter automatica.
-                    </p>
-
-                    <button type="submit" class="btn btn-primary beta-submit" id="beta-submit">
-                        <span class="btn-label">Invia richiesta</span>
-                        <span class="btn-loading" hidden>Invio in corso…</span>
-                    </button>
-
-                    <p id="beta-status" class="form-status" role="status" aria-live="polite" hidden></p>
-                </form>
+            <div class="form-group">
+                <label for="profile">Qual è il tuo profilo?</label>
+                <select id="profile" name="profile" required>
+                    <option value="" disabled selected>Seleziona il tuo profilo...</option>
+                    <option value="Professionista / Azienda">Professionista / Azienda</option>
+                    <option value="Studente / Ricercatore">Studente / Ricercatore</option>
+                </select>
             </div>
-        </section>
 
-        <div id="pipeline-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 9999; justify-content: center; align-items: center; padding: 20px;" onclick="if(event.target === this) this.style.display='none';">
-          <div style="background: #18181b; color: #fff; max-width: 700px; width: 100%; padding: 30px; border-radius: 12px; position: relative; max-height: 85vh; overflow-y: auto; border: 1px solid #27272a; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);">
-            <button type="button" onclick="document.getElementById('pipeline-modal').style.display='none'" style="position: absolute; top: 20px; right: 20px; background: none; border: none; color: #a1a1aa; font-size: 1.8rem; cursor: pointer; line-height: 1;">&times;</button>
-
-            <h2 style="margin-bottom: 20px; font-size: 1.6rem; color: #4ade80;">Flusso Operativo gOWLsystem</h2>
-            <ul style="list-style-type: none; padding: 0; line-height: 1.8;">
-              <li style="margin-bottom: 15px;"><strong>1. Acquisizione e Pre-elaborazione</strong> — Integrazione dei rilievi fotogrammetrici da drone (RGB e multispettrali), suddivisione e georeferenziazione dei raster per preparare ortofoto ad alta risoluzione pronte all'analisi spaziale.</li>
-              <li style="margin-bottom: 15px;"><strong>2. Elaborazione Indici di Vigore</strong> — Calcolo automatico degli indici vegetativi (come VARI e NDVI) e dei modelli di architettura della chioma per mappare lo stato di salute e la vigoria reale del vigneto.</li>
-              <li style="margin-bottom: 15px;"><strong>3. Generazione Prescrizioni Agronomiche (VRA)</strong> — Elaborazione mirata degli interventi — dalla concimazione fogliare e geolocalizzata alla difesa fitosanitaria e al controllo delle infestanti — trasformando i dati agronomici in mappe a dosaggio variabile.</li>
-              <li style="margin-bottom: 15px;"><strong>4. Automazione GIS e Standardizzazione</strong> — Gestione automatizzata dei layer territoriali e conversione nei formati standard internazionali compatibili con le console di bordo delle macchine agricole e i dispositivi mobili da campo (ISO-XML, Shapefile, GeoJSON, KML/KMZ).</li>
-              <li><strong>5. Controllo e Operatività in Campo</strong> — Validazione complessiva del flusso operativo, generazione della documentazione di cantiere in formato PDF dedicata agli operatori e creazione del pacchetto <code>.zip</code> per il Registro dei Trattamenti e il Quaderno di Campagna Elettronico (QCdc).</li>
-            </ul>
-          </div>
-        </div>
-
-        <footer class="site-footer">
-            <p>&copy; 2026 Giorgio Lombardo &bull; <a href="mailto:info@gowlsystem.com">info@gowlsystem.com</a></p>
-            <div style="margin-top: 10px; display: flex; justify-content: center; gap: 20px; font-size: 0.85rem;">
-                <a href="https://github.com/giorgiolombardo/gowlsystem-web" target="_blank" rel="noopener">GitHub</a>
-                <a href="https://www.linkedin.com/in/giorgio-lombardo-796751362/" target="_blank" rel="noopener">Profilo LinkedIn</a>
-                <a href="#beta-access">Beta Viewer</a>
+            <div class="form-group">
+                <label for="notes">Note o aspettative (facoltativo)</label>
+                <textarea id="notes" name="notes" rows="3" placeholder="Raccontaci brevemente di cosa ti occupi..."></textarea>
             </div>
-        </footer>
+
+            <button type="submit" class="btn btn-primary">Ottieni l'accesso prioritario</button>
+        </form>
     </div>
-
-    <script src="beta-form.js" defer></script>
-</body>
-</html>
+</section>
