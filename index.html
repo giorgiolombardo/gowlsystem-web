@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>gOWLsystem — Integrated VRA & Field Logistics Engine</title>
+    <meta name="description" content="Pipeline VRA e Viewer per agricoltura di precisione. Richiedi l'accesso Beta al Viewer gOWLsystem.">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,6 +15,10 @@
     <div class="page-wrapper">
         <header class="site-header">
             <div class="logo">g<span>OWL</span>system</div>
+            <nav class="site-nav" aria-label="Principale">
+                <a href="#features">Funzioni</a>
+                <a href="#beta-access">Beta</a>
+            </nav>
             <div class="badge-status">
                 <span class="status-dot"></span> System Online
             </div>
@@ -23,10 +28,10 @@
             <div class="hero-content">
                 <h1>Precision Viticulture & Prescription Mapping</h1>
                 <p class="subtitle">Advanced VRA engine and field logistics workflows designed for data-driven agricultural management.</p>
-                
+
                 <div class="action-buttons">
-                    <a href="#features" class="btn btn-primary">Scopri le Funzioni</a>
-                    <a href="mailto:info@gowlsystem.com" class="btn btn-secondary">Contatta il Team</a>
+                    <a href="#beta-access" class="btn btn-primary">Diventa Beta Tester</a>
+                    <a href="#features" class="btn btn-secondary">Scopri le Funzioni</a>
                 </div>
             </div>
 
@@ -46,7 +51,7 @@
                     <h3>VRA Pipeline</h3>
                     <p>Elaborazione dati geospaziali e generazione automatizzata di mappe di prescrizione multi-formato (ISO-XML, Shapefile, GeoJSON, KML/KMZ).</p>
                     <div style="margin-top: 15px;">
-                        <button onclick="document.getElementById('pipeline-modal').style.display='flex'" style="background: #27272a; border: 1px solid #3f3f46; color: #4ade80; cursor: pointer; padding: 8px 16px; border-radius: 6px; font-weight: 600; font-size: 0.9rem;">Esplora Pipeline &rarr;</button>
+                        <button type="button" onclick="document.getElementById('pipeline-modal').style.display='flex'" style="background: #27272a; border: 1px solid #3f3f46; color: #4ade80; cursor: pointer; padding: 8px 16px; border-radius: 6px; font-weight: 600; font-size: 0.9rem;">Esplora Pipeline &rarr;</button>
                     </div>
                 </div>
 
@@ -54,7 +59,7 @@
                     <div class="icon">🗺️</div>
                     <h3>Viewer VRA <span class="beta-tag">BETA</span></h3>
                     <p>Interfaccia di anteprima interattiva per la visualizzazione rapida dei livelli di vigore e dei layer agronomici.</p>
-                    <a href="#" class="link-disabled" title="Disponibile a breve">Anteprima in arrivo &rarr;</a>
+                    <a href="#beta-access" class="link-beta">Richiedi accesso anticipato &rarr;</a>
                 </div>
 
                 <div class="feature-card">
@@ -65,10 +70,83 @@
             </section>
         </main>
 
+        <section id="beta-access" class="beta-section" aria-labelledby="beta-heading">
+            <div class="beta-panel">
+                <div class="beta-intro">
+                    <span class="beta-tag">BETA VIEWER</span>
+                    <h2 id="beta-heading">Richiesta accesso Beta</h2>
+                    <p>
+                        Richiedi l'accesso anticipato al Viewer gOWLsystem e diventa Beta Tester.
+                        La richiesta viene registrata come Issue nel repository pubblico del sito:
+                        ti contattiamo quando il profilo è idoneo.
+                    </p>
+                    <ul class="beta-bullets">
+                        <li>Anteprima layer VRA e vigore (VARI / NDVI)</li>
+                        <li>Feedback su GIS, ISO-XML e flussi di campo</li>
+                        <li>Priorità sulla roadmap del Viewer</li>
+                    </ul>
+                </div>
+
+                <!--
+                  Formspree: sostituisci YOUR_FORM_ID con l'ID del form (vedi SETUP.md).
+                  Flusso: Formspree → webhook Make → repository_dispatch → Issue GitHub.
+                -->
+                <form
+                    id="beta-form"
+                    class="beta-form"
+                    action="https://formspree.io/f/YOUR_FORM_ID"
+                    method="POST"
+                    novalidate
+                >
+                    <input type="hidden" name="_subject" value="[gOWLsystem] Richiesta Beta Tester Viewer">
+                    <input type="hidden" name="source" value="gowlsystem.com/#beta-access">
+                    <input type="text" name="_gotcha" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+                    <div class="field">
+                        <label for="beta-email">Email di contatto <span aria-hidden="true">*</span></label>
+                        <input id="beta-email" name="email" type="email" required autocomplete="email" placeholder="nome@studio.it">
+                    </div>
+
+                    <div class="field">
+                        <label for="beta-professione">Professione <span aria-hidden="true">*</span></label>
+                        <select id="beta-professione" name="professione" required>
+                            <option value="" disabled selected>Seleziona il tuo profilo</option>
+                            <option value="Agronomo / Consulente">Agronomo / Consulente</option>
+                            <option value="Tecnico GIS / Telerilevamento">Tecnico GIS / Telerilevamento</option>
+                            <option value="Viticoltore / Imprenditore Agricolo">Viticoltore / Imprenditore Agricolo</option>
+                            <option value="Altro">Altro</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label for="beta-motivazione">Nota motivazionale</label>
+                        <textarea id="beta-motivazione" name="motivazione" rows="3" placeholder="Perché vuoi testare gOWLsystem? (facoltativo)"></textarea>
+                    </div>
+
+                    <div class="field">
+                        <label for="beta-aspettative">Feedback / Aspettative</label>
+                        <textarea id="beta-aspettative" name="aspettative" rows="3" placeholder="Cosa vorresti risolvere con VRA o GIS? (facoltativo)"></textarea>
+                    </div>
+
+                    <p class="privacy-note">
+                        Inviando la richiesta acconsenti al trattamento dell'email solo per la gestione
+                        del programma Beta. Nessuna newsletter automatica.
+                    </p>
+
+                    <button type="submit" class="btn btn-primary beta-submit" id="beta-submit">
+                        <span class="btn-label">Richiedi accesso Beta</span>
+                        <span class="btn-loading" hidden>Invio in corso…</span>
+                    </button>
+
+                    <p id="beta-status" class="form-status" role="status" aria-live="polite" hidden></p>
+                </form>
+            </div>
+        </section>
+
         <div id="pipeline-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 9999; justify-content: center; align-items: center; padding: 20px;" onclick="if(event.target === this) this.style.display='none';">
           <div style="background: #18181b; color: #fff; max-width: 700px; width: 100%; padding: 30px; border-radius: 12px; position: relative; max-height: 85vh; overflow-y: auto; border: 1px solid #27272a; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);">
-            <button onclick="document.getElementById('pipeline-modal').style.display='none'" style="position: absolute; top: 20px; right: 20px; background: none; border: none; color: #a1a1aa; font-size: 1.8rem; cursor: pointer; line-height: 1;">&times;</button>
-            
+            <button type="button" onclick="document.getElementById('pipeline-modal').style.display='none'" style="position: absolute; top: 20px; right: 20px; background: none; border: none; color: #a1a1aa; font-size: 1.8rem; cursor: pointer; line-height: 1;">&times;</button>
+
             <h2 style="margin-bottom: 20px; font-size: 1.6rem; color: #4ade80;">Flusso Operativo gOWLsystem</h2>
             <ul style="list-style-type: none; padding: 0; line-height: 1.8;">
               <li style="margin-bottom: 15px;"><strong>1. Acquisizione e Pre-elaborazione</strong> — Integrazione dei rilievi fotogrammetrici da drone (RGB e multispettrali), suddivisione e georeferenziazione dei raster per preparare ortofoto ad alta risoluzione pronte all'analisi spaziale.</li>
@@ -83,11 +161,13 @@
         <footer class="site-footer">
             <p>&copy; 2026 Giorgio Lombardo &bull; <a href="mailto:info@gowlsystem.com">info@gowlsystem.com</a></p>
             <div style="margin-top: 10px; display: flex; justify-content: center; gap: 20px; font-size: 0.85rem;">
-                <a href="https://github.com/giorgiolombardo" target="_blank" rel="noopener">GitHub</a>
+                <a href="https://github.com/giorgiolombardo/gowlsystem-web" target="_blank" rel="noopener">GitHub</a>
                 <a href="https://www.linkedin.com/in/giorgio-lombardo-796751362/" target="_blank" rel="noopener">Profilo LinkedIn</a>
+                <a href="#beta-access">Beta Viewer</a>
             </div>
         </footer>
     </div>
 
+    <script src="beta-form.js" defer></script>
 </body>
 </html>

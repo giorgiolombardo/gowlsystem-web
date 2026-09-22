@@ -1,0 +1,99 @@
+# Crea Issue da richieste Beta Tester (Formspree webhook → repository_dispatch)
+#
+# POST https://api.github.com/repos/giorgiolombardo/gowlsystem-web/dispatches
+# Authorization: Bearer <GITHUB_PAT>   # mai nel frontend
+# {
+#   "event_type": "beta-tester-request",
+#   "client_payload": { "email", "professione", "motivazione", "aspettative" }
+# }
+
+name: Beta Tester → GitHub Issue
+
+on:
+  repository_dispatch:
+    types: [beta-tester-request]
+  workflow_dispatch:
+    inputs:
+      email:
+        description: Email di contatto
+        required: true
+        type: string
+      professione:
+        description: Professione
+        required: true
+        type: string
+      motivazione:
+        description: Nota motivazionale
+        required: false
+        type: string
+      aspettative:
+        description: Feedback / Aspettative
+        required: false
+        type: string
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  open-issue:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Crea Issue Beta Tester
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const payload = context.payload.client_payload || {};
+            const inputs = context.payload.inputs || {};
+            const email = String(payload.email || inputs.email || "").trim();
+            const professione = String(payload.professione || inputs.professione || "").trim();
+            const motivazione = String(payload.motivazione || inputs.motivazione || "").trim() || "—";
+            const aspettative = String(payload.aspettative || inputs.aspettative || "").trim() || "—";
+
+            if (!email || !professione) {
+              core.setFailed("email e professione sono obbligatori");
+              return;
+            }
+
+            const safe = (s) => String(s).replace(/</g, "&lt;").slice(0, 4000);
+            const title = `[Beta Tester] ${professione} — ${email}`;
+            const body = [
+              "## Richiesta accesso Viewer gOWLsystem",
+              "",
+              `| Campo | Valore |`,
+              `| --- | --- |`,
+              `| **Email** | ${safe(email)} |`,
+              `| **Professione** | ${safe(professione)} |`,
+              `| **Nota motivazionale** | ${safe(motivazione)} |`,
+              `| **Feedback / Aspettative** | ${safe(aspettative)} |`,
+              `| **Origine** | https://gowlsystem.com/#beta-access |`,
+              `| **Ricevuto** | ${new Date().toISOString()} |`,
+              "",
+              "_Issue generata automaticamente dal form Beta (repository_dispatch)._",
+            ].join("\n");
+
+            for (const [name, color, description] of [
+              ["beta-tester", "EAB308", "Richiesta accesso Beta Viewer"],
+              ["viewer", "4ADE80", "Viewer VRA / anteprima web"],
+            ]) {
+              try {
+                await github.rest.issues.createLabel({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  name,
+                  color,
+                  description,
+                });
+              } catch (e) {
+                /* già presente */
+              }
+            }
+
+            const issue = await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: title.slice(0, 240),
+              body,
+              labels: ["beta-tester", "viewer"],
+            });
+            core.info(`Issue #${issue.data.number} creata`);

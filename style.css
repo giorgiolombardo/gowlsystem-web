@@ -28,6 +28,25 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 32px 0;
+    gap: 16px;
+}
+
+.site-nav {
+    display: flex;
+    gap: 18px;
+    margin-left: auto;
+    margin-right: 16px;
+}
+
+.site-nav a {
+    color: #a1a1aa;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.site-nav a:hover {
+    color: #fff;
 }
 
 .logo {
@@ -200,6 +219,160 @@ body {
     cursor: default;
 }
 
+.link-beta {
+    display: inline-block;
+    margin-top: 16px;
+    color: #4ade80;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.link-beta:hover {
+    color: #86efac;
+}
+
+.beta-section {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto 80px;
+    text-align: left;
+}
+
+.beta-panel {
+    display: grid;
+    grid-template-columns: 1fr 1.15fr;
+    gap: 36px;
+    background: #121215;
+    border: 1px solid #222225;
+    border-radius: 14px;
+    padding: 36px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.beta-intro h2 {
+    color: #fff;
+    font-size: 1.75rem;
+    letter-spacing: -0.02em;
+    margin: 12px 0 14px;
+}
+
+.beta-intro p {
+    color: #a1a1aa;
+    line-height: 1.65;
+    font-size: 0.98rem;
+}
+
+.beta-bullets {
+    margin-top: 20px;
+    padding-left: 18px;
+    color: #d4d4d8;
+    font-size: 0.92rem;
+    line-height: 1.7;
+}
+
+.beta-bullets li {
+    margin-bottom: 6px;
+}
+
+.beta-form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.beta-form .field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.beta-form label {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #e4e4e7;
+}
+
+.beta-form input,
+.beta-form select,
+.beta-form textarea {
+    width: 100%;
+    background: #09090b;
+    border: 1px solid #27272a;
+    border-radius: 8px;
+    color: #f4f4f5;
+    padding: 11px 12px;
+    font: inherit;
+    font-size: 0.95rem;
+    transition: border-color 0.15s ease;
+}
+
+.beta-form input:focus,
+.beta-form select:focus,
+.beta-form textarea:focus {
+    outline: none;
+    border-color: #4ade80;
+}
+
+.beta-form select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23a1a1aa' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 36px;
+}
+
+.beta-form textarea {
+    resize: vertical;
+    min-height: 72px;
+}
+
+.hp-field {
+    position: absolute !important;
+    left: -9999px !important;
+    height: 0 !important;
+    width: 0 !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+.privacy-note {
+    font-size: 0.78rem;
+    color: #71717a;
+    line-height: 1.45;
+}
+
+.beta-submit {
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 4px;
+}
+
+.beta-submit:disabled {
+    opacity: 0.7;
+    cursor: wait;
+}
+
+.form-status {
+    font-size: 0.9rem;
+    line-height: 1.45;
+    padding: 10px 12px;
+    border-radius: 8px;
+}
+
+.form-status.ok {
+    background: rgba(74, 222, 128, 0.12);
+    border: 1px solid rgba(74, 222, 128, 0.35);
+    color: #86efac;
+}
+
+.form-status.err {
+    background: rgba(248, 113, 113, 0.1);
+    border: 1px solid rgba(248, 113, 113, 0.35);
+    color: #fca5a5;
+}
+
 .site-footer {
     text-align: center;
     padding: 32px 0;
@@ -229,5 +402,13 @@ body {
     .btn {
         width: 100%;
         text-align: center;
+    }
+    .site-nav {
+        display: none;
+    }
+    .beta-panel {
+        grid-template-columns: 1fr;
+        padding: 24px;
+        gap: 24px;
     }
 }
