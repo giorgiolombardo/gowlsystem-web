@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>gOWLsystem — L'Hub Geospaziale e Agricolo</title>
+    <title>gOWLsystem — Richiesta Accesso Beta Viewer</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -12,72 +12,62 @@
             <div class="logo">g<span>OWL</span>system</div>
         </header>
         
-        <main class="hero-section">
-            <div class="hero-content">
-                <h1>Mappando l'ecosistema GIS in Agricoltura</h1>
-                <p class="subtitle">La pipeline software che collega i rilievi di telerilevamento ai formati macchina per la concimazione a rateo variabile (VRA).</p>
+        <main class="hero-section" id="beta-access">
+            <div class="beta-container">
+                <div class="beta-header">
+                    <span class="badge-beta">BETA VIEWER</span>
+                    <h1>Richiesta accesso Beta</h1>
+                    <p>
+                        Richiedi l'accesso anticipato al Viewer gOWLsystem per caricare, testare e verificare i file delle mappe VRA (formati ZIP, KMZ, KML, GeoJSON). Diventa Beta Tester compilando il modulo sottostante.
+                    </p>
+                    <ul class="beta-perks">
+                        <li>Caricamento e verifica file mappe VRA (ZIP, KMZ, KML, GeoJSON)</li>
+                        <li>Feedback su GIS, ISO-XML e flussi di campo</li>
+                        <li>Priorità sulla roadmap del Viewer</li>
+                    </ul>
+                </div>
+
+                <!-- VIDEO DIMOSTRATIVO DEL VIEWER -->
+                <div class="video-container" style="margin: 2rem 0; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3); background: #111;">
+                    <video src="public/videos/demo_viewer.mp4" autoplay loop muted playsinline style="width: 100%; height: auto; display: block; max-height: 400px; object-fit: cover;"></video>
+                </div>
+
+                <!-- MODULO DI ISCRIZIONE FORMSPREE -->
+                <form class="beta-form" action="https://formspree.io/f/xnpndrrb" method="POST">
+                    <div class="form-group">
+                        <label for="email">Email di contatto *</label>
+                        <input type="email" id="email" name="email" placeholder="nome@studio.it" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="profession">Professione *</label>
+                        <select id="profession" name="profession" required>
+                            <option value="" disabled selected>Seleziona il tuo profilo</option>
+                            <option value="Agronomo / Consulente">Agronomo / Consulente</option>
+                            <option value="Viticoltore / Azienda Agricola">Viticoltore / Azienda Agricola</option>
+                            <option value="Specialista GIS / Droni">Specialista GIS / Droni</option>
+                            <option value="Studente / Ricercatore">Studente / Ricercatore</option>
+                            <option value="Altro">Altro</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="motivation">Nota motivazionale</label>
+                        <textarea id="motivation" name="motivation" rows="3" placeholder="Perché vuoi testare gOWLsystem? (facoltativo)"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="expectations">Feedback / Aspettative</label>
+                        <textarea id="expectations" name="expectations" rows="3" placeholder="Cosa vorresti risolvere con VRA o GIS? (facoltativo)"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-submit">Richiedi accesso Beta</button>
+                </form>
             </div>
-
-            <!-- Sezione Video Demo / Presentazione -->
-            <section class="video-section">
-                <div class="video-container">
-                    <video autoplay muted loop playsinline>
-                        <source src="public/videos/demo_viewer.mp4" type="video/mp4">
-                        Il tuo browser non supporta il tag video.
-                    </video>
-                </div>
-            </section>
-
-            <!-- Sezione Dettagli Pipeline / Info -->
-            <section class="info-section">
-                <div class="info-grid">
-                    <div class="info-card">
-                        <h3>Integrazione WebODM & QGIS</h3>
-                        <p>Elaborazione di indici di vegetazione multispettrali (NDVI, VARI) direttamente dai rilievi aerei dei droni.</p>
-                    </div>
-                    <div class="info-card">
-                        <h3>Esportazione VRA Nativa</h3>
-                        <p>Generazione di formati macchina standardizzati, inclusi ISO-XML TaskData e Shapefile per la distribuzione a rateo variabile.</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Sezione del form di accesso Beta -->
-            <section id="beta-access" class="beta-section">
-                <div class="beta-panel">
-                    <div class="beta-intro">
-                        <h2>Richiedi l'Accesso Prioritario</h2>
-                        <p>Nessuno spam. Solo l'invito al rilascio della Beta e anteprime geospaziali.</p>
-                    </div>
-                    
-                    <form action="https://formspree.io/f/xnpndrrb" method="POST" class="beta-form">
-                        <div class="field">
-                            <label for="email">La tua Email</label>
-                            <input type="email" id="email" name="email" required placeholder="nome@esempio.it">
-                        </div>
-
-                        <div class="field">
-                            <label for="profile">Qual è il tuo profilo?</label>
-                            <select id="profile" name="profile" required>
-                                <option value="" disabled selected>Seleziona il tuo profilo...</option>
-                                <option value="Professionista / Azienda">Professionista / Azienda</option>
-                                <option value="Studente / Ricercatore">Studente / Ricercatore</option>
-                            </select>
-                        </div>
-
-                        <div class="field">
-                            <label for="notes">Note o aspettative (facoltativo)</label>
-                            <textarea id="notes" name="notes" rows="3" placeholder="Raccontaci brevemente di cosa ti occupi..."></textarea>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary beta-submit">Ottieni l'accesso prioritario</button>
-                    </form>
-                </div>
-            </section>
         </main>
 
         <footer class="site-footer">
-            <p>&copy; 2026 gowlsystem.com — Tutti i diritti riservati.</p>
+            <p>&copy; gowlsystem.com — Tutti i diritti riservati.</p>
         </footer>
     </div>
 </body>
