@@ -1,60 +1,43 @@
-# Beta Tester → GitHub Issue (gowlsystem-web / gowlsystem.com)
+# Beta Tester — Formspree (nessuna GitHub Issue)
 
-Repo ufficiale del sito: **giorgiolombardo/gowlsystem-web** (GitHub Pages → `gowlsystem.com`).
-
-Flusso nativo (nessun servizio terzi):
+Flusso:
 
 ```
-Browser (form su gowlsystem.com)
-  → apre Issue form GitHub (.github/ISSUE_TEMPLATE/beta_tester.yml)
-  → l’utente conferma e crea l’Issue (label beta-tester, viewer)
+Form su gowlsystem.com
+  → POST Formspree (AJAX)
+  → conferma immediata a schermo
+  → ricevi le richieste via email Formspree
 ```
 
-Opzionale: Action `workflow_dispatch` / `repository_dispatch` per test manuali o automazioni interne (senza secret nel frontend).
+Nessun login utente. Nessuna Issue automatica.
 
-## File
+## Setup (2 minuti)
 
-| File | Ruolo |
-|------|--------|
-| `index.html` | Sezione `#beta-access` |
-| `beta-form.js` | Prefill Issue form + stati UI |
-| `style.css` | Stili Beta |
-| `.github/workflows/beta-tester-issue.yml` | Crea Issue da dispatch (test / automazione) |
-| `.github/ISSUE_TEMPLATE/beta_tester.yml` | Form Issue nativo |
+1. Crea un form su [formspree.io](https://formspree.io) (piano free ok).
+2. Copia l’endpoint `https://formspree.io/f/xxxxxx`.
+3. In `index.html`, nel form `#beta-form`, sostituisci `YOUR_FORM_ID` nell’attributo `action`.
+4. In Formspree abilita il dominio `gowlsystem.com` (e `localhost` per test).
+5. Commit + push su `main` → Pages aggiorna il sito.
 
-## Setup (Cursor)
+## Campi inviati
 
-### A. Apri il repo giusto
+| name | Obbligatorio |
+|------|----------------|
+| `email` | sì |
+| `professione` | sì |
+| `motivazione` | no |
+| `aspettative` | no |
+| `_subject` | fisso |
+| `source` | `gowlsystem.com/#beta-access` |
 
-1. **File → Open Folder…**
-2. Apri la cartella clonata di `gowlsystem-web` (non `gowlsys`).
-3. Se non l’hai ancora:
+Honeypot anti-bot: campo `_gotcha` (nascosto).
 
-```bash
-cd ~
-git clone https://github.com/giorgiolombardo/gowlsystem-web.git
-```
+## Verifica
 
-Poi in Cursor: Open Folder → `~/gowlsystem-web`.
+1. Apri https://gowlsystem.com/#beta-access
+2. Invia una richiesta di prova
+3. Controlla la casella collegata a Formspree e il messaggio verde a schermo
 
-### B. Nessuna configurazione esterna
+## Alternative
 
-Il form punta a:
-
-`https://github.com/giorgiolombardo/gowlsystem-web/issues/new?template=beta_tester.yml`
-
-con i campi `email`, `professione`, `motivazione`, `aspettative` precompilati dal sito.
-
-### C. Test Action (opzionale)
-
-Actions → **Beta Tester → GitHub Issue** → Run workflow (input manuali), oppure `repository_dispatch` con `event_type: beta-tester-request` e `client_payload` (email, professione, …).
-
-### D. Verifica
-
-1. Apri `https://gowlsystem.com/#beta-access`
-2. Compila e conferma l’Issue su GitHub
-3. Controlla Issues con label `beta-tester`
-
-## Privacy
-
-Se il repo è pubblico, le Issue (con email) sono pubbliche. Alternative: repo Issues privato dedicato, oppure rimuovere l’email dal template e chiedere contatto via messaggio privato.
+Stesso `beta-form.js` funziona con qualsiasi endpoint che accetti `multipart/form-data` o `FormData` e risponda JSON 2xx (es. Getform, Basin, Netlify Forms con adattamento minore).

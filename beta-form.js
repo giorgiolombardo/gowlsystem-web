@@ -1,12 +1,14 @@
 /**
  * gOWLsystem-web — form Beta Tester (gowlsystem.com)
- * Invio → apre il form Issue nativo GitHub (.github/ISSUE_TEMPLATE/beta_tester.yml)
+ * Invio diretto a Formspree → conferma a schermo (nessun login GitHub).
+ *
+ * Configura l'endpoint in index.html (action del form) oppure in FORM_ENDPOINT sotto.
  */
 (function () {
   "use strict";
 
-  var ISSUE_FORM_URL =
-    "https://github.com/giorgiolombardo/gowlsystem-web/issues/new?template=beta_tester.yml";
+  /** Fallback se l'attributo action del form non è valorizzato. */
+  var FORM_ENDPOINT = "";
 
   var form = document.getElementById("beta-form");
   if (!form) return;
@@ -30,14 +32,28 @@
     statusEl.textContent = message;
   }
 
-  function fieldValue(name) {
-    var el = form.elements.namedItem(name);
-    if (!el) return "";
-    return String(el.value || "").trim();
+  function endpoint() {
+    var action = (form.getAttribute("action") || "").trim();
+    if (action && action !== "#" && action.indexOf("YOUR_FORM_ID") === -1) {
+      return action;
+    }
+    if (FORM_ENDPOINT && FORM_ENDPOINT.indexOf("YOUR_FORM_ID") === -1) {
+      return FORM_ENDPOINT;
+    }
+    return "";
   }
 
   form.addEventListener("submit", function (event) {
     event.preventDefault();
+
+    var url = endpoint();
+    if (!url) {
+      showStatus(
+        false,
+        "Form non ancora configurato: inserisci l'URL Formspree in index.html (action del form)."
+      );
+      return;
+    }
 
     if (!form.checkValidity()) {
       form.reportValidity();
@@ -47,31 +63,32 @@
     setBusy(true);
     statusEl.hidden = true;
 
-    var params = new URLSearchParams();
-    params.set("template", "beta_tester.yml");
-    params.set("email", fieldValue("email"));
-    params.set("professione", fieldValue("professione"));
-    params.set("motivazione", fieldValue("motivazione"));
-    params.set("aspettative", fieldValue("aspettative"));
-
-    var url =
-      "https://github.com/giorgiolombardo/gowlsystem-web/issues/new?" +
-      params.toString();
-
-    try {
-      window.open(url, "_blank", "noopener,noreferrer");
-      showStatus(
-        true,
-        "Si apre GitHub: conferma e invia l'Issue per completare la richiesta Beta."
-      );
-    } catch (err) {
-      showStatus(
-        false,
-        "Impossibile aprire GitHub. Usa il link diretto oppure scrivi a info@gowlsystem.com."
-      );
-      window.location.href = ISSUE_FORM_URL;
-    } finally {
-      setBusy(false);
-    }
+    fetch(url, {
+      method: "POST",
+      body: new FormData(form),
+      headers: { Accept: "application/json" },
+    })
+      .then(function (res) {
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        return res.json().catch(function () {
+          return {};
+        });
+      })
+      .then(function () {
+        form.reset();
+        showStatus(
+          true,
+          "Richiesta inviata. Ti contatteremo all'email indicata con le istruzioni di accesso."
+        );
+      })
+      .catch(function () {
+        showStatus(
+          false,
+          "Invio non riuscito. Riprova oppure scrivi a info@gowlsystem.com."
+        );
+      })
+      .finally(function () {
+        setBusy(false);
+      });
   });
 })();
