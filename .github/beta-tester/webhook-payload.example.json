@@ -1,9 +1,0 @@
-{
-  "event_type": "beta-tester-request",
-  "client_payload": {
-    "email": "esempio@studio.it",
-    "professione": "Viticoltore / Imprenditore Agricolo",
-    "motivazione": "Vorrei testare il Viewer VRA sul mio vigneto.",
-    "aspettative": "Prescrizioni ISO-XML e mappe di vigore più semplici da usare in campo."
-  }
-}

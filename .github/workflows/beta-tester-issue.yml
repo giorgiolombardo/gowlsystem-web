@@ -1,7 +1,9 @@
-# Crea Issue da richieste Beta Tester (Formspree webhook → repository_dispatch)
+# Crea Issue Beta Tester (test / automazione).
+# Produzione: form nativo su gowlsystem.com → Issue template beta_tester.yml.
 #
+# Opzionale — repository_dispatch (PAT mai nel frontend):
 # POST https://api.github.com/repos/giorgiolombardo/gowlsystem-web/dispatches
-# Authorization: Bearer <GITHUB_PAT>   # mai nel frontend
+# Authorization: Bearer <GITHUB_PAT>
 # {
 #   "event_type": "beta-tester-request",
 #   "client_payload": { "email", "professione", "motivazione", "aspettative" }
@@ -69,7 +71,7 @@ jobs:
               `| **Origine** | https://gowlsystem.com/#beta-access |`,
               `| **Ricevuto** | ${new Date().toISOString()} |`,
               "",
-              "_Issue generata automaticamente dal form Beta (repository_dispatch)._",
+              "_Issue generata da workflow Beta (workflow_dispatch / repository_dispatch)._",
             ].join("\n");
 
             for (const [name, color, description] of [

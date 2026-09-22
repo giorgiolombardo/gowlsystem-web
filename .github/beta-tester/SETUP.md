@@ -2,26 +2,25 @@
 
 Repo ufficiale del sito: **giorgiolombardo/gowlsystem-web** (GitHub Pages → `gowlsystem.com`).
 
-Flusso sicuro:
+Flusso nativo (nessun servizio terzi):
 
 ```
-Browser (form)
-  → Formspree (nessun secret in pagina)
-  → Webhook Make.com / n8n
-  → repository_dispatch (event: beta-tester-request)
-  → Action crea Issue con label beta-tester, viewer
+Browser (form su gowlsystem.com)
+  → apre Issue form GitHub (.github/ISSUE_TEMPLATE/beta_tester.yml)
+  → l’utente conferma e crea l’Issue (label beta-tester, viewer)
 ```
+
+Opzionale: Action `workflow_dispatch` / `repository_dispatch` per test manuali o automazioni interne (senza secret nel frontend).
 
 ## File
 
 | File | Ruolo |
 |------|--------|
 | `index.html` | Sezione `#beta-access` |
-| `beta-form.js` | AJAX + stati UI |
+| `beta-form.js` | Prefill Issue form + stati UI |
 | `style.css` | Stili Beta |
-| `.github/workflows/beta-tester-issue.yml` | Crea Issue |
-| `.github/ISSUE_TEMPLATE/beta_tester.yml` | Issue manuale |
-| `.github/beta-tester/webhook-payload.example.json` | Body webhook |
+| `.github/workflows/beta-tester-issue.yml` | Crea Issue da dispatch (test / automazione) |
+| `.github/ISSUE_TEMPLATE/beta_tester.yml` | Form Issue nativo |
 
 ## Setup (Cursor)
 
@@ -38,43 +37,24 @@ git clone https://github.com/giorgiolombardo/gowlsystem-web.git
 
 Poi in Cursor: Open Folder → `~/gowlsystem-web`.
 
-### B. Formspree
+### B. Nessuna configurazione esterna
 
-1. Crea form su [formspree.io](https://formspree.io).
-2. Copia `https://formspree.io/f/xxxxxx`.
-3. In `index.html` sostituisci `YOUR_FORM_ID` nell’`action` di `#beta-form`.
-4. Abilita il dominio `gowlsystem.com` nel pannello Formspree.
+Il form punta a:
 
-### C. PAT fine-grained
+`https://github.com/giorgiolombardo/gowlsystem-web/issues/new?template=beta_tester.yml`
 
-GitHub → Settings → Developer settings → Fine-grained token:
+con i campi `email`, `professione`, `motivazione`, `aspettative` precompilati dal sito.
 
-- Repository: **solo** `gowlsystem-web`
-- Permission: **Issues → Read and write**
+### C. Test Action (opzionale)
 
-### D. Webhook → Issue
+Actions → **Beta Tester → GitHub Issue** → Run workflow (input manuali), oppure `repository_dispatch` con `event_type: beta-tester-request` e `client_payload` (email, professione, …).
 
-Make.com (gratis) o Formspree Webhooks:
-
-- URL: `https://api.github.com/repos/giorgiolombardo/gowlsystem-web/dispatches`
-- Method: `POST`
-- Headers:
-  - `Authorization: Bearer <PAT>`
-  - `Accept: application/vnd.github+json`
-- Body: vedi `webhook-payload.example.json` (`event_type`: `beta-tester-request`)
-
-### E. Commit e push (da Cursor)
-
-1. Source Control → stage di `index.html`, `style.css`, `beta-form.js`, `.github/**`
-2. Commit: `Add Beta Tester access form and GitHub Issue workflow`
-3. Push su `main` → GitHub Pages aggiorna `gowlsystem.com` in 1–2 minuti
-
-### F. Verifica
+### D. Verifica
 
 1. Apri `https://gowlsystem.com/#beta-access`
-2. Oppure Actions → **Beta Tester → GitHub Issue** → Run workflow (test manuale)
+2. Compila e conferma l’Issue su GitHub
 3. Controlla Issues con label `beta-tester`
 
 ## Privacy
 
-Se il repo è pubblico, le Issue (con email) sono pubbliche. Alternative: repo Issues privato dedicato, oppure lasciare solo Formspree email e non creare Issue pubbliche.
+Se il repo è pubblico, le Issue (con email) sono pubbliche. Alternative: repo Issues privato dedicato, oppure rimuovere l’email dal template e chiedere contatto via messaggio privato.

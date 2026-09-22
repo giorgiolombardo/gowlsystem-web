@@ -88,19 +88,19 @@
                 </div>
 
                 <!--
-                  Formspree: sostituisci YOUR_FORM_ID con l'ID del form (vedi SETUP.md).
-                  Flusso: Formspree → webhook Make → repository_dispatch → Issue GitHub.
+                  Flusso nativo: apre Issue form GitHub (template beta_tester.yml).
+                  Vedi .github/beta-tester/SETUP.md.
                 -->
                 <form
                     id="beta-form"
                     class="beta-form"
-                    action="https://formspree.io/f/YOUR_FORM_ID"
-                    method="POST"
+                    action="https://github.com/giorgiolombardo/gowlsystem-web/issues/new?template=beta_tester.yml"
+                    method="get"
+                    target="_blank"
+                    rel="noopener"
                     novalidate
                 >
-                    <input type="hidden" name="_subject" value="[gOWLsystem] Richiesta Beta Tester Viewer">
                     <input type="hidden" name="source" value="gowlsystem.com/#beta-access">
-                    <input type="text" name="_gotcha" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">
 
                     <div class="field">
                         <label for="beta-email">Email di contatto <span aria-hidden="true">*</span></label>
@@ -129,13 +129,14 @@
                     </div>
 
                     <p class="privacy-note">
-                        Inviando la richiesta acconsenti al trattamento dell'email solo per la gestione
-                        del programma Beta. Nessuna newsletter automatica.
+                        La richiesta diventa un'Issue pubblica sul repository del sito (serve un account GitHub).
+                        L'email è usata solo per la gestione del programma Beta. Nessuna newsletter automatica.
+                        <a href="https://github.com/giorgiolombardo/gowlsystem-web/issues/new?template=beta_tester.yml" target="_blank" rel="noopener">Apri direttamente il form Issue</a>.
                     </p>
 
                     <button type="submit" class="btn btn-primary beta-submit" id="beta-submit">
                         <span class="btn-label">Richiedi accesso Beta</span>
-                        <span class="btn-loading" hidden>Invio in corso…</span>
+                        <span class="btn-loading" hidden>Apertura GitHub…</span>
                     </button>
 
                     <p id="beta-status" class="form-status" role="status" aria-live="polite" hidden></p>

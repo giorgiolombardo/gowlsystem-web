@@ -1,9 +1,12 @@
 /**
  * gOWLsystem-web — form Beta Tester (gowlsystem.com)
- * Invio → Formspree → webhook → repository_dispatch → GitHub Issue
+ * Invio → apre il form Issue nativo GitHub (.github/ISSUE_TEMPLATE/beta_tester.yml)
  */
 (function () {
   "use strict";
+
+  var ISSUE_FORM_URL =
+    "https://github.com/giorgiolombardo/gowlsystem-web/issues/new?template=beta_tester.yml";
 
   var form = document.getElementById("beta-form");
   if (!form) return;
@@ -27,17 +30,14 @@
     statusEl.textContent = message;
   }
 
+  function fieldValue(name) {
+    var el = form.elements.namedItem(name);
+    if (!el) return "";
+    return String(el.value || "").trim();
+  }
+
   form.addEventListener("submit", function (event) {
     event.preventDefault();
-
-    var action = form.getAttribute("action") || "";
-    if (action.indexOf("YOUR_FORM_ID") !== -1) {
-      showStatus(
-        false,
-        "Configura Formspree: sostituisci YOUR_FORM_ID in index.html (vedi .github/beta-tester/SETUP.md)."
-      );
-      return;
-    }
 
     if (!form.checkValidity()) {
       form.reportValidity();
@@ -47,32 +47,31 @@
     setBusy(true);
     statusEl.hidden = true;
 
-    fetch(action, {
-      method: "POST",
-      body: new FormData(form),
-      headers: { Accept: "application/json" },
-    })
-      .then(function (res) {
-        if (!res.ok) throw new Error("HTTP " + res.status);
-        return res.json().catch(function () {
-          return {};
-        });
-      })
-      .then(function () {
-        form.reset();
-        showStatus(
-          true,
-          "Richiesta inviata. Ti contatteremo all'email indicata con le istruzioni di accesso."
-        );
-      })
-      .catch(function () {
-        showStatus(
-          false,
-          "Invio non riuscito. Riprova oppure scrivi a info@gowlsystem.com."
-        );
-      })
-      .finally(function () {
-        setBusy(false);
-      });
+    var params = new URLSearchParams();
+    params.set("template", "beta_tester.yml");
+    params.set("email", fieldValue("email"));
+    params.set("professione", fieldValue("professione"));
+    params.set("motivazione", fieldValue("motivazione"));
+    params.set("aspettative", fieldValue("aspettative"));
+
+    var url =
+      "https://github.com/giorgiolombardo/gowlsystem-web/issues/new?" +
+      params.toString();
+
+    try {
+      window.open(url, "_blank", "noopener,noreferrer");
+      showStatus(
+        true,
+        "Si apre GitHub: conferma e invia l'Issue per completare la richiesta Beta."
+      );
+    } catch (err) {
+      showStatus(
+        false,
+        "Impossibile aprire GitHub. Usa il link diretto oppure scrivi a info@gowlsystem.com."
+      );
+      window.location.href = ISSUE_FORM_URL;
+    } finally {
+      setBusy(false);
+    }
   });
 })();
