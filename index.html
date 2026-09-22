@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>gOWLsystem — GIS & VRA Pipeline</title>
+    <title>gOWLsystem — L'Hub Geospaziale e VRA per l'Agricoltura di Precisione</title>
     <link rel="stylesheet" href="style.css">
     <style>
         :root {
             --bg-color: #0b0f19;
-            --card-bg: rgba(17, 24, 39, 0.7);
-            --border-color: rgba(255, 255, 255, 0.08);
+            --card-bg: rgba(17, 24, 39, 0.75);
+            --border-color: rgba(255, 255, 255, 0.1);
             --accent-green: #2ea44f;
             --accent-glow: rgba(46, 164, 79, 0.2);
             --text-main: #f3f4f6;
@@ -26,7 +26,7 @@
         }
 
         .page-wrapper {
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 2rem 1.5rem;
         }
@@ -41,7 +41,7 @@
         }
 
         .logo {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-weight: 800;
             letter-spacing: -0.5px;
             color: #fff;
@@ -51,31 +51,83 @@
             color: var(--accent-green);
         }
 
-        .hero-content {
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto 3rem auto;
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
         }
 
-        .hero-content h1 {
-            font-size: 2.5rem;
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #fff;
+        }
+
+        /* Hero Principale */
+        .hero-section {
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto 4rem auto;
+        }
+
+        .hero-section h1 {
+            font-size: 3rem;
             font-weight: 800;
-            letter-spacing: -1px;
-            margin-bottom: 1rem;
+            letter-spacing: -1.5px;
+            margin-bottom: 1.25rem;
             background: linear-gradient(to right, #fff, var(--text-muted));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         .subtitle {
-            font-size: 1.15rem;
+            font-size: 1.25rem;
             color: var(--text-muted);
+            margin-bottom: 2.5rem;
         }
 
-        /* Grid della Pipeline */
+        /* Mission Box */
+        .mission-box {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin-bottom: 4rem;
+            backdrop-filter: blur(10px);
+            text-align: left;
+        }
+
+        .mission-box h2 {
+            color: #fff;
+            font-size: 1.75rem;
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+
+        .mission-box p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            margin: 0;
+            line-height: 1.7;
+        }
+
+        /* Sezione Pipeline & Schema */
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 2.5rem;
+            color: #fff;
+        }
+
         .info-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
             gap: 1.5rem;
             margin-bottom: 4rem;
         }
@@ -83,8 +135,8 @@
         .info-card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
-            padding: 2rem;
-            border-radius: 16px;
+            padding: 2.5rem;
+            border-radius: 20px;
             backdrop-filter: blur(10px);
             transition: transform 0.2s ease, border-color 0.2s ease;
         }
@@ -97,34 +149,28 @@
         .info-card h3 {
             color: #fff;
             margin-top: 0;
-            margin-bottom: 0.75rem;
-            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            font-size: 1.35rem;
         }
 
         .info-card p {
             color: var(--text-muted);
-            font-size: 0.95rem;
+            font-size: 1rem;
             margin: 0;
         }
 
-        /* Sezione Video */
+        /* Video Showcase */
         .video-section {
             text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        .video-section h2 {
-            font-size: 1.75rem;
-            margin-bottom: 1.5rem;
-            color: #fff;
+            margin-bottom: 5rem;
         }
 
         .video-container {
-            max-width: 950px;
+            max-width: 1050px;
             margin: 0 auto;
-            border-radius: 16px;
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
+            box-shadow: 0 25px 50px -15px rgba(0, 0, 0, 0.8);
             border: 1px solid var(--border-color);
             background: #000;
         }
@@ -133,79 +179,84 @@
             width: 100%;
             height: auto;
             display: block;
-            max-height: 500px;
+            max-height: 550px;
             object-fit: cover;
         }
 
-        /* Sezione Beta Viewer */
+        /* Sezione Beta Viewer / Form */
         .beta-section {
-            max-width: 750px;
+            max-width: 800px;
             margin: 0 auto;
             background: var(--card-bg);
             border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 3rem;
+            border-radius: 24px;
+            padding: 3.5rem;
             backdrop-filter: blur(10px);
-            box-shadow: 0 15px 30px -10px rgba(0,0,0,0.5);
+            box-shadow: 0 20px 40px -15px rgba(0,0,0,0.6);
+            text-align: left;
         }
 
         .badge-beta {
             display: inline-block;
             background: var(--accent-glow);
             color: var(--accent-green);
-            padding: 0.35rem 1rem;
+            padding: 0.4rem 1.1rem;
             border-radius: 30px;
             font-size: 0.8rem;
             font-weight: 700;
             letter-spacing: 0.5px;
             text-transform: uppercase;
             border: 1px solid rgba(46, 164, 79, 0.3);
+            margin-bottom: 1rem;
         }
 
         .beta-header h2 {
-            font-size: 2rem;
-            margin: 1rem 0 0.5rem 0;
+            font-size: 2.25rem;
+            margin: 0 0 1rem 0;
             color: #fff;
+            letter-spacing: -0.5px;
         }
 
         .beta-header p {
             color: var(--text-muted);
-            font-size: 1rem;
+            font-size: 1.05rem;
+            line-height: 1.6;
         }
 
         .beta-perks {
             list-style: none;
             padding: 0;
-            margin: 1.5rem 0 2rem 0;
+            margin: 1.5rem 0 2.5rem 0;
             display: flex;
             flex-direction: column;
-            gap: 0.5rem;
+            gap: 0.75rem;
         }
 
         .beta-perks li {
             color: var(--text-main);
-            font-size: 0.95rem;
+            font-size: 1rem;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.75rem;
         }
 
         .beta-perks li::before {
             content: "✓";
             color: var(--accent-green);
             font-weight: bold;
+            font-size: 1.1rem;
         }
 
-        /* Form Styling */
+        /* Form Styling Avanzato */
         .form-group {
-            margin-bottom: 1.25rem;
+            margin-bottom: 1.5rem;
         }
 
         .form-group label {
             display: block;
             color: var(--text-main);
             margin-bottom: 0.5rem;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             font-weight: 500;
         }
 
@@ -213,12 +264,12 @@
         .form-group select,
         .form-group textarea {
             width: 100%;
-            padding: 0.85rem 1rem;
-            background: rgba(10, 14, 23, 0.8);
+            padding: 0.9rem 1.1rem;
+            background: rgba(10, 14, 23, 0.9);
             border: 1px solid var(--border-color);
             color: #fff;
-            border-radius: 10px;
-            font-size: 0.95rem;
+            border-radius: 12px;
+            font-size: 1rem;
             transition: border-color 0.2s ease, box-shadow 0.2s ease;
             box-sizing: border-box;
         }
@@ -228,19 +279,19 @@
         .form-group textarea:focus {
             outline: none;
             border-color: var(--accent-green);
-            box-shadow: 0 0 0 3px var(--accent-glow);
+            box-shadow: 0 0 0 4px var(--accent-glow);
         }
 
         .btn-submit {
             width: 100%;
-            padding: 1rem;
+            padding: 1.1rem;
             background: var(--accent-green);
             color: white;
             border: none;
             font-weight: 600;
-            border-radius: 10px;
+            border-radius: 12px;
             cursor: pointer;
-            font-size: 1rem;
+            font-size: 1.05rem;
             transition: background 0.2s ease, transform 0.1s ease;
             margin-top: 1rem;
         }
@@ -255,16 +306,17 @@
 
         .site-footer {
             text-align: center;
-            padding: 3rem 0 1rem 0;
+            padding: 4rem 0 2rem 0;
             color: var(--text-muted);
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             border-top: 1px solid var(--border-color);
-            margin-top: 4rem;
+            margin-top: 5rem;
         }
 
         @media (max-width: 768px) {
-            .hero-content h1 { font-size: 2rem; }
-            .beta-section { padding: 1.5rem; }
+            .hero-section h1 { font-size: 2.25rem; }
+            .beta-section { padding: 2rem; }
+            .mission-box { padding: 1.5rem; }
         }
     </style>
 </head>
@@ -272,48 +324,68 @@
     <div class="page-wrapper">
         <header class="site-header">
             <div class="logo">g<span>OWL</span>system</div>
+            <nav class="nav-links">
+                <a href="#mission">La Mission</a>
+                <a href="#pipeline">Pipeline</a>
+                <a href="#viewer">Viewer & Demo</a>
+                <a href="#beta-access">Accesso Beta</a>
+            </nav>
         </header>
         
-        <main class="hero-section">
-            <div class="hero-content">
+        <main>
+            <!-- Hero Principale -->
+            <section class="hero-section">
                 <h1>Mappando l'ecosistema GIS in Agricoltura</h1>
-                <p class="subtitle">La pipeline software modulare che collega i rilievi di telerilevamento aereo ai formati macchina per la concimazione a rateo variabile (VRA).</p>
-            </div>
+                <p class="subtitle">La soluzione integrata per colmare il divario tra telerilevamento avanzato e macchine agricole di precisione.</p>
+            </section>
 
-            <!-- Sezione Pipeline / Info -->
-            <section class="info-section">
+            <!-- Sezione Mission -->
+            <section id="mission" class="mission-box">
+                <h2>La Mission di gOWLsystem</h2>
+                <p>
+                    gOWLsystem nasce per semplificare e rendere accessibile l'agricoltura di precisione, unendo il mondo dell'analisi territoriale geospaziale con l'operatività quotidiana in campo. La nostra missione è eliminare le complessità di conversione dei dati, offrendo una pipeline fluida che trasforma i rilievi aerei e satellitari in prescrizioni agronomiche chiare, standardizzate e pronte per essere eseguite dai moderni macchinari agricoli a rateo variabile.
+                </p>
+            </section>
+
+            <!-- Sezione Pipeline & Schema -->
+            <section id="pipeline" class="pipeline-section">
+                <h2 class="section-title">Come Funziona la Pipeline</h2>
                 <div class="info-grid">
                     <div class="info-card">
-                        <h3>Integrazione WebODM & QGIS</h3>
-                        <p>Elaborazione avanzata di indici di vegetazione multispettrali (NDVI, VARI) direttamente dai rilievi effettuati con droni, trasformando i dati grezzi in informazioni agronomiche azionabili.</p>
+                        <h3>01. Rilievi Drone & Satellitari</h3>
+                        <p>Acquisizione di immagini ad alta risoluzione tramite telerilevamento aereo e satellitare, elaborate attraverso tecniche avanzate di fotogrammetria per estrarre indici di vigore e mappe di variabilità vegetativa.</p>
                     </div>
                     <div class="info-card">
-                        <h3>Esportazione VRA Nativa</h3>
-                        <p>Generazione fluida di formati macchina standardizzati e pronti all'uso, inclusi pacchetti ISO-XML TaskData e Shapefile per la distribuzione di input a rateo variabile in campo.</p>
+                        <h3>02. Elaborazione GIS & VRA</h3>
+                        <p>Analisi spaziale e modellazione dei dati all'interno dell'ambiente GIS, per tradurre lo stato effettivo della coltura in mappe di prescrizione agronomica a rateo variabile (VRA) mirate e calibrate.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>03. Export Nativo ISO-XML</h3>
+                        <p>Conversione automatizzata nei formati standard internazionali di interconnessione agricola, inclusi i pacchetti ISO-XML TaskData, per caricare i file direttamente sui terminali di bordo dei trattori.</p>
                     </div>
                 </div>
             </section>
 
-            <!-- Video Dimostrativo -->
-            <section class="video-section">
-                <h2>Anteprima del Viewer in Azione</h2>
+            <!-- Sezione Video Demo / Viewer -->
+            <section id="viewer" class="video-section">
+                <h2 class="section-title">Test e Validazione Mappe VRA</h2>
                 <div class="video-container">
                     <video src="public/videos/demo_viewer.mp4" autoplay loop muted playsinline></video>
                 </div>
             </section>
 
-            <!-- Sezione BETA VIEWER -->
+            <!-- Sezione BETA VIEWER / Form di Contatto -->
             <section id="beta-access" class="beta-section">
                 <div class="beta-header">
-                    <span class="badge-beta">BETA VIEWER</span>
+                    <span class="badge-beta">BETA VIEWER PROGRAM</span>
                     <h2>Richiedi l'accesso Beta</h2>
                     <p>
-                        Richiedi l'accesso anticipato al Viewer gOWLsystem per caricare, testare e verificare i file delle mappe VRA (formati ZIP, KMZ, KML, GeoJSON). Diventa Beta Tester compilando il modulo sottostante.
+                        Unisciti al programma di test anticipato per il Viewer gOWLsystem. Carica, testa e verifica i file delle tue mappe VRA (formati ZIP, KMZ, KML, GeoJSON) direttamente in ambiente web prima dell'utilizzo in campo.
                     </p>
                     <ul class="beta-perks">
-                        <li>Caricamento e verifica file mappe VRA (ZIP, KMZ, KML, GeoJSON)</li>
-                        <li>Feedback mirato su GIS, ISO-XML e flussi di campo</li>
-                        <li>Priorità diretta sulla roadmap di sviluppo del Viewer</li>
+                        <li>Upload e controllo nativo file VRA (ZIP, KMZ, KML, GeoJSON)</li>
+                        <li>Verifica preventiva di geometrie e dosi target prima dell'operatività</li>
+                        <li>Canale di feedback diretto per contribuire alla roadmap del progetto</li>
                     </ul>
                 </div>
 
@@ -346,13 +418,13 @@
                         <textarea id="expectations" name="expectations" rows="3" placeholder="Cosa vorresti risolvere con VRA o GIS? (facoltativo)"></textarea>
                     </div>
 
-                    <button type="submit" class="btn-submit">Richiedi accesso Beta</button>
+                    <button type="submit" class="btn-submit">Ottieni l'accesso prioritario Beta</button>
                 </form>
             </section>
         </main>
 
         <footer class="site-footer">
-            <p>&copy; 2026 gowlsystem.com — Tutti i diritti riservati.</p>
+            <p>&copy; 2026 gowlsystem.com — L'Hub Geospaziale e VRA per l'Agricoltura. Tutti i diritti riservati.</p>
         </footer>
     </div>
 </body>
