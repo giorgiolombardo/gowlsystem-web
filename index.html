@@ -1,17 +1,18 @@
 <section id="beta-access" class="beta-section">
-    <div class="beta-container">
-        <h2>Richiedi l'Accesso Prioritario</h2>
-        <p>Nessuno spam. Solo l'invito al rilascio della Beta e anteprime geospaziali.</p>
+    <div class="beta-panel">
+        <div class="beta-intro">
+            <h2>Richiedi l'Accesso Prioritario</h2>
+            <p>Nessuno spam. Solo l'invito al rilascio della Beta e anteprime geospaziali.</p>
+        </div>
         
-        <!-- Sostituisci YOUR_FORM_ID con l'ID effettivo fornito da Formspree -->
         <form action="https://formspree.io/f/xnpndrrb" method="POST" class="beta-form">
             
-            <div class="form-group">
+            <div class="field">
                 <label for="email">La tua Email</label>
                 <input type="email" id="email" name="email" required placeholder="nome@esempio.it">
             </div>
 
-            <div class="form-group">
+            <div class="field">
                 <label for="profile">Qual è il tuo profilo?</label>
                 <select id="profile" name="profile" required>
                     <option value="" disabled selected>Seleziona il tuo profilo...</option>
@@ -20,12 +21,12 @@
                 </select>
             </div>
 
-            <div class="form-group">
+            <div class="field">
                 <label for="notes">Note o aspettative (facoltativo)</label>
                 <textarea id="notes" name="notes" rows="3" placeholder="Raccontaci brevemente di cosa ti occupi..."></textarea>
             </div>
 
-            <button type="submit" class="btn btn-primary">Ottieni l'accesso prioritario</button>
+            <button type="submit" class="btn btn-primary beta-submit">Ottieni l'accesso prioritario</button>
         </form>
     </div>
 </section>
