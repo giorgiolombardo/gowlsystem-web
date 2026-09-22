@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>gOWLsystem — Integrated VRA & Field Logistics Engine</title>
-    <meta name="description" content="Pipeline VRA e Viewer per agricoltura di precisione. Richiedi l'accesso Beta al Viewer gOWLsystem.">
+    <meta name="description" content="Viewer gOWLsystem: carica, testa e verifica mappe VRA (ZIP, KMZ, KML, GeoJSON) prima del campo. Pipeline e logistica per agricoltura di precisione.">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,12 +27,32 @@
         <main class="hero-section">
             <div class="hero-content">
                 <h1>Precision Viticulture & Prescription Mapping</h1>
-                <p class="subtitle">Advanced VRA engine and field logistics workflows designed for data-driven agricultural management.</p>
+                <p class="subtitle">Carica, testa e verifica le mappe di prescrizione VRA (ZIP, KMZ, KML, GeoJSON) prima del monitor di bordo — insieme alla pipeline GIS e alla logistica di campo.</p>
 
                 <div class="action-buttons">
                     <a href="#beta-access" class="btn btn-primary">Diventa Beta Tester</a>
                     <a href="#features" class="btn btn-secondary">Scopri le Funzioni</a>
                 </div>
+
+                <figure class="hero-demo" aria-label="Demo Viewer VRA">
+                    <div class="video-frame">
+                        <video
+                            class="demo-video"
+                            autoplay
+                            loop
+                            muted
+                            playsinline
+                            preload="metadata"
+                            poster=""
+                        >
+                            <source src="public/videos/demo_viewer.mp4" type="video/mp4">
+                            Il tuo browser non supporta la riproduzione video.
+                        </video>
+                    </div>
+                    <figcaption class="video-caption">
+                        Demo Viewer — ispezione mappe VRA (non è un indice di vigore)
+                    </figcaption>
+                </figure>
             </div>
 
             <section class="about-section">
@@ -58,7 +78,7 @@
                 <div class="feature-card beta-card">
                     <div class="icon">🗺️</div>
                     <h3>Viewer VRA <span class="beta-tag">BETA</span></h3>
-                    <p>Interfaccia di anteprima interattiva per la visualizzazione rapida dei livelli di vigore e dei layer agronomici.</p>
+                    <p>Tool web per caricare, testare e verificare i file delle mappe VRA (ZIP, KMZ, KML, GeoJSON): geometrie, zone di dose e compatibilità prima dell'uso in cabina. Non calcola indici di vigore.</p>
                     <a href="#beta-access" class="link-beta">Richiedi accesso anticipato &rarr;</a>
                 </div>
 
@@ -76,15 +96,20 @@
                     <span class="beta-tag">BETA VIEWER</span>
                     <h2 id="beta-heading">Richiesta accesso Beta</h2>
                     <p>
-                        Richiedi l'accesso anticipato al Viewer gOWLsystem e diventa Beta Tester.
-                        La richiesta viene registrata come Issue nel repository pubblico del sito:
-                        ti contattiamo quando il profilo è idoneo.
+                        Richiedi l'accesso anticipato al Viewer gOWLsystem: lo strumento per
+                        <strong>caricare, testare e verificare</strong> le mappe di prescrizione VRA
+                        nei formati ZIP, KMZ, KML e GeoJSON — non un viewer di indici di vigore.
+                        All'invio si apre una <strong>GitHub Issue</strong> precompilata: conferma
+                        con il tuo account GitHub.
                     </p>
                     <ul class="beta-bullets">
-                        <li>Anteprima layer VRA e vigore (VARI / NDVI)</li>
-                        <li>Feedback su GIS, ISO-XML e flussi di campo</li>
-                        <li>Priorità sulla roadmap del Viewer</li>
+                        <li>Upload e controllo file VRA (ZIP / KMZ / KML / GeoJSON)</li>
+                        <li>Verifica geometrie e target dose prima del campo</li>
+                        <li>Feedback su GIS, ISO-XML e flussi operativi</li>
                     </ul>
+                    <p class="beta-demo-link">
+                        <a href="#features">↑ Guarda la demo video sopra</a>
+                    </p>
                 </div>
 
                 <!--
