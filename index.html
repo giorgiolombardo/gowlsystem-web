@@ -280,6 +280,52 @@
             line-height: 1.6;
         }
 
+        .export-dual-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            gap: 1rem;
+            margin-top: 0.85rem;
+        }
+
+        .export-col {
+            background: rgba(10, 14, 23, 0.65);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 1rem 1.1rem;
+            min-width: 0;
+        }
+
+        .export-col h5 {
+            margin: 0 0 0.65rem 0;
+            color: var(--accent-green);
+            font-size: 0.82rem;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        .export-col ol {
+            margin: 0;
+            padding-left: 1.15rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.55;
+        }
+
+        .export-col li {
+            margin-bottom: 0.35rem;
+        }
+
+        .export-col li strong {
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        @media (max-width: 720px) {
+            .export-dual-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
         /* Video Showcase */
         .video-section {
             text-align: center;
@@ -498,7 +544,7 @@
                         <h3>gOWLsystem Pipeline</h3>
                     </div>
                     <div class="modal-intro">
-                        Un flusso di lavoro digitale e automatizzato pensato per trasformare i dati aerei in strumenti operativi concreti, applicabile non solo alla viticoltura di precisione ma a qualsiasi coltura agricola e alla gestione agroforestale. La pipeline unisce il rilievo con drone all'analisi territoriale avanzata, traducendo lo stato reale della vegetazione in indicazioni agronomiche mirate, fruibili sia tramite report PDF per il lavoro in campo sia attraverso pacchetti di dati georeferenziati (.zip) pronti per i terminali di bordo dei trattori e per la tracciabilità aziendale.
+                        Un flusso di lavoro digitale e automatizzato pensato per trasformare i dati aerei in strumenti operativi concreti, applicabile non solo alla viticoltura di precisione ma a qualsiasi coltura agricola e alla gestione agroforestale. La pipeline unisce il rilievo con drone all'analisi territoriale avanzata, traducendo lo stato reale della vegetazione in indicazioni agronomiche mirate. In uscita: <strong>quattro PDF formali</strong> (Operatore, Quaderno di Campagna, Report assicurativo di resa, Report/Stampa PAC AGEA) e, sul lato macchina, <strong>KML / GeoJSON / TaskData ISO-XML</strong> racchiusi nel <strong>pacchetto ZIP QdC / USB ISOBUS</strong>.
                     </div>
                     <div class="modal-steps">
                         <div class="modal-step-item">
@@ -519,7 +565,30 @@
                         </div>
                         <div class="modal-step-item">
                             <h4><span>5.</span> Esportazione Standard e Archiviazione</h4>
-                            <p>Conversione finale dei dati in formati pronti all'uso: file PDF di sintesi per l'operatore in campo e pacchetti .ZIP completi (con tracciati compatibili per le macchine agricole e la documentazione utile) per la gestione e la tracciabilità delle attività.</p>
+                            <p>
+                                La console VRA consegna una <strong>doppia uscita simmetrica</strong> (hub download a due colonne):
+                                a sinistra la suite PDF formale/ministeriale, a destra i file di bordo racchiusi nel pacchetto USB.
+                            </p>
+                            <div class="export-dual-grid" aria-label="Doppia uscita hub download">
+                                <div class="export-col">
+                                    <h5>Sinistra — Output PDF</h5>
+                                    <ol>
+                                        <li><strong>Report Operatore (PDF)</strong> — fallanze georeferenziate e coordinate di campo</li>
+                                        <li><strong>Quaderno di Campagna / Prescrizione VRA (PDF)</strong> — CUAA, N. di registrazione, dosi e tracciabilità</li>
+                                        <li><strong>Report assicurativo di resa (PDF)</strong> — stima quintali in pianta per perizie e sinistri</li>
+                                        <li><strong>Report / Stampa PAC (PDF)</strong> — conformità e condizionalità AGEA (fascicolo, SQNPI/PAN, dichiarazioni)</li>
+                                    </ol>
+                                </div>
+                                <div class="export-col">
+                                    <h5>Destra — Vettoriali e USB</h5>
+                                    <ol>
+                                        <li><strong>KML</strong> — Google Earth / QField (WGS84)</li>
+                                        <li><strong>GeoJSON</strong> — slot/prescrizione su Griglia Madre (EPSG:32632)</li>
+                                        <li><strong>TaskData ISO-XML</strong> — terminali ISOBUS</li>
+                                        <li><strong>Pacchetto ZIP QdC / USB ISOBUS</strong> — archivio unico per chiavetta e tracciabilità QdC</li>
+                                    </ol>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
