@@ -460,13 +460,24 @@ body {
     background: #0a0f18;
 }
 
+.showcase-frame--board {
+    background: #000;
+}
+
 .showcase-frame img {
     display: block;
     width: 100%;
     height: auto;
-    max-height: min(68vh, 640px);
+    max-height: min(72vh, 720px);
     object-fit: contain;
     background: #0a0f18;
+}
+
+.showcase-frame--board img {
+    /* Quadro 2×2: mostra l'intera griglia senza crop */
+    max-height: none;
+    background: #000;
+    image-rendering: auto;
 }
 
 .showcase-figure figcaption {
@@ -510,6 +521,32 @@ body {
     display: inline-flex;
     align-items: center;
     gap: 0.45rem;
+}
+
+.showcase-legend--spectral {
+    gap: 0.65rem 1.1rem;
+}
+
+.showcase-legend--spectral .swatch {
+    width: 28px;
+    height: 12px;
+    border-radius: 3px;
+}
+
+.swatch.spectral-ndvi {
+    background: linear-gradient(90deg, #d73027, #fee08b, #1a9850);
+}
+
+.swatch.spectral-gndvi {
+    background: linear-gradient(90deg, #ffffe5, #78c679, #004529);
+}
+
+.swatch.spectral-ndre {
+    background: linear-gradient(90deg, #d73027, #fee08b, #1a9850);
+}
+
+.swatch.spectral-ndwi {
+    background: linear-gradient(90deg, #a50026, #f7f7f7, #313695);
 }
 
 .showcase-soon-card {
@@ -819,7 +856,11 @@ body {
     }
 
     .showcase-frame img {
-        max-height: min(55vh, 480px);
+        max-height: min(58vh, 520px);
+    }
+
+    .showcase-frame--board img {
+        max-height: none;
     }
 }
 
@@ -861,7 +902,16 @@ body {
     }
 
     .showcase-frame img {
-        max-height: min(48vh, 360px);
+        max-height: min(52vh, 400px);
+    }
+
+    .showcase-frame--board img {
+        max-height: none;
+    }
+
+    .showcase-legend--spectral {
+        gap: 0.5rem 0.85rem;
+        font-size: 0.78rem;
     }
 
     .showcase-soon-slot {

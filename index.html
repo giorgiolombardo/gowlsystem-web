@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>gOWLsystem — Intelligenza Geospaziale per la Gestione Agricola</title>
-    <meta name="description" content="NDVI ad alta risoluzione e Macro-zonazione VRA G4 continua per ISOBUS TASKDATA. Telerilevamento, conformità PAC/SRH01 e tutela peritale.">
+    <meta name="description" content="Diagnostica Spettrale Integrata G5 (NDVI, GNDVI, NDRE, NDWI) e Macro-zonazione VRA continua per ISOBUS TASKDATA. Telerilevamento, conformità PAC/SRH01 e tutela peritale.">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -74,46 +74,61 @@
                     </article>
                 </div>
 
-                <!-- Showcase mappe validate (report reale G4) -->
-                <div class="g4-panel showcase-panel" id="showcase-mappe" aria-label="Showcase mappe NDVI e Macro-zonazione VRA">
+                <!-- Showcase mappe validate (report reale G5 — diagnostica_g5 frozen) -->
+                <div class="g4-panel showcase-panel" id="showcase-mappe" aria-label="Showcase Diagnostica Spettrale Integrata G5 e Macro-zonazione VRA">
                     <div class="g4-panel-head">
                         <div>
-                            <h3>Showcase mappe — report reale G4</h3>
+                            <h3>Showcase demo — report reale G5</h3>
                             <p>
-                                Due strati convalidati dal pipeline: NDVI ad alta risoluzione e
-                                <strong>macro-zonazione vettoriale continua</strong> ottimizzata per
-                                terminali ISOBUS (ISO-XML TASKDATA) — guida fluido, senza micro-pixel.
+                                Due strati convalidati dalla pipeline: Diagnostica Spettrale Integrata G5 (NDVI, GNDVI, NDRE, NDWI) e Macro-Zonazione Vettoriale Continua VRA ottimizzata per terminali ISOBUS (ISO-XML TASKDATA) — guida fluida, senza micro-pixel.
                             </p>
                         </div>
-                        <span class="g4-badge">Gate 4 · Live</span>
+                        <span class="g4-badge">Gate 5 · Live</span>
                     </div>
 
-                    <div class="showcase-tabs" role="tablist" aria-label="Seleziona mappa">
-                        <button type="button" class="showcase-tab is-active" role="tab" aria-selected="true" aria-controls="panel-ndvi" id="tab-ndvi" data-panel="ndvi">Mappa 1 · NDVI</button>
-                        <button type="button" class="showcase-tab" role="tab" aria-selected="false" aria-controls="panel-vra" id="tab-vra" data-panel="vra">Mappa 2 · Macro-VRA</button>
-                        <button type="button" class="showcase-tab showcase-tab-soon" role="tab" aria-selected="false" aria-controls="panel-fallanze" id="tab-fallanze" data-panel="fallanze">
-                            POI Fallanze
-                            <span class="tab-badge">Prossimamente</span>
+                    <div class="showcase-tabs" role="tablist" aria-label="Seleziona mappa dimostrativa">
+                        <button type="button" class="showcase-tab is-active" role="tab" aria-selected="true" aria-controls="panel-diagnostica" id="tab-diagnostica" data-panel="diagnostica">
+                            Diagnostica Spettrale G5
+                        </button>
+                        <button type="button" class="showcase-tab" role="tab" aria-selected="false" aria-controls="panel-vra" id="tab-vra" data-panel="vra">
+                            Macro-VRA G4
                         </button>
                     </div>
 
                     <div class="showcase-stage">
-                        <figure class="showcase-figure is-active" id="panel-ndvi" role="tabpanel" aria-labelledby="tab-ndvi">
-                            <div class="showcase-frame">
-                                <img
-                                    src="public/showcase/map_ndvi_vigore.png"
-                                    alt="Mappa di Vigore NDVI — analisi spettrale ad alta risoluzione su appezzamento di riferimento"
-                                    width="1200"
-                                    height="800"
-                                    loading="eager"
-                                    decoding="async"
-                                >
+                        <figure class="showcase-figure is-active" id="panel-diagnostica" role="tabpanel" aria-labelledby="tab-diagnostica">
+                            <div class="showcase-frame showcase-frame--board">
+                                <picture>
+                                    <source srcset="public/showcase/diagnostica_spettrale/Diagnostica_Spettrale_Integrata_G5.webp" type="image/webp">
+                                    <img
+                                        src="public/showcase/diagnostica_spettrale/Diagnostica_Spettrale_Integrata_G5.png"
+                                        alt="Diagnostica Spettrale Integrata G5 — quadro 2×2 NDVI, GNDVI, NDRE, NDWI da diagnostica_g5"
+                                        width="2223"
+                                        height="1764"
+                                        loading="eager"
+                                        decoding="async"
+                                        data-assets-root="public/showcase/diagnostica_spettrale/"
+                                        data-map-ndvi="public/showcase/diagnostica_spettrale/map_ndvi_hires.webp"
+                                        data-map-gndvi="public/showcase/diagnostica_spettrale/map_gndvi_hires.webp"
+                                        data-map-ndre="public/showcase/diagnostica_spettrale/map_ndre_hires.webp"
+                                        data-map-ndwi="public/showcase/diagnostica_spettrale/map_ndwi_hires.webp"
+                                    >
+                                </picture>
                             </div>
                             <figcaption>
-                                <span class="fig-kicker">Mappa 1</span>
-                                <strong>Mappa di Vigore NDVI</strong>
-                                <span>Analisi spettrale multispettrale ad alta risoluzione — base diagnostica del vigore vegetativo.</span>
+                                <span class="fig-kicker">Tab 1 · G5</span>
+                                <strong>Diagnostica Spettrale G5</strong>
+                                <span>
+                                    Quadro 2×2 a quattro indici: Vigore/Biomassa (NDVI), Clorofilla (GNDVI),
+                                    Salute Red Edge (NDRE), Stress Idrico (NDWI) — asset da diagnostica_g5/.
+                                </span>
                             </figcaption>
+                            <ul class="showcase-legend showcase-legend--spectral" aria-label="Indici spettrali">
+                                <li><span class="swatch spectral-ndvi"></span>NDVI — Vigore / Biomassa</li>
+                                <li><span class="swatch spectral-gndvi"></span>GNDVI — Clorofilla</li>
+                                <li><span class="swatch spectral-ndre"></span>NDRE — Red Edge</li>
+                                <li><span class="swatch spectral-ndwi"></span>NDWI — Stress Idrico</li>
+                            </ul>
                         </figure>
 
                         <figure class="showcase-figure" id="panel-vra" role="tabpanel" aria-labelledby="tab-vra" hidden>
@@ -122,20 +137,20 @@
                                     <source srcset="public/showcase/map_macrozone_vra.webp" type="image/webp">
                                     <img
                                         src="public/showcase/map_macrozone_vra.png"
-                                        alt="Macro-zonazione VRA G4 a macro-poligoni continui con palette agronomica Verde Scuro, Verde Chiaro e Rosso"
-                                        width="1200"
-                                        height="800"
+                                        alt="Macro-zonazione VRA G4 a tre classi continue Verde Scuro, Verde Chiaro e Rosso per spandiconcime e irroratrici ISOBUS"
+                                        width="1919"
+                                        height="1154"
                                         loading="lazy"
                                         decoding="async"
                                     >
                                 </picture>
                             </div>
                             <figcaption>
-                                <span class="fig-kicker">Mappa 2</span>
-                                <strong>Macro-Zonazione VRA G4</strong>
+                                <span class="fig-kicker">Tab 2</span>
+                                <strong>Macro-VRA G4</strong>
                                 <span>
-                                    Vettoriale a macro-poligoni continui (Verde Scuro / Verde Chiaro / Rosso).
-                                    Precisione geometrica per rateo variabile continuo — niente strappi sul terminale ISOBUS.
+                                    Mappa vettoriale continua a 3 classi (Verde Scuro / Verde Chiaro / Rosso)
+                                    per spandiconcime e irroratrici ISOBUS — export ISO-XML TASKDATA, senza micro-pixel.
                                 </span>
                             </figcaption>
                             <ul class="showcase-legend" aria-label="Palette agronomica">
@@ -144,26 +159,11 @@
                                 <li><span class="swatch basso"></span>Rosso — Basso vigore / Stress</li>
                             </ul>
                         </figure>
-
-                        <div class="showcase-figure showcase-soon" id="panel-fallanze" role="tabpanel" aria-labelledby="tab-fallanze" hidden>
-                            <div class="showcase-soon-card">
-                                <span class="g4-badge">Modulo indipendente</span>
-                                <h4>Censimento POI Fallanze</h4>
-                                <p>
-                                    Layer punti georeferenziati (SHP / GeoJSON / GPX) per overlay su
-                                    <strong>Ortofoto RGB</strong> e Griglia Madre in QField / Avenza Maps.
-                                    Separato dal TASKDATA VRA — Dose Zero fuori dalla mappa di dose.
-                                </p>
-                                <div class="showcase-soon-slot" aria-hidden="true">
-                                    <span class="soon-placeholder">Ortofoto RGB · in arrivo con il prossimo rilievo ceppi</span>
-                                </div>
-                            </div>
-                        </div>
                     </div>
 
                     <p class="showcase-note">
-                        Asset da report agronomico reale (appezzamento di riferimento). La macro-zonazione continua
-                        riduce i micro-cambi di dose e stabilizza la guida delle barre a rateo variabile.
+                        Asset da report agronomico reale (appezzamento di riferimento). Due strati distinti:
+                        diagnostica spettrale e macro-zonazione VRA per terminali ISOBUS.
                     </p>
                 </div>
             </section>
@@ -311,9 +311,8 @@
 
             var tabs = document.querySelectorAll('.showcase-tab');
             var panels = {
-                ndvi: document.getElementById('panel-ndvi'),
-                vra: document.getElementById('panel-vra'),
-                fallanze: document.getElementById('panel-fallanze')
+                diagnostica: document.getElementById('panel-diagnostica'),
+                vra: document.getElementById('panel-vra')
             };
             if (!tabs.length) return;
 
