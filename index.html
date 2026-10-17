@@ -3,691 +3,174 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>gOWLsystem — L'Hub Geospaziale e VRA per l'Agricoltura di Precisione</title>
+    <title>gOWLsystem — Intelligenza Geospaziale per la Gestione Agricola</title>
+    <meta name="description" content="Piattaforma integrata: telerilevamento, VRA, conformità PAC/SRH01 e tutela peritale. Risparmio economico 15-25%.">
     <link rel="stylesheet" href="style.css">
-    <style>
-        :root {
-            --bg-color: #0b0f19;
-            --card-bg: rgba(17, 24, 39, 0.75);
-            --border-color: rgba(255, 255, 255, 0.1);
-            --accent-green: #2ea44f;
-            --accent-glow: rgba(46, 164, 79, 0.2);
-            --text-main: #f3f4f6;
-            --text-muted: #9ca3af;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
-        }
-
-        .page-wrapper {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem 1.5rem;
-        }
-
-        .site-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.5rem 0;
-            border-bottom: 1px solid var(--border-color);
-            margin-bottom: 3rem;
-        }
-
-        .logo {
-            font-size: 1.6rem;
-            font-weight: 800;
-            letter-spacing: -0.5px;
-            color: #fff;
-        }
-
-        .logo span {
-            color: var(--accent-green);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 1.5rem;
-            font-size: 0.9rem;
-            color: var(--text-muted);
-        }
-
-        .nav-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
-        .nav-links a:hover {
-            color: #fff;
-        }
-
-        /* Hero Principale */
-        .hero-section {
-            text-align: center;
-            max-width: 900px;
-            margin: 0 auto 4rem auto;
-        }
-
-        .hero-section h1 {
-            font-size: 3rem;
-            font-weight: 800;
-            letter-spacing: -1.5px;
-            margin-bottom: 1.25rem;
-            background: linear-gradient(to right, #fff, var(--text-muted));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .subtitle {
-            font-size: 1.25rem;
-            color: var(--text-muted);
-            margin-bottom: 2.5rem;
-        }
-
-        /* Mission Box */
-        .mission-box {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 2.5rem;
-            margin-bottom: 4rem;
-            backdrop-filter: blur(10px);
-            text-align: left;
-        }
-
-        .mission-box h2 {
-            color: #fff;
-            font-size: 1.75rem;
-            margin-top: 0;
-            margin-bottom: 1rem;
-        }
-
-        .mission-box p {
-            color: var(--text-muted);
-            font-size: 1.05rem;
-            margin: 0;
-            line-height: 1.7;
-        }
-
-        /* Sezione Pipeline & Schema */
-        .section-title {
-            font-size: 2rem;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 2.5rem;
-            color: #fff;
-        }
-
-        .section-title-link {
-            color: #fff;
-            text-decoration: none;
-            border-bottom: 2px dashed var(--accent-green);
-            transition: color 0.2s, border-color 0.2s;
-            cursor: pointer;
-        }
-
-        .section-title-link:hover {
-            color: var(--accent-green);
-            border-bottom-style: solid;
-        }
-
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 4rem;
-        }
-
-        .info-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            padding: 2.5rem;
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            transition: transform 0.2s ease, border-color 0.2s ease;
-        }
-
-        .info-card:hover {
-            transform: translateY(-4px);
-            border-color: rgba(46, 164, 79, 0.4);
-        }
-
-        .info-card h3 {
-            color: #fff;
-            margin-top: 0;
-            margin-bottom: 1rem;
-            font-size: 1.35rem;
-        }
-
-        .info-card p {
-            color: var(--text-muted);
-            font-size: 1rem;
-            margin: 0;
-        }
-
-        /* Modale a scomparsa (Lightbox/Popup) */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(5, 8, 15, 0.85);
-            backdrop-filter: blur(8px);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-            padding: 1.5rem;
-            box-sizing: border-box;
-        }
-
-        .modal-overlay.active {
-            display: flex;
-        }
-
-        .modal-content {
-            background: #111827;
-            border: 1px solid rgba(46, 164, 79, 0.3);
-            border-radius: 24px;
-            max-width: 800px;
-            width: 100%;
-            max-height: 90vh;
-            overflow-y: auto;
-            padding: 2.5rem;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
-            position: relative;
-            text-align: left;
-            animation: modalPop 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-
-        @keyframes modalPop {
-            0% { transform: scale(0.95); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 1.5rem;
-            right: 1.5rem;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border-color);
-            color: var(--text-muted);
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.25rem;
-            cursor: pointer;
-            transition: background 0.2s, color 0.2s;
-        }
-
-        .modal-close:hover {
-            background: var(--accent-glow);
-            color: #fff;
-            border-color: var(--accent-green);
-        }
-
-        .modal-header h3 {
-            color: #fff;
-            font-size: 1.75rem;
-            margin-top: 0;
-            margin-bottom: 1rem;
-        }
-
-        .modal-intro {
-            color: var(--text-muted);
-            font-size: 1.05rem;
-            line-height: 1.7;
-            margin-bottom: 2rem;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 1.5rem;
-        }
-
-        .modal-steps {
-            display: flex;
-            flex-direction: column;
-            gap: 1.25rem;
-        }
-
-        .modal-step-item h4 {
-            color: #fff;
-            font-size: 1.1rem;
-            margin: 0 0 0.35rem 0;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .modal-step-item h4 span {
-            color: var(--accent-green);
-            font-family: monospace;
-        }
-
-        .modal-step-item p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            margin: 0;
-            line-height: 1.6;
-        }
-
-        .export-dual-grid {
-            display: grid;
-            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-            gap: 1rem;
-            margin-top: 0.85rem;
-        }
-
-        .export-col {
-            background: rgba(10, 14, 23, 0.65);
-            border: 1px solid var(--border-color);
-            border-radius: 14px;
-            padding: 1rem 1.1rem;
-            min-width: 0;
-        }
-
-        .export-col h5 {
-            margin: 0 0 0.65rem 0;
-            color: var(--accent-green);
-            font-size: 0.82rem;
-            letter-spacing: 0.04em;
-            text-transform: uppercase;
-        }
-
-        .export-col ol {
-            margin: 0;
-            padding-left: 1.15rem;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            line-height: 1.55;
-        }
-
-        .export-col li {
-            margin-bottom: 0.35rem;
-        }
-
-        .export-col li strong {
-            color: var(--text-main);
-            font-weight: 600;
-        }
-
-        @media (max-width: 720px) {
-            .export-dual-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Video Showcase */
-        .video-section {
-            text-align: center;
-            margin-bottom: 5rem;
-        }
-
-        .video-container {
-            max-width: 1050px;
-            margin: 0 auto;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 25px 50px -15px rgba(0, 0, 0, 0.8);
-            border: 1px solid var(--border-color);
-            background: #000;
-        }
-
-        .video-container video {
-            width: 100%;
-            height: auto;
-            display: block;
-            max-height: 550px;
-            object-fit: cover;
-        }
-
-        /* Sezione Beta Viewer / Form */
-        .beta-section {
-            max-width: 800px;
-            margin: 0 auto;
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 24px;
-            padding: 3.5rem;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 20px 40px -15px rgba(0,0,0,0.6);
-            text-align: left;
-        }
-
-        .badge-beta {
-            display: inline-block;
-            background: var(--accent-glow);
-            color: var(--accent-green);
-            padding: 0.4rem 1.1rem;
-            border-radius: 30px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-            border: 1px solid rgba(46, 164, 79, 0.3);
-            margin-bottom: 1rem;
-        }
-
-        .beta-header h2 {
-            font-size: 2.25rem;
-            margin: 0 0 1rem 0;
-            color: #fff;
-            letter-spacing: -0.5px;
-        }
-
-        .beta-header p {
-            color: var(--text-muted);
-            font-size: 1.05rem;
-            line-height: 1.6;
-        }
-
-        .beta-perks {
-            list-style: none;
-            padding: 0;
-            margin: 1.5rem 0 2.5rem 0;
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-
-        .beta-perks li {
-            color: var(--text-main);
-            font-size: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .beta-perks li::before {
-            content: "✓";
-            color: var(--accent-green);
-            font-weight: bold;
-            font-size: 1.1rem;
-        }
-
-        /* Form Styling Avanzato */
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            color: var(--text-main);
-            margin-bottom: 0.5rem;
-            font-size: 0.95rem;
-            font-weight: 500;
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 0.9rem 1.1rem;
-            background: rgba(10, 14, 23, 0.9);
-            border: 1px solid var(--border-color);
-            color: #fff;
-            border-radius: 12px;
-            font-size: 1rem;
-            transition: border-color 0.2s ease, box-shadow 0.2s ease;
-            box-sizing: border-box;
-        }
-
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--accent-green);
-            box-shadow: 0 0 0 4px var(--accent-glow);
-        }
-
-        .btn-submit {
-            width: 100%;
-            padding: 1.1rem;
-            background: var(--accent-green);
-            color: white;
-            border: none;
-            font-weight: 600;
-            border-radius: 12px;
-            cursor: pointer;
-            font-size: 1.05rem;
-            transition: background 0.2s ease, transform 0.1s ease;
-            margin-top: 1rem;
-        }
-
-        .btn-submit:hover {
-            background: #26893c;
-        }
-
-        .btn-submit:active {
-            transform: scale(0.99);
-        }
-
-        .site-footer {
-            text-align: center;
-            padding: 4rem 0 2rem 0;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            border-top: 1px solid var(--border-color);
-            margin-top: 5rem;
-        }
-
-        @media (max-width: 768px) {
-            .hero-section h1 { font-size: 2.25rem; }
-            .beta-section { padding: 2rem; }
-            .mission-box { padding: 1.5rem; }
-            .modal-content { padding: 1.5rem; }
-        }
-    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+
     <div class="page-wrapper">
         <header class="site-header">
             <div class="logo">g<span>OWL</span>system</div>
-            <nav class="nav-links">
-                <a href="#mission">La Mission</a>
-                <a href="#pipeline">Pipeline</a>
-                <a href="#viewer">Viewer & Demo</a>
-                <a href="#beta-access">Accesso Beta</a>
+            <nav class="site-nav" aria-label="Principale">
+                <a href="#metodo">Metodo</a>
+                <a href="#vantaggi">Vantaggi</a>
+                <a href="#servizi-modulari">Servizi</a>
             </nav>
-        </header>
-        
-        <main>
-            <!-- Hero Principale -->
-            <section class="hero-section">
-                <h1>L'ecosistema GIS in agricoltura</h1>
-                <p class="subtitle">La soluzione integrata per colmare il divario tra telerilevamento avanzato e macchine agricole di precisione.</p>
-            </section>
-
-            <!-- Sezione Mission -->
-            <section id="mission" class="mission-box">
-                <h2>La Mission di gOWLsystem</h2>
-                <p>
-                    gOWLsystem nasce per semplificare e rendere accessibile l'agricoltura di precisione, unendo il mondo dell'analisi territoriale geospaziale con l'operatività quotidiana in campo. La nostra missione è eliminare le complessità di conversione dei dati, offrendo una pipeline fluida che trasforma i rilievi aerei e satellitari in prescrizioni agronomiche chiare, standardizzate e pronte per essere eseguite dai moderni macchinari agricoli a rateo variabile.
-                </p>
-            </section>
-
-            <!-- Sezione Pipeline & Schema -->
-            <section id="pipeline" class="pipeline-section">
-                <h2 class="section-title">
-                    <a href="#" id="openPipelineModal" class="section-title-link" title="Clicca per esplorare la pipeline nel dettaglio">Come Funziona la Pipeline</a>
-                </h2>
-                <div class="info-grid">
-                    <div class="info-card">
-                        <h3>01. Rilievi Drone & Satellitari</h3>
-                        <p>Acquisizione di immagini ad alta risoluzione tramite telerilevamento aereo e satellitari, elaborate attraverso tecniche avanzate di fotogrammetria per estrarre indici di vigore e mappe di variabilità vegetativa.</p>
-                    </div>
-                    <div class="info-card">
-                        <h3>02. Elaborazione GIS & VRA</h3>
-                        <p>Analisi spaziale e modellazione dei dati all'interno dell'ambiente GIS, per tradurre lo stato effettivo della coltura in mappe di prescrizione agronomica mirate a supportare tutte le operazioni a rateo variabile.</p>
-                    </div>
-                    <div class="info-card">
-                        <h3>03. Export Nativo ISO-XML</h3>
-                        <p>Conversione automatizzata nei formati standard internazionali di interconnessione agricola, inclusi i pacchetti ISO-XML TaskData, per caricare i file direttamente sui terminali di bordo di trattrici e droni agricoli.</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Modale a scomparsa della Pipeline -->
-            <div id="pipelineModal" class="modal-overlay">
-                <div class="modal-content">
-                    <button id="closePipelineModal" class="modal-close">&times;</button>
-                    <div class="modal-header">
-                        <h3>gOWLsystem Pipeline</h3>
-                    </div>
-                    <div class="modal-intro">
-                        Un flusso di lavoro digitale e automatizzato pensato per trasformare i dati aerei in strumenti operativi concreti, applicabile non solo alla viticoltura di precisione ma a qualsiasi coltura agricola e alla gestione agroforestale. La pipeline unisce il rilievo con drone all'analisi territoriale avanzata, traducendo lo stato reale della vegetazione in indicazioni agronomiche mirate. In uscita: <strong>quattro PDF formali</strong> (Operatore, Quaderno di Campagna, Report assicurativo di resa, Report/Stampa PAC AGEA) e, sul lato macchina, <strong>KML / GeoJSON / TaskData ISO-XML</strong> racchiusi nel <strong>pacchetto ZIP QdC / USB ISOBUS</strong>.
-                    </div>
-                    <div class="modal-steps">
-                        <div class="modal-step-item">
-                            <h4><span>1.</span> Rilievo Aereo e Acquisizione Dati</h4>
-                            <p>Impiego di droni (UAS) per effettuare voli programmati e raccogliere immagini ad altissima risoluzione e dati geospaziali di qualsiasi appezzamento agricolo o area agroforestale.</p>
-                        </div>
-                        <div class="modal-step-item">
-                            <h4><span>2.</span> Fotogrammetria e Modellazione del Territorio</h4>
-                            <p>Elaborazione dei rilievi per generare ortofoto dettagliate e modelli tridimensionali del terreno e della vegetazione (DTM, DSM), offrendo una panoramica completa dello stato del suolo e della copertura vegetale, applicabile a colture arboree, erbacee e boschi.</p>
-                        </div>
-                        <div class="modal-step-item">
-                            <h4><span>3.</span> Analisi dello Stato Vegetativo</h4>
-                            <p>Elaborazione delle informazioni territoriali per estrarre la vigoria e lo stato di salute generale delle piante, evidenziando le differenze di sviluppo all'interno di qualsiasi campo o bosco.</p>
-                        </div>
-                        <div class="modal-step-item">
-                            <h4><span>4.</span> Generazione Mappe di Prescrizione (VRA)</h4>
-                            <p>Traduzione dei dati raccolti in indicazioni agronomiche mirate a rateo variabile, per distribuire risorse o interventi in modo mirato dove la vegetazione ne ha realmente bisogno.</p>
-                        </div>
-                        <div class="modal-step-item">
-                            <h4><span>5.</span> Esportazione Standard e Archiviazione</h4>
-                            <p>
-                                La console VRA espone due uscite operative: la documentazione ufficiale in PDF e i file di bordo
-                                pronti per QField, terminali ISOBUS e chiavetta USB.
-                            </p>
-                            <div class="export-dual-grid" aria-label="Uscite hub download">
-                                <div class="export-col">
-                                    <h5>Output PDF</h5>
-                                    <ol>
-                                        <li><strong>Report Operatore (PDF)</strong> — fallanze georeferenziate e coordinate di campo</li>
-                                        <li><strong>Quaderno di Campagna / Prescrizione VRA (PDF)</strong> — CUAA, N. di registrazione, dosi e tracciabilità</li>
-                                        <li><strong>Report assicurativo di resa (PDF)</strong> — stima quintali in pianta per perizie e sinistri</li>
-                                        <li><strong>Report / Stampa PAC (PDF)</strong> — conformità e condizionalità AGEA (fascicolo, SQNPI/PAN, dichiarazioni)</li>
-                                    </ol>
-                                </div>
-                                <div class="export-col">
-                                    <h5>Vettoriali e USB</h5>
-                                    <ol>
-                                        <li><strong>KML</strong> — Google Earth / QField (WGS84)</li>
-                                        <li><strong>GeoJSON</strong> — slot/prescrizione su Griglia Madre (EPSG:32632)</li>
-                                        <li><strong>TaskData ISO-XML</strong> — terminali ISOBUS</li>
-                                        <li><strong>Pacchetto ZIP QdC / USB ISOBUS</strong> — archivio unico per chiavetta e tracciabilità QdC</li>
-                                    </ol>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="badge-status">
+                <span class="status-dot"></span> System Online
             </div>
+        </header>
 
-            <!-- Sezione Video Demo / Viewer -->
-            <section id="viewer" class="video-section">
-                <h2 class="section-title">Test e Validazione Mappe VRA</h2>
-                <div class="video-container">
-                    <video src="public/videos/demo_viewer.mp4" autoplay loop muted playsinline></video>
+        <main>
+            <!-- 1. HERO SECTION -->
+            <section class="hero-section">
+                <div class="hero-content">
+                    <h1>L'Intelligenza Geospaziale per la Gestione Agricola</h1>
+                    <p class="subtitle">La piattaforma integrata che trasforma i dati da telerilevamento in decisioni operative, supporto burocratico e precisione in campo.</p>
+
+                    <div class="action-buttons">
+                        <a href="#metodo" class="btn btn-primary">Il Metodo</a>
+                        <a href="mailto:info@gowlsystem.com?subject=Richiesta%20info%20gOWLsystem" class="btn btn-secondary">info@gowlsystem.com</a>
+                    </div>
                 </div>
             </section>
 
-            <!-- Sezione BETA VIEWER / Form di Contatto -->
-            <section id="beta-access" class="beta-section">
-                <div class="beta-header">
-                    <span class="badge-beta">BETA VIEWER PROGRAM</span>
-                    <h2>Richiedi l'accesso Beta</h2>
-                    <p>
-                        Unisciti al programma di test anticipato per il Viewer gOWLsystem. Carica, testa e verifica i file delle tue mappe VRA (formati ZIP, KMZ, KML, GeoJSON) direttamente in ambiente web prima dell'utilizzo in campo.
-                    </p>
-                    <ul class="beta-perks">
-                        <li>Upload e controllo nativo file VRA (ZIP, KMZ, KML, GeoJSON)</li>
-                        <li>Verifica preventiva di geometrie e dosi target prima dell'operatività</li>
-                        <li>Canale di feedback diretto per contribuire alla roadmap del progetto</li>
-                    </ul>
+            <!-- 2. METODO E RISULTATI -->
+            <section id="metodo" class="content-section">
+                <header class="section-head">
+                    <h2>I 3 Step del Metodo</h2>
+                    <p>Rilievo, zonizzazione intelligente ed esecuzione operativa sulla stessa base georeferenziata.</p>
+                </header>
+
+                <ol class="method-steps">
+                    <li class="method-step">
+                        <span class="step-num">1</span>
+                        <div>
+                            <h3>Rilievo</h3>
+                            <p>Acquisizione e elaborazione dei dati da telerilevamento (RGB e multispettrale). Ortofoto, Griglia Madre e indici spettrali per una base georeferenziata affidabile.</p>
+                        </div>
+                    </li>
+                    <li class="method-step">
+                        <span class="step-num">2</span>
+                        <div>
+                            <h3>Zonizzazione Intelligente</h3>
+                            <p>Classificazione in zone Blu, Verde e Rossa con dose variabile sul vivo. Sulle fallanze strutturali confermate si applica Dose Zero.</p>
+                        </div>
+                    </li>
+                    <li class="method-step">
+                        <span class="step-num">3</span>
+                        <div>
+                            <h3>Esecuzione in Campo</h3>
+                            <p>Consegna operativa per macchina e operatore: TaskData ISOBUS, report di cantiere e navigazione POI, allineati alla stessa mappa di prescrizione.</p>
+                        </div>
+                    </li>
+                </ol>
+
+                <div class="zone-legend" aria-label="Legenda zonazione VRA">
+                    <article class="zone-chip zone-blu">
+                        <span class="zone-swatch" aria-hidden="true"></span>
+                        <div>
+                            <strong>Blu — Alto vigore</strong>
+                            <span>Dose ridotta</span>
+                        </div>
+                    </article>
+                    <article class="zone-chip zone-verde">
+                        <span class="zone-swatch" aria-hidden="true"></span>
+                        <div>
+                            <strong>Verde — Medio vigore</strong>
+                            <span>Dose intermedia</span>
+                        </div>
+                    </article>
+                    <article class="zone-chip zone-rossa">
+                        <span class="zone-swatch" aria-hidden="true"></span>
+                        <div>
+                            <strong>Rossa — Basso vigore</strong>
+                            <span>Dose rafforzata</span>
+                        </div>
+                    </article>
+                    <article class="zone-chip zone-fallanza">
+                        <span class="zone-swatch" aria-hidden="true"></span>
+                        <div>
+                            <strong>Fallanze</strong>
+                            <span>Dose Zero</span>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <section id="vantaggi" class="content-section advantages-section">
+                <header class="section-head">
+                    <h2>I Risultati Concreti</h2>
+                    <p>Economia di intervento, conformità documentale e tutela in caso di sinistro.</p>
+                </header>
+
+                <div class="advantages-grid">
+                    <article class="advantage-card">
+                        <h3>Risparmio Economico (15-25%)</h3>
+                        <p>Riduzione tipica di prodotto e costi di trattamento rispetto alla dose fissa su tutto il campo, grazie alla zonizzazione e alle fallanze a Dose Zero.</p>
+                        <span class="adv-tag">Economia</span>
+                    </article>
+                    <article class="advantage-card">
+                        <h3>Burocrazia (PAC / SRH01)</h3>
+                        <p>Supporto documentale per Quaderno di Campagna, registro trattamenti e report di conformità allineati alle mappe di prescrizione.</p>
+                        <span class="adv-tag">Conformità</span>
+                    </article>
+                    <article class="advantage-card">
+                        <h3>Tutela Peritale (Gate Peritale)</h3>
+                        <p>Evidenza georeferenziata Ante/Post a supporto di perizie assicurative e sinistri.</p>
+                        <span class="adv-tag">Tutela</span>
+                    </article>
+                </div>
+            </section>
+
+            <!-- 3. SERVIZI MODULARI -->
+            <section id="servizi-modulari" class="content-section">
+                <header class="section-head">
+                    <h2>Servizi Modulari gOWLsystem</h2>
+                    <p>Quattro ambiti componibili, senza listino fisso, attivabili in base alle esigenze aziendali.</p>
+                </header>
+
+                <div class="advantages-grid">
+                    <article class="advantage-card">
+                        <h3>Telerilevamento Avanzato</h3>
+                        <p>Rilievi UAV, censimento ceppi e fallanze, report storico satellitare per il monitoraggio pluriennale dell’appezzamento.</p>
+                        <span class="adv-tag">Diagnosi</span>
+                    </article>
+                    <article class="advantage-card">
+                        <h3>Operatività ISOBUS</h3>
+                        <p>Mappe VRA ISOBUS (TaskData) e Scheda Operatore di campo per l’esecuzione in cantiere.</p>
+                        <span class="adv-tag">Operatività</span>
+                    </article>
+                    <article class="advantage-card">
+                        <h3>Burocrazia / PAC</h3>
+                        <p>Quaderno di Campagna (QdC) e dossier a supporto di bandi PSR / SRH01.</p>
+                        <span class="adv-tag">Conformità</span>
+                    </article>
+                    <article class="advantage-card">
+                        <h3>Tutela Peritale</h3>
+                        <p>Dossier peritale assicurativo e Consuntivo ROI di fine anno.</p>
+                        <span class="adv-tag">Gestione</span>
+                    </article>
                 </div>
 
-                <!-- Modulo di Iscrizione Formspree -->
-                <form class="beta-form" action="https://formspree.io/f/xnpndrrb" method="POST">
-                    <div class="form-group">
-                        <label for="email">Email di contatto *</label>
-                        <input type="email" id="email" name="email" placeholder="nome@studio.it" required>
+                <div class="cta-banner">
+                    <div>
+                        <h3>Preventivo personalizzato</h3>
+                        <p>I servizi vengono modulati su misura in base all’estensione e alle esigenze aziendali. Contatta il team per un preventivo personalizzato.</p>
                     </div>
-
-                    <div class="form-group">
-                        <label for="profession">Professione *</label>
-                        <select id="profession" name="profession" required>
-                            <option value="" disabled selected>Seleziona il tuo profilo</option>
-                            <option value="Agronomo / Consulente">Agronomo / Consulente</option>
-                            <option value="Viticoltore / Azienda Agricola">Viticoltore / Azienda Agricola</option>
-                            <option value="Specialista GIS / Droni">Specialista GIS / Droni</option>
-                            <option value="Studente / Ricercatore">Studente / Ricercatore</option>
-                            <option value="Altro">Altro</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="motivation">Nota motivazionale</label>
-                        <textarea id="motivation" name="motivation" rows="3" placeholder="Perché vuoi testare gOWLsystem? (facoltativo)"></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="expectations">Feedback / Aspettative</label>
-                        <textarea id="expectations" name="expectations" rows="3" placeholder="Cosa vorresti risolvere con VRA o GIS? (facoltativo)"></textarea>
-                    </div>
-
-                    <button type="submit" class="btn-submit">Ottieni l'accesso prioritario Beta</button>
-                </form>
+                    <a class="btn btn-primary" href="mailto:info@gowlsystem.com?subject=Richiesta%20preventivo%20personalizzato%20gOWLsystem">info@gowlsystem.com</a>
+                </div>
             </section>
         </main>
 
         <footer class="site-footer">
-            <p>&copy; 2026 gowlsystem.com — L'Hub Geospaziale e VRA per l'Agricoltura. Tutti i diritti riservati.</p>
+            <p>2026 Giorgio Lombardo — <a href="mailto:info@gowlsystem.com">info@gowlsystem.com</a></p>
         </footer>
     </div>
 
-    <!-- Script per la gestione del modale -->
-    <script>
-        const modal = document.getElementById('pipelineModal');
-        const openBtn = document.getElementById('openPipelineModal');
-        const closeBtn = document.getElementById('closePipelineModal');
-
-        openBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden'; // Blocca lo scroll del body
-        });
-
-        closeBtn.addEventListener('click', () => {
-            modal.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        });
-
-        // Chiusura cliccando fuori dal box del modale
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.classList.remove('active');
-                document.body.style.overflow = 'auto';
-            }
-        });
-
-        // Chiusura con tasto ESC
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && modal.classList.contains('active')) {
-                modal.classList.remove('active');
-                document.body.style.overflow = 'auto';
-            }
-        });
-    </script>
 </body>
 </html>
