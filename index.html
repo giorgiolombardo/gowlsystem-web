@@ -4,173 +4,285 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>gOWLsystem — Intelligenza Geospaziale per la Gestione Agricola</title>
-    <meta name="description" content="Piattaforma integrata: telerilevamento, VRA, conformità PAC/SRH01 e tutela peritale. Risparmio economico 15-25%.">
+    <meta name="description" content="Piattaforma integrata: telerilevamento, VRA, conformità PAC/SRH01 e tutela peritale. Viewer demo e accesso Beta.">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-
     <div class="page-wrapper">
         <header class="site-header">
-            <div class="logo">g<span>OWL</span>system</div>
-            <nav class="site-nav" aria-label="Principale">
-                <a href="#metodo">Metodo</a>
-                <a href="#vantaggi">Vantaggi</a>
-                <a href="#servizi-modulari">Servizi</a>
+            <a class="logo" href="#">g<span>OWL</span>system</a>
+            <nav class="nav-links" aria-label="Principale">
+                <a href="#mission">La Mission</a>
+                <a href="#metodo">Il Metodo</a>
+                <a href="#viewer">Viewer &amp; Demo</a>
+                <a href="#beta">Accesso Beta</a>
             </nav>
             <div class="badge-status">
-                <span class="status-dot"></span> System Online
+                <span class="status-dot" aria-hidden="true"></span>
+                System Online
             </div>
         </header>
 
         <main>
-            <!-- 1. HERO SECTION -->
+            <!-- HERO -->
             <section class="hero-section">
-                <div class="hero-content">
-                    <h1>L'Intelligenza Geospaziale per la Gestione Agricola</h1>
-                    <p class="subtitle">La piattaforma integrata che trasforma i dati da telerilevamento in decisioni operative, supporto burocratico e precisione in campo.</p>
+                <h1>L'Intelligenza Geospaziale per la Gestione Agricola</h1>
+                <p class="subtitle">La piattaforma integrata che trasforma i dati da telerilevamento in decisioni operative, supporto burocratico e precisione in campo.</p>
+                <div class="action-buttons">
+                    <a href="#metodo" class="btn btn-primary">Il Metodo</a>
+                    <a href="#viewer" class="btn btn-secondary">Apri Viewer &amp; Demo</a>
+                </div>
+            </section>
 
-                    <div class="action-buttons">
-                        <a href="#metodo" class="btn btn-primary">Il Metodo</a>
-                        <a href="mailto:info@gowlsystem.com?subject=Richiesta%20info%20gOWLsystem" class="btn btn-secondary">info@gowlsystem.com</a>
+            <!-- MISSION -->
+            <section id="mission" class="mission-box">
+                <h2>La Mission di gOWLsystem</h2>
+                <p>
+                    gOWLsystem nasce per semplificare e rendere accessibile l'agricoltura di precisione,
+                    unendo analisi territoriale geospaziale e operatività quotidiana in campo.
+                    La missione è eliminare le complessità di conversione dei dati: dai rilievi aerei e satellitari
+                    a prescrizioni agronomiche chiare, standardizzate e pronte per macchinari a rateo variabile,
+                    con tracciabilità documentale e tutela peritale.
+                </p>
+            </section>
+
+            <!-- IL METODO -->
+            <section id="metodo" class="metodo-section">
+                <header class="section-head">
+                    <h2 class="section-title">Il Metodo</h2>
+                    <p class="section-lead">Tre passaggi sulla stessa base georeferenziata: dal rilievo alla macchina.</p>
+                </header>
+
+                <div class="info-grid metodo-grid">
+                    <article class="info-card">
+                        <span class="card-kicker">01</span>
+                        <h3>Il Rilievo</h3>
+                        <p>Acquisizione multispettrale UAV ad alta risoluzione (RGB e multispettrale) per una base georeferenziata affidabile.</p>
+                    </article>
+                    <article class="info-card">
+                        <span class="card-kicker">02</span>
+                        <h3>Zonizzazione Intelligente</h3>
+                        <p>Classificazione in zone Blu, Verde e Rossa con dose variabile sul vivo. Esclusione automatica delle fallanze strutturali con applicazione Dose Zero.</p>
+                    </article>
+                    <article class="info-card">
+                        <span class="card-kicker">03</span>
+                        <h3>Esecuzione in Campo</h3>
+                        <p>Esportazione di mappe VRA per terminali ISOBUS e generazione di Schede Operatore di Cantiere in 1 pagina.</p>
+                    </article>
+                </div>
+
+                <!-- Mappa G4 -->
+                <div class="g4-panel" aria-label="Mappa di Vigore e Zonizzazione G4">
+                    <div class="g4-panel-head">
+                        <div>
+                            <h3>Mappa di Vigore &amp; Zonizzazione G4</h3>
+                            <p>Anteprima dello strato diagnostico: vigore, zone VRA e fallanze a Dose Zero.</p>
+                        </div>
+                        <span class="g4-badge">Gate 4</span>
+                    </div>
+
+                    <div class="g4-body">
+                        <div class="g4-canvas" role="img" aria-label="Placeholder mappa vigore G4">
+                            <svg viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg" class="g4-svg">
+                                <defs>
+                                    <linearGradient id="fieldGrad" x1="0" y1="0" x2="1" y2="1">
+                                        <stop offset="0%" stop-color="#1e3a8a"/>
+                                        <stop offset="35%" stop-color="#166534"/>
+                                        <stop offset="70%" stop-color="#15803d"/>
+                                        <stop offset="100%" stop-color="#991b1b"/>
+                                    </linearGradient>
+                                    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+                                        <path d="M32 0H0V32" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+                                    </pattern>
+                                </defs>
+                                <rect width="640" height="360" rx="16" fill="#0a0f18"/>
+                                <rect x="24" y="24" width="420" height="312" rx="12" fill="url(#fieldGrad)" opacity="0.92"/>
+                                <rect x="24" y="24" width="420" height="312" rx="12" fill="url(#grid)"/>
+                                <!-- Fallanze Dose Zero -->
+                                <rect x="72" y="64" width="28" height="28" rx="4" fill="#27272a" stroke="#71717a" stroke-width="1.5"/>
+                                <rect x="168" y="140" width="28" height="28" rx="4" fill="#27272a" stroke="#71717a" stroke-width="1.5"/>
+                                <rect x="280" y="88" width="28" height="28" rx="4" fill="#27272a" stroke="#71717a" stroke-width="1.5"/>
+                                <rect x="220" y="220" width="28" height="28" rx="4" fill="#27272a" stroke="#71717a" stroke-width="1.5"/>
+                                <rect x="360" y="180" width="28" height="28" rx="4" fill="#27272a" stroke="#71717a" stroke-width="1.5"/>
+                                <text x="234" y="190" text-anchor="middle" fill="rgba(255,255,255,0.55)" font-size="13" font-family="Inter, sans-serif">NDVI / Zone VRA</text>
+                                <!-- Side panel -->
+                                <rect x="460" y="24" width="156" height="312" rx="12" fill="rgba(17,24,39,0.9)" stroke="rgba(255,255,255,0.1)"/>
+                                <text x="538" y="56" text-anchor="middle" fill="#f3f4f6" font-size="12" font-weight="600" font-family="Inter, sans-serif">Parametri</text>
+                                <text x="480" y="96" fill="#9ca3af" font-size="11" font-family="Inter, sans-serif">min</text>
+                                <text x="596" y="96" text-anchor="end" fill="#fff" font-size="13" font-weight="600" font-family="Inter, sans-serif">0.18</text>
+                                <text x="480" y="132" fill="#9ca3af" font-size="11" font-family="Inter, sans-serif">μ</text>
+                                <text x="596" y="132" text-anchor="end" fill="#fff" font-size="13" font-weight="600" font-family="Inter, sans-serif">0.47</text>
+                                <text x="480" y="168" fill="#9ca3af" font-size="11" font-family="Inter, sans-serif">max</text>
+                                <text x="596" y="168" text-anchor="end" fill="#fff" font-size="13" font-weight="600" font-family="Inter, sans-serif">0.81</text>
+                                <line x1="480" y1="196" x2="596" y2="196" stroke="rgba(255,255,255,0.1)"/>
+                                <text x="480" y="228" fill="#9ca3af" font-size="11" font-family="Inter, sans-serif">Slot</text>
+                                <text x="596" y="228" text-anchor="end" fill="#fff" font-size="13" font-weight="600" font-family="Inter, sans-serif">1 248</text>
+                                <text x="480" y="264" fill="#9ca3af" font-size="11" font-family="Inter, sans-serif">Fallanze</text>
+                                <text x="596" y="264" text-anchor="end" fill="#fff" font-size="13" font-weight="600" font-family="Inter, sans-serif">5.2%</text>
+                            </svg>
+                        </div>
+
+                        <aside class="g4-legend">
+                            <h4>Legenda zonazione</h4>
+                            <ul>
+                                <li><span class="swatch blu"></span><div><strong>Blu</strong><span>Alto vigore — dose ridotta</span></div></li>
+                                <li><span class="swatch verde"></span><div><strong>Verde</strong><span>Medio vigore — dose intermedia</span></div></li>
+                                <li><span class="swatch rossa"></span><div><strong>Rossa</strong><span>Basso vigore — dose rafforzata</span></div></li>
+                                <li><span class="swatch fallanza"></span><div><strong>Fallanze</strong><span>Dose Zero</span></div></li>
+                            </ul>
+                            <div class="g4-stats">
+                                <div><span>min</span><strong>0.18</strong></div>
+                                <div><span>μ</span><strong>0.47</strong></div>
+                                <div><span>max</span><strong>0.81</strong></div>
+                            </div>
+                        </aside>
                     </div>
                 </div>
             </section>
 
-            <!-- 2. METODO E RISULTATI -->
-            <section id="metodo" class="content-section">
+            <!-- SERVIZI MODULARI -->
+            <section id="servizi" class="servizi-section">
                 <header class="section-head">
-                    <h2>I 3 Step del Metodo</h2>
-                    <p>Rilievo, zonizzazione intelligente ed esecuzione operativa sulla stessa base georeferenziata.</p>
+                    <h2 class="section-title">Servizi Modulari</h2>
+                    <p class="section-lead">Quattro ambiti componibili, attivabili in base alle esigenze aziendali.</p>
                 </header>
 
-                <ol class="method-steps">
-                    <li class="method-step">
-                        <span class="step-num">1</span>
-                        <div>
-                            <h3>Rilievo</h3>
-                            <p>Acquisizione e elaborazione dei dati da telerilevamento (RGB e multispettrale). Ortofoto, Griglia Madre e indici spettrali per una base georeferenziata affidabile.</p>
-                        </div>
-                    </li>
-                    <li class="method-step">
-                        <span class="step-num">2</span>
-                        <div>
-                            <h3>Zonizzazione Intelligente</h3>
-                            <p>Classificazione in zone Blu, Verde e Rossa con dose variabile sul vivo. Sulle fallanze strutturali confermate si applica Dose Zero.</p>
-                        </div>
-                    </li>
-                    <li class="method-step">
-                        <span class="step-num">3</span>
-                        <div>
-                            <h3>Esecuzione in Campo</h3>
-                            <p>Consegna operativa per macchina e operatore: TaskData ISOBUS, report di cantiere e navigazione POI, allineati alla stessa mappa di prescrizione.</p>
-                        </div>
-                    </li>
-                </ol>
-
-                <div class="zone-legend" aria-label="Legenda zonazione VRA">
-                    <article class="zone-chip zone-blu">
-                        <span class="zone-swatch" aria-hidden="true"></span>
-                        <div>
-                            <strong>Blu — Alto vigore</strong>
-                            <span>Dose ridotta</span>
-                        </div>
+                <div class="services-grid">
+                    <article class="info-card">
+                        <h3>Telerilevamento</h3>
+                        <p>Rilievi UAV, censimento ceppi e fallanze, report storico satellitare per il monitoraggio pluriennale.</p>
                     </article>
-                    <article class="zone-chip zone-verde">
-                        <span class="zone-swatch" aria-hidden="true"></span>
-                        <div>
-                            <strong>Verde — Medio vigore</strong>
-                            <span>Dose intermedia</span>
-                        </div>
-                    </article>
-                    <article class="zone-chip zone-rossa">
-                        <span class="zone-swatch" aria-hidden="true"></span>
-                        <div>
-                            <strong>Rossa — Basso vigore</strong>
-                            <span>Dose rafforzata</span>
-                        </div>
-                    </article>
-                    <article class="zone-chip zone-fallanza">
-                        <span class="zone-swatch" aria-hidden="true"></span>
-                        <div>
-                            <strong>Fallanze</strong>
-                            <span>Dose Zero</span>
-                        </div>
-                    </article>
-                </div>
-            </section>
-
-            <section id="vantaggi" class="content-section advantages-section">
-                <header class="section-head">
-                    <h2>I Risultati Concreti</h2>
-                    <p>Economia di intervento, conformità documentale e tutela in caso di sinistro.</p>
-                </header>
-
-                <div class="advantages-grid">
-                    <article class="advantage-card">
-                        <h3>Risparmio Economico (15-25%)</h3>
-                        <p>Riduzione tipica di prodotto e costi di trattamento rispetto alla dose fissa su tutto il campo, grazie alla zonizzazione e alle fallanze a Dose Zero.</p>
-                        <span class="adv-tag">Economia</span>
-                    </article>
-                    <article class="advantage-card">
-                        <h3>Burocrazia (PAC / SRH01)</h3>
-                        <p>Supporto documentale per Quaderno di Campagna, registro trattamenti e report di conformità allineati alle mappe di prescrizione.</p>
-                        <span class="adv-tag">Conformità</span>
-                    </article>
-                    <article class="advantage-card">
-                        <h3>Tutela Peritale (Gate Peritale)</h3>
-                        <p>Evidenza georeferenziata Ante/Post a supporto di perizie assicurative e sinistri.</p>
-                        <span class="adv-tag">Tutela</span>
-                    </article>
-                </div>
-            </section>
-
-            <!-- 3. SERVIZI MODULARI -->
-            <section id="servizi-modulari" class="content-section">
-                <header class="section-head">
-                    <h2>Servizi Modulari gOWLsystem</h2>
-                    <p>Quattro ambiti componibili, senza listino fisso, attivabili in base alle esigenze aziendali.</p>
-                </header>
-
-                <div class="advantages-grid">
-                    <article class="advantage-card">
-                        <h3>Telerilevamento Avanzato</h3>
-                        <p>Rilievi UAV, censimento ceppi e fallanze, report storico satellitare per il monitoraggio pluriennale dell’appezzamento.</p>
-                        <span class="adv-tag">Diagnosi</span>
-                    </article>
-                    <article class="advantage-card">
+                    <article class="info-card">
                         <h3>Operatività ISOBUS</h3>
                         <p>Mappe VRA ISOBUS (TaskData) e Scheda Operatore di campo per l’esecuzione in cantiere.</p>
-                        <span class="adv-tag">Operatività</span>
                     </article>
-                    <article class="advantage-card">
+                    <article class="info-card">
                         <h3>Burocrazia / PAC</h3>
-                        <p>Quaderno di Campagna (QdC) e dossier a supporto di bandi PSR / SRH01.</p>
-                        <span class="adv-tag">Conformità</span>
+                        <p>Quaderno di Campagna e dossier a supporto di bandi PSR / SRH01 e conformità documentale.</p>
                     </article>
-                    <article class="advantage-card">
+                    <article class="info-card">
                         <h3>Tutela Peritale</h3>
-                        <p>Dossier peritale assicurativo e Consuntivo ROI di fine anno.</p>
-                        <span class="adv-tag">Gestione</span>
+                        <p>Gate Peritale Ante/Post, dossier assicurativo e Consuntivo ROI di fine anno.</p>
                     </article>
                 </div>
 
                 <div class="cta-banner">
                     <div>
-                        <h3>Preventivo personalizzato</h3>
-                        <p>I servizi vengono modulati su misura in base all’estensione e alle esigenze aziendali. Contatta il team per un preventivo personalizzato.</p>
+                        <h3>Servizio sartoriale su misura</h3>
+                        <p>Moduli e perimetro di intervento calibrati su estensione e obiettivi aziendali. Richiedi un preventivo personalizzato.</p>
                     </div>
                     <a class="btn btn-primary" href="mailto:info@gowlsystem.com?subject=Richiesta%20preventivo%20personalizzato%20gOWLsystem">info@gowlsystem.com</a>
                 </div>
             </section>
+
+            <!-- VIEWER & DEMO (Armila Violeta) -->
+            <section id="viewer" class="video-section">
+                <header class="section-head">
+                    <h2 class="section-title">Viewer &amp; Demo</h2>
+                    <p class="section-lead">
+                        Demo del Viewer gOWLsystem su appezzamento di riferimento
+                        <strong>Armila Violeta</strong>: validazione geometrie, zone VRA e dosi prima dell’uso in campo.
+                    </p>
+                </header>
+                <div class="video-container">
+                    <video
+                        id="viewer-demo"
+                        src="public/videos/demo_viewer.mp4"
+                        autoplay
+                        loop
+                        muted
+                        playsinline
+                        controls
+                        title="Viewer demo — Armila Violeta"
+                    ></video>
+                </div>
+                <div class="viewer-actions">
+                    <a href="#viewer-demo" class="btn btn-primary" id="play-viewer">Riproduci demo Armila Violeta</a>
+                    <a href="#beta" class="btn btn-secondary">Richiedi accesso Beta Viewer</a>
+                </div>
+            </section>
+
+            <!-- ACCESSO BETA -->
+            <section id="beta" class="beta-section">
+                <div class="beta-header">
+                    <span class="badge-beta">BETA VIEWER PROGRAM</span>
+                    <h2>Richiedi l'accesso Beta</h2>
+                    <p>
+                        Unisciti al programma di test anticipato per il Viewer gOWLsystem.
+                        Carica e verifica mappe VRA (ZIP, KMZ, KML, GeoJSON) in ambiente web prima dell’operatività.
+                    </p>
+                    <ul class="beta-perks">
+                        <li>Upload e controllo nativo file VRA</li>
+                        <li>Verifica preventiva di geometrie e dosi target</li>
+                        <li>Canale di feedback diretto sulla roadmap</li>
+                    </ul>
+                </div>
+
+                <form
+                    id="beta-form"
+                    class="beta-form"
+                    action="https://formspree.io/f/xnpndrrb"
+                    method="POST"
+                >
+                    <div class="form-group">
+                        <label for="email">Email di contatto *</label>
+                        <input type="email" id="email" name="email" placeholder="nome@studio.it" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="profession">Professione *</label>
+                        <select id="profession" name="profession" required>
+                            <option value="" disabled selected>Seleziona il tuo profilo</option>
+                            <option value="Agronomo / Consulente">Agronomo / Consulente</option>
+                            <option value="Viticoltore / Azienda Agricola">Viticoltore / Azienda Agricola</option>
+                            <option value="Specialista GIS / Droni">Specialista GIS / Droni</option>
+                            <option value="Studente / Ricercatore">Studente / Ricercatore</option>
+                            <option value="Altro">Altro</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="motivation">Nota motivazionale</label>
+                        <textarea id="motivation" name="motivation" rows="3" placeholder="Perché vuoi testare gOWLsystem? (facoltativo)"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="expectations">Feedback / Aspettative</label>
+                        <textarea id="expectations" name="expectations" rows="3" placeholder="Cosa vorresti risolvere con VRA o GIS? (facoltativo)"></textarea>
+                    </div>
+
+                    <p id="beta-status" class="form-status" hidden></p>
+
+                    <button type="submit" id="beta-submit" class="btn-submit">
+                        <span class="btn-label">Ottieni l'accesso prioritario Beta</span>
+                        <span class="btn-loading" hidden>Invio in corso…</span>
+                    </button>
+                </form>
+            </section>
         </main>
 
         <footer class="site-footer">
-            <p>2026 Giorgio Lombardo — <a href="mailto:info@gowlsystem.com">info@gowlsystem.com</a></p>
+            <p>2026 Giorgio Lombardo — <a href="mailto:info@gowlsystem.com">info@gowlsystem.com</a> — gowlsystem.com</p>
         </footer>
     </div>
 
+    <script src="beta-form.js" defer></script>
+    <script>
+        (function () {
+            var playBtn = document.getElementById('play-viewer');
+            var video = document.getElementById('viewer-demo');
+            if (!playBtn || !video) return;
+            playBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                video.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                video.muted = false;
+                var p = video.play();
+                if (p && typeof p.catch === 'function') p.catch(function () {});
+            });
+        })();
+    </script>
 </body>
 </html>
