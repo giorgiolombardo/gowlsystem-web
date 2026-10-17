@@ -384,6 +384,185 @@ body {
 .swatch.verde { background: #16a34a; }
 .swatch.rossa { background: #dc2626; }
 .swatch.fallanza { background: #3f3f46; }
+.swatch.alto { background: #1b7837; }
+.swatch.medio { background: #a6d96a; }
+.swatch.basso { background: #d7191c; }
+
+/* Showcase mappe validate */
+.showcase-panel .g4-panel-head strong {
+    color: #e8f5e9;
+    font-weight: 600;
+}
+
+.showcase-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+}
+
+.showcase-tab {
+    appearance: none;
+    border: 1px solid var(--border-color);
+    background: rgba(10, 14, 23, 0.55);
+    color: var(--text-muted);
+    font: inherit;
+    font-size: 0.88rem;
+    font-weight: 600;
+    padding: 0.55rem 0.95rem;
+    border-radius: 999px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+
+.showcase-tab:hover {
+    color: #fff;
+    border-color: rgba(46, 164, 79, 0.4);
+}
+
+.showcase-tab.is-active {
+    color: #fff;
+    border-color: rgba(46, 164, 79, 0.55);
+    background: var(--accent-glow);
+}
+
+.tab-badge {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: #fbbf24;
+    border: 1px solid rgba(251, 191, 36, 0.35);
+    background: rgba(251, 191, 36, 0.1);
+    padding: 0.15rem 0.4rem;
+    border-radius: 999px;
+}
+
+.showcase-stage {
+    position: relative;
+}
+
+.showcase-figure {
+    margin: 0;
+}
+
+.showcase-figure[hidden] {
+    display: none !important;
+}
+
+.showcase-frame {
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    background: #0a0f18;
+}
+
+.showcase-frame img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: min(68vh, 640px);
+    object-fit: contain;
+    background: #0a0f18;
+}
+
+.showcase-figure figcaption {
+    display: grid;
+    gap: 0.25rem;
+    margin-top: 1rem;
+}
+
+.fig-kicker {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent-green);
+}
+
+.showcase-figure figcaption strong {
+    color: #fff;
+    font-size: 1.05rem;
+}
+
+.showcase-figure figcaption > span:last-child {
+    color: var(--text-muted);
+    font-size: 0.92rem;
+    line-height: 1.45;
+    max-width: 52rem;
+}
+
+.showcase-legend {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.25rem;
+    margin: 1rem 0 0;
+    padding: 0;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+.showcase-legend li {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+}
+
+.showcase-soon-card {
+    border: 1px dashed rgba(251, 191, 36, 0.35);
+    border-radius: 16px;
+    background: rgba(17, 24, 39, 0.55);
+    padding: 1.5rem 1.6rem;
+}
+
+.showcase-soon-card h4 {
+    color: #fff;
+    font-size: 1.15rem;
+    margin: 0.85rem 0 0.5rem;
+}
+
+.showcase-soon-card p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    max-width: 40rem;
+    margin-bottom: 1.15rem;
+}
+
+.showcase-soon-slot {
+    min-height: 180px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    background:
+        linear-gradient(135deg, rgba(46, 164, 79, 0.08), transparent 45%),
+        repeating-linear-gradient(
+            -12deg,
+            rgba(255, 255, 255, 0.03) 0 8px,
+            transparent 8px 16px
+        ),
+        #0a0f18;
+    display: grid;
+    place-items: center;
+    padding: 1.25rem;
+}
+
+.soon-placeholder {
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.showcase-note {
+    margin: 1.25rem 0 0;
+    color: var(--text-muted);
+    font-size: 0.88rem;
+    line-height: 1.45;
+    max-width: 48rem;
+}
 
 .g4-stats {
     display: grid;
@@ -638,6 +817,10 @@ body {
     .g4-body {
         grid-template-columns: 1fr;
     }
+
+    .showcase-frame img {
+        max-height: min(55vh, 480px);
+    }
 }
 
 @media (max-width: 720px) {
@@ -666,5 +849,22 @@ body {
 
     .mission-box {
         padding: 1.5rem;
+    }
+
+    .showcase-tabs {
+        gap: 0.4rem;
+    }
+
+    .showcase-tab {
+        font-size: 0.8rem;
+        padding: 0.45rem 0.75rem;
+    }
+
+    .showcase-frame img {
+        max-height: min(48vh, 360px);
+    }
+
+    .showcase-soon-slot {
+        min-height: 140px;
     }
 }

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>gOWLsystem — Intelligenza Geospaziale per la Gestione Agricola</title>
-    <meta name="description" content="Piattaforma integrata: telerilevamento, VRA, conformità PAC/SRH01 e tutela peritale. Viewer demo e accesso Beta.">
+    <meta name="description" content="NDVI ad alta risoluzione e Macro-zonazione VRA G4 continua per ISOBUS TASKDATA. Telerilevamento, conformità PAC/SRH01 e tutela peritale.">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -64,82 +64,107 @@
                     </article>
                     <article class="info-card">
                         <span class="card-kicker">02</span>
-                        <h3>Zonizzazione Intelligente</h3>
-                        <p>Classificazione in zone Blu, Verde e Rossa con dose variabile sul vivo. Esclusione automatica delle fallanze strutturali con applicazione Dose Zero.</p>
+                        <h3>Macro-zonazione continua</h3>
+                        <p>Poligoni VRA continui (Verde Scuro / Verde Chiaro / Rosso) per una guida fluida e senza strappi delle macchine a rateo variabile. Fallanze fuori dal layer di dose — modulo POI dedicato.</p>
                     </article>
                     <article class="info-card">
                         <span class="card-kicker">03</span>
                         <h3>Esecuzione in Campo</h3>
-                        <p>Esportazione di mappe VRA per terminali ISOBUS e generazione di Schede Operatore di Cantiere in 1 pagina.</p>
+                        <p>Export ISOBUS ISO-XML TASKDATA e mappe VRA per terminali, più Scheda Operatore di Cantiere in 1 pagina.</p>
                     </article>
                 </div>
 
-                <!-- Mappa G4 -->
-                <div class="g4-panel" aria-label="Mappa di Vigore e Zonizzazione G4">
+                <!-- Showcase mappe validate (report reale G4) -->
+                <div class="g4-panel showcase-panel" id="showcase-mappe" aria-label="Showcase mappe NDVI e Macro-zonazione VRA">
                     <div class="g4-panel-head">
                         <div>
-                            <h3>Mappa di Vigore &amp; Zonizzazione G4</h3>
-                            <p>Anteprima dello strato diagnostico: vigore, zone VRA e fallanze a Dose Zero.</p>
+                            <h3>Showcase mappe — report reale G4</h3>
+                            <p>
+                                Due strati convalidati dal pipeline: NDVI ad alta risoluzione e
+                                <strong>macro-zonazione vettoriale continua</strong> ottimizzata per
+                                terminali ISOBUS (ISO-XML TASKDATA) — guida fluido, senza micro-pixel.
+                            </p>
                         </div>
-                        <span class="g4-badge">Gate 4</span>
+                        <span class="g4-badge">Gate 4 · Live</span>
                     </div>
 
-                    <div class="g4-body">
-                        <div class="g4-canvas" role="img" aria-label="Placeholder mappa vigore G4">
-                            <svg viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg" class="g4-svg">
-                                <defs>
-                                    <linearGradient id="fieldGrad" x1="0" y1="0" x2="1" y2="1">
-                                        <stop offset="0%" stop-color="#1e3a8a"/>
-                                        <stop offset="35%" stop-color="#166534"/>
-                                        <stop offset="70%" stop-color="#15803d"/>
-                                        <stop offset="100%" stop-color="#991b1b"/>
-                                    </linearGradient>
-                                    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
-                                        <path d="M32 0H0V32" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
-                                    </pattern>
-                                </defs>
-                                <rect width="640" height="360" rx="16" fill="#0a0f18"/>
-                                <rect x="24" y="24" width="420" height="312" rx="12" fill="url(#fieldGrad)" opacity="0.92"/>
-                                <rect x="24" y="24" width="420" height="312" rx="12" fill="url(#grid)"/>
-                                <!-- Fallanze Dose Zero -->
-                                <rect x="72" y="64" width="28" height="28" rx="4" fill="#27272a" stroke="#71717a" stroke-width="1.5"/>
-                                <rect x="168" y="140" width="28" height="28" rx="4" fill="#27272a" stroke="#71717a" stroke-width="1.5"/>
-                                <rect x="280" y="88" width="28" height="28" rx="4" fill="#27272a" stroke="#71717a" stroke-width="1.5"/>
-                                <rect x="220" y="220" width="28" height="28" rx="4" fill="#27272a" stroke="#71717a" stroke-width="1.5"/>
-                                <rect x="360" y="180" width="28" height="28" rx="4" fill="#27272a" stroke="#71717a" stroke-width="1.5"/>
-                                <text x="234" y="190" text-anchor="middle" fill="rgba(255,255,255,0.55)" font-size="13" font-family="Inter, sans-serif">NDVI / Zone VRA</text>
-                                <!-- Side panel -->
-                                <rect x="460" y="24" width="156" height="312" rx="12" fill="rgba(17,24,39,0.9)" stroke="rgba(255,255,255,0.1)"/>
-                                <text x="538" y="56" text-anchor="middle" fill="#f3f4f6" font-size="12" font-weight="600" font-family="Inter, sans-serif">Parametri</text>
-                                <text x="480" y="96" fill="#9ca3af" font-size="11" font-family="Inter, sans-serif">min</text>
-                                <text x="596" y="96" text-anchor="end" fill="#fff" font-size="13" font-weight="600" font-family="Inter, sans-serif">0.18</text>
-                                <text x="480" y="132" fill="#9ca3af" font-size="11" font-family="Inter, sans-serif">μ</text>
-                                <text x="596" y="132" text-anchor="end" fill="#fff" font-size="13" font-weight="600" font-family="Inter, sans-serif">0.47</text>
-                                <text x="480" y="168" fill="#9ca3af" font-size="11" font-family="Inter, sans-serif">max</text>
-                                <text x="596" y="168" text-anchor="end" fill="#fff" font-size="13" font-weight="600" font-family="Inter, sans-serif">0.81</text>
-                                <line x1="480" y1="196" x2="596" y2="196" stroke="rgba(255,255,255,0.1)"/>
-                                <text x="480" y="228" fill="#9ca3af" font-size="11" font-family="Inter, sans-serif">Slot</text>
-                                <text x="596" y="228" text-anchor="end" fill="#fff" font-size="13" font-weight="600" font-family="Inter, sans-serif">1 248</text>
-                                <text x="480" y="264" fill="#9ca3af" font-size="11" font-family="Inter, sans-serif">Fallanze</text>
-                                <text x="596" y="264" text-anchor="end" fill="#fff" font-size="13" font-weight="600" font-family="Inter, sans-serif">5.2%</text>
-                            </svg>
-                        </div>
+                    <div class="showcase-tabs" role="tablist" aria-label="Seleziona mappa">
+                        <button type="button" class="showcase-tab is-active" role="tab" aria-selected="true" aria-controls="panel-ndvi" id="tab-ndvi" data-panel="ndvi">Mappa 1 · NDVI</button>
+                        <button type="button" class="showcase-tab" role="tab" aria-selected="false" aria-controls="panel-vra" id="tab-vra" data-panel="vra">Mappa 2 · Macro-VRA</button>
+                        <button type="button" class="showcase-tab showcase-tab-soon" role="tab" aria-selected="false" aria-controls="panel-fallanze" id="tab-fallanze" data-panel="fallanze">
+                            POI Fallanze
+                            <span class="tab-badge">Prossimamente</span>
+                        </button>
+                    </div>
 
-                        <aside class="g4-legend">
-                            <h4>Legenda zonazione</h4>
-                            <ul>
-                                <li><span class="swatch blu"></span><div><strong>Blu</strong><span>Alto vigore — dose ridotta</span></div></li>
-                                <li><span class="swatch verde"></span><div><strong>Verde</strong><span>Medio vigore — dose intermedia</span></div></li>
-                                <li><span class="swatch rossa"></span><div><strong>Rossa</strong><span>Basso vigore — dose rafforzata</span></div></li>
-                                <li><span class="swatch fallanza"></span><div><strong>Fallanze</strong><span>Dose Zero</span></div></li>
-                            </ul>
-                            <div class="g4-stats">
-                                <div><span>min</span><strong>0.18</strong></div>
-                                <div><span>μ</span><strong>0.47</strong></div>
-                                <div><span>max</span><strong>0.81</strong></div>
+                    <div class="showcase-stage">
+                        <figure class="showcase-figure is-active" id="panel-ndvi" role="tabpanel" aria-labelledby="tab-ndvi">
+                            <div class="showcase-frame">
+                                <img
+                                    src="public/showcase/map_ndvi_vigore.png"
+                                    alt="Mappa di Vigore NDVI — analisi spettrale ad alta risoluzione su appezzamento di riferimento"
+                                    width="1200"
+                                    height="800"
+                                    loading="eager"
+                                    decoding="async"
+                                >
                             </div>
-                        </aside>
+                            <figcaption>
+                                <span class="fig-kicker">Mappa 1</span>
+                                <strong>Mappa di Vigore NDVI</strong>
+                                <span>Analisi spettrale multispettrale ad alta risoluzione — base diagnostica del vigore vegetativo.</span>
+                            </figcaption>
+                        </figure>
+
+                        <figure class="showcase-figure" id="panel-vra" role="tabpanel" aria-labelledby="tab-vra" hidden>
+                            <div class="showcase-frame">
+                                <picture>
+                                    <source srcset="public/showcase/map_macrozone_vra.webp" type="image/webp">
+                                    <img
+                                        src="public/showcase/map_macrozone_vra.png"
+                                        alt="Macro-zonazione VRA G4 a macro-poligoni continui con palette agronomica Verde Scuro, Verde Chiaro e Rosso"
+                                        width="1200"
+                                        height="800"
+                                        loading="lazy"
+                                        decoding="async"
+                                    >
+                                </picture>
+                            </div>
+                            <figcaption>
+                                <span class="fig-kicker">Mappa 2</span>
+                                <strong>Macro-Zonazione VRA G4</strong>
+                                <span>
+                                    Vettoriale a macro-poligoni continui (Verde Scuro / Verde Chiaro / Rosso).
+                                    Precisione geometrica per rateo variabile continuo — niente strappi sul terminale ISOBUS.
+                                </span>
+                            </figcaption>
+                            <ul class="showcase-legend" aria-label="Palette agronomica">
+                                <li><span class="swatch alto"></span>Verde Scuro — Alto vigore</li>
+                                <li><span class="swatch medio"></span>Verde Chiaro — Medio / Target</li>
+                                <li><span class="swatch basso"></span>Rosso — Basso vigore / Stress</li>
+                            </ul>
+                        </figure>
+
+                        <div class="showcase-figure showcase-soon" id="panel-fallanze" role="tabpanel" aria-labelledby="tab-fallanze" hidden>
+                            <div class="showcase-soon-card">
+                                <span class="g4-badge">Modulo indipendente</span>
+                                <h4>Censimento POI Fallanze</h4>
+                                <p>
+                                    Layer punti georeferenziati (SHP / GeoJSON / GPX) per overlay su
+                                    <strong>Ortofoto RGB</strong> e Griglia Madre in QField / Avenza Maps.
+                                    Separato dal TASKDATA VRA — Dose Zero fuori dalla mappa di dose.
+                                </p>
+                                <div class="showcase-soon-slot" aria-hidden="true">
+                                    <span class="soon-placeholder">Ortofoto RGB · in arrivo con il prossimo rilievo ceppi</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
+                    <p class="showcase-note">
+                        Asset da report agronomico reale (appezzamento di riferimento). La macro-zonazione continua
+                        riduce i micro-cambi di dose e stabilizza la guida delle barre a rateo variabile.
+                    </p>
                 </div>
             </section>
 
@@ -274,13 +299,47 @@
         (function () {
             var playBtn = document.getElementById('play-viewer');
             var video = document.getElementById('viewer-demo');
-            if (!playBtn || !video) return;
-            playBtn.addEventListener('click', function (e) {
-                e.preventDefault();
-                video.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                video.muted = false;
-                var p = video.play();
-                if (p && typeof p.catch === 'function') p.catch(function () {});
+            if (playBtn && video) {
+                playBtn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    video.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    video.muted = false;
+                    var p = video.play();
+                    if (p && typeof p.catch === 'function') p.catch(function () {});
+                });
+            }
+
+            var tabs = document.querySelectorAll('.showcase-tab');
+            var panels = {
+                ndvi: document.getElementById('panel-ndvi'),
+                vra: document.getElementById('panel-vra'),
+                fallanze: document.getElementById('panel-fallanze')
+            };
+            if (!tabs.length) return;
+
+            function activate(id) {
+                tabs.forEach(function (tab) {
+                    var on = tab.getAttribute('data-panel') === id;
+                    tab.classList.toggle('is-active', on);
+                    tab.setAttribute('aria-selected', on ? 'true' : 'false');
+                });
+                Object.keys(panels).forEach(function (key) {
+                    var panel = panels[key];
+                    if (!panel) return;
+                    if (key === id) {
+                        panel.hidden = false;
+                        panel.classList.add('is-active');
+                    } else {
+                        panel.hidden = true;
+                        panel.classList.remove('is-active');
+                    }
+                });
+            }
+
+            tabs.forEach(function (tab) {
+                tab.addEventListener('click', function () {
+                    activate(tab.getAttribute('data-panel'));
+                });
             });
         })();
     </script>
