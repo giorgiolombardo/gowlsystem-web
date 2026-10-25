@@ -524,6 +524,96 @@ body {
 .swatch.medio { background: #a6d96a; }
 .swatch.basso { background: #d7191c; }
 
+/* Showcase mappe: canvas a sinistra, comandi a destra */
+.showcase-split {
+    display: grid;
+    grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
+    grid-template-areas: "canvas aside";
+    gap: 1.35rem 1.5rem;
+    align-items: start;
+}
+
+.showcase-split .showcase-stage {
+    grid-area: canvas;
+    min-width: 0;
+}
+
+.showcase-aside {
+    grid-area: aside;
+    min-width: 0;
+    position: sticky;
+    top: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.showcase-aside .g4-panel-head {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.showcase-kicker {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.55rem 0.75rem;
+}
+
+.showcase-kicker h3 {
+    margin-bottom: 0;
+}
+
+.showcase-aside .g4-panel-head p {
+    margin: 0;
+}
+
+.showcase-aside .showcase-tabs {
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.showcase-aside .showcase-tab {
+    justify-content: flex-start;
+}
+
+.showcase-detail[hidden] {
+    display: none !important;
+}
+
+.showcase-detail h4 {
+    color: #fff;
+    font-size: 1.02rem;
+    margin: 0.15rem 0 0.35rem;
+}
+
+.showcase-detail > p:not(.fig-kicker) {
+    color: var(--text-muted);
+    font-size: 0.92rem;
+    line-height: 1.45;
+    margin: 0;
+}
+
+.showcase-aside .showcase-legend {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.55rem;
+    margin-top: 0.9rem;
+}
+
+.showcase-aside .showcase-note {
+    margin-top: 1.1rem;
+    max-width: none;
+}
+
+.showcase-split .showcase-frame {
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: #12181b;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+}
+
 /* Showcase mappe validate */
 .showcase-panel .g4-panel-head strong {
     color: #e8f5e9;
@@ -1041,6 +1131,22 @@ body {
 
 /* Responsive */
 @media (max-width: 960px) {
+    .showcase-split {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "aside"
+            "canvas";
+    }
+
+    .showcase-aside {
+        position: static;
+    }
+
+    .showcase-aside .showcase-tabs {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
     .pipeline-split {
         grid-template-columns: 1fr;
         align-items: stretch;

@@ -102,27 +102,8 @@
                     </figure>
                 </div>
 
-                <!-- Showcase mappe validate (report reale G5 — diagnostica_g5 frozen) -->
-                <div class="g4-panel showcase-panel" id="showcase-mappe" aria-label="Showcase Diagnostica Spettrale Integrata G5 e Macro-zonazione VRA">
-                    <div class="g4-panel-head">
-                        <div>
-                            <h3>Showcase demo — report reale G5</h3>
-                            <p>
-                                Due strati convalidati dalla pipeline: Diagnostica Spettrale Integrata G5 (NDVI, GNDVI, NDRE, NDWI) e Macro-Zonazione Vettoriale Continua VRA ottimizzata per terminali ISOBUS (ISO-XML TASKDATA) — guida fluida, senza micro-pixel.
-                            </p>
-                        </div>
-                        <span class="g4-badge">Gate 5 · Live</span>
-                    </div>
-
-                    <div class="showcase-tabs" role="tablist" aria-label="Seleziona mappa dimostrativa">
-                        <button type="button" class="showcase-tab is-active" role="tab" aria-selected="true" aria-controls="panel-diagnostica" id="tab-diagnostica" data-panel="diagnostica">
-                            Diagnostica Spettrale G5
-                        </button>
-                        <button type="button" class="showcase-tab" role="tab" aria-selected="false" aria-controls="panel-vra" id="tab-vra" data-panel="vra">
-                            Macro-VRA G4
-                        </button>
-                    </div>
-
+                <!-- Showcase mappe: canvas a sinistra, comandi e legenda a destra -->
+                <div class="g4-panel showcase-panel showcase-split" id="showcase-mappe" aria-label="Showcase Diagnostica Spettrale Integrata G5 e Macro-zonazione VRA">
                     <div class="showcase-stage">
                         <figure class="showcase-figure is-active" id="panel-diagnostica" role="tabpanel" aria-labelledby="tab-diagnostica">
                             <div class="showcase-frame showcase-frame--board">
@@ -143,20 +124,6 @@
                                     >
                                 </picture>
                             </div>
-                            <figcaption>
-                                <span class="fig-kicker">Tab 1 · G5</span>
-                                <strong>Diagnostica Spettrale G5</strong>
-                                <span>
-                                    Quadro 2×2 a quattro indici: Vigore/Biomassa (NDVI), Clorofilla (GNDVI),
-                                    Salute Red Edge (NDRE), Stress Idrico (NDWI) — asset da diagnostica_g5/.
-                                </span>
-                            </figcaption>
-                            <ul class="showcase-legend showcase-legend--spectral" aria-label="Indici spettrali">
-                                <li><span class="swatch spectral-ndvi"></span>NDVI — Vigore / Biomassa</li>
-                                <li><span class="swatch spectral-gndvi"></span>GNDVI — Clorofilla</li>
-                                <li><span class="swatch spectral-ndre"></span>NDRE — Red Edge</li>
-                                <li><span class="swatch spectral-ndwi"></span>NDWI — Stress Idrico</li>
-                            </ul>
                         </figure>
 
                         <figure class="showcase-figure" id="panel-vra" role="tabpanel" aria-labelledby="tab-vra" hidden>
@@ -173,26 +140,63 @@
                                     >
                                 </picture>
                             </div>
-                            <figcaption>
-                                <span class="fig-kicker">Tab 2</span>
-                                <strong>Macro-VRA G4</strong>
-                                <span>
-                                    Mappa vettoriale continua a 3 classi (Verde Scuro / Verde Chiaro / Rosso)
-                                    per spandiconcime e irroratrici ISOBUS — export ISO-XML TASKDATA, senza micro-pixel.
-                                </span>
-                            </figcaption>
+                        </figure>
+                    </div>
+
+                    <aside class="showcase-aside">
+                        <div class="g4-panel-head">
+                            <div class="showcase-kicker">
+                                <h3>Showcase demo — report reale G5</h3>
+                                <span class="g4-badge">GATE 5 · LIVE</span>
+                            </div>
+                            <p>
+                                Due strati convalidati dalla pipeline: Diagnostica Spettrale Integrata G5 (NDVI, GNDVI, NDRE, NDWI) e Macro-Zonazione Vettoriale Continua VRA ottimizzata per terminali ISOBUS (ISO-XML TASKDATA) — guida fluida, senza micro-pixel.
+                            </p>
+                        </div>
+
+                        <div class="showcase-tabs" role="tablist" aria-label="Seleziona mappa dimostrativa">
+                            <button type="button" class="showcase-tab is-active" role="tab" aria-selected="true" aria-controls="panel-diagnostica" id="tab-diagnostica" data-panel="diagnostica">
+                                Diagnostica Spettrale G5
+                            </button>
+                            <button type="button" class="showcase-tab" role="tab" aria-selected="false" aria-controls="panel-vra" id="tab-vra" data-panel="vra">
+                                Macro-VRA G4
+                            </button>
+                        </div>
+
+                        <div class="showcase-detail is-active" data-panel="diagnostica">
+                            <p class="fig-kicker">Tab 1 · G5</p>
+                            <h4>Diagnostica Spettrale G5</h4>
+                            <p>
+                                Quadro 2×2 a quattro indici: Vigore/Biomassa (NDVI), Clorofilla (GNDVI),
+                                Salute Red Edge (NDRE), Stress Idrico (NDWI) — asset da diagnostica_g5/.
+                            </p>
+                            <ul class="showcase-legend showcase-legend--spectral" aria-label="Indici spettrali">
+                                <li><span class="swatch spectral-ndvi"></span>NDVI — Vigore / Biomassa</li>
+                                <li><span class="swatch spectral-gndvi"></span>GNDVI — Clorofilla</li>
+                                <li><span class="swatch spectral-ndre"></span>NDRE — Red Edge</li>
+                                <li><span class="swatch spectral-ndwi"></span>NDWI — Stress Idrico</li>
+                            </ul>
+                        </div>
+
+                        <div class="showcase-detail" data-panel="vra" hidden>
+                            <p class="fig-kicker">Tab 2</p>
+                            <h4>Macro-VRA G4</h4>
+                            <p>
+                                Mappa vettoriale continua a 3 classi (Verde Scuro / Verde Chiaro / Rosso)
+                                per spandiconcime e irroratrici ISOBUS — export ISO-XML TASKDATA, senza micro-pixel.
+                            </p>
                             <ul class="showcase-legend" aria-label="Palette agronomica">
                                 <li><span class="swatch alto"></span>Verde Scuro — Alto vigore</li>
                                 <li><span class="swatch medio"></span>Verde Chiaro — Medio / Target</li>
                                 <li><span class="swatch basso"></span>Rosso — Basso vigore / Stress</li>
                             </ul>
-                        </figure>
-                    </div>
+                        </div>
 
-                    <p class="showcase-note">
-                        Asset da report agronomico reale (appezzamento di riferimento). Due strati distinti:
-                        diagnostica spettrale e macro-zonazione VRA per terminali ISOBUS.
-                    </p>
+                        <p class="showcase-note">
+                            Asset da report agronomico reale (appezzamento di riferimento). Due strati distinti:
+                            diagnostica spettrale e macro-zonazione VRA per terminali ISOBUS.
+                        </p>
+                    </aside>
                 </div>
             </section>
 
@@ -371,6 +375,7 @@
                 diagnostica: document.getElementById('panel-diagnostica'),
                 vra: document.getElementById('panel-vra')
             };
+            var details = document.querySelectorAll('.showcase-detail');
             if (!tabs.length) return;
 
             function activate(id) {
@@ -389,6 +394,11 @@
                         panel.hidden = true;
                         panel.classList.remove('is-active');
                     }
+                });
+                details.forEach(function (detail) {
+                    var on = detail.getAttribute('data-panel') === id;
+                    detail.hidden = !on;
+                    detail.classList.toggle('is-active', on);
                 });
             }
 
