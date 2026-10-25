@@ -240,6 +240,47 @@ body {
     grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+/* Metodo: teoria a sinistra, Console Madre a destra */
+.pipeline-split {
+    display: grid;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    gap: 1.35rem 1.5rem;
+    align-items: center;
+    margin-bottom: 2.5rem;
+}
+
+.pipeline-split .metodo-grid {
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+    margin-bottom: 0;
+}
+
+.pipeline-split .info-card {
+    padding: 1.05rem 1.15rem;
+    border-radius: 14px;
+}
+
+.pipeline-split .card-kicker {
+    margin-bottom: 0.35rem;
+    font-size: 0.72rem;
+}
+
+.pipeline-split .info-card h3 {
+    font-size: 1.05rem;
+    margin-bottom: 0.4rem;
+}
+
+.pipeline-split .info-card p {
+    font-size: 0.92rem;
+    line-height: 1.45;
+}
+
+.pipeline-split .console-window {
+    margin: 0;
+    position: sticky;
+    top: 1.25rem;
+}
+
 .services-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
 }
@@ -1000,6 +1041,15 @@ body {
 
 /* Responsive */
 @media (max-width: 960px) {
+    .pipeline-split {
+        grid-template-columns: 1fr;
+        align-items: stretch;
+    }
+
+    .pipeline-split .console-window {
+        position: static;
+    }
+
     .metodo-grid {
         grid-template-columns: 1fr;
     }
