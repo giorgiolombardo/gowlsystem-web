@@ -280,6 +280,91 @@ body {
     margin: 0;
 }
 
+/* Console Madre — frame finestra desktop */
+.console-window {
+    margin: 0 0 2.5rem;
+    max-width: 100%;
+    background: #12181b;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    box-shadow: 0 28px 70px rgba(0, 0, 0, 0.48);
+    overflow: hidden;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.console-window:hover {
+    border-color: rgba(74, 222, 128, 0.7);
+    box-shadow:
+        0 28px 70px rgba(0, 0, 0, 0.48),
+        0 0 0 1px rgba(74, 222, 128, 0.35),
+        0 0 32px rgba(74, 222, 128, 0.16);
+}
+
+.console-window-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    min-width: 0;
+    padding: 0.7rem 0.95rem;
+    background: #1a2226;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.console-dots {
+    display: flex;
+    gap: 0.38rem;
+    flex: 0 0 auto;
+}
+
+.console-dots span {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: block;
+}
+
+.dot-red { background: #ff5f57; }
+.dot-yellow { background: #febc2e; }
+.dot-green { background: #28c840; }
+
+.console-window-title {
+    min-width: 0;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.78rem;
+    line-height: 1.35;
+    color: #c5d0d6;
+}
+
+.console-window-stage {
+    background: #0b0f19;
+    line-height: 0;
+}
+
+.console-window-stage img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+}
+
+.console-window-caption {
+    padding: 1.15rem 1.25rem 1.3rem;
+    text-align: left;
+}
+
+.console-window-caption h3 {
+    color: #ffffff;
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin: 0 0 0.45rem;
+}
+
+.console-window-caption p {
+    color: var(--text-muted);
+    font-size: 0.98rem;
+    margin: 0;
+}
+
 /* G4 panel */
 .g4-panel {
     background: var(--card-bg);
@@ -933,6 +1018,18 @@ body {
 }
 
 @media (max-width: 720px) {
+    .console-window-bar {
+        align-items: flex-start;
+    }
+
+    .console-window-title {
+        font-size: 0.68rem;
+    }
+
+    .console-window-caption {
+        padding: 1rem;
+    }
+
     .services-grid {
         grid-template-columns: 1fr;
     }
