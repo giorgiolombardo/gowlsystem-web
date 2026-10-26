@@ -134,6 +134,19 @@ body {
     flex-wrap: wrap;
 }
 
+.hero-section .action-buttons {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    max-width: 54rem;
+    margin-inline: auto;
+}
+
+@media (max-width: 720px) {
+    .hero-section .action-buttons {
+        grid-template-columns: 1fr;
+    }
+}
+
 .btn {
     display: inline-flex;
     align-items: center;
@@ -168,6 +181,23 @@ body {
 
 .btn-secondary:hover {
     border-color: rgba(46, 164, 79, 0.5);
+    color: #fff;
+}
+
+.btn-servizi {
+    appearance: none;
+    background: transparent;
+    color: var(--accent-green);
+    border: 1px solid rgba(46, 164, 79, 0.7);
+    cursor: pointer;
+    font-family: inherit;
+    line-height: 1.25;
+}
+
+.btn-servizi:hover,
+.btn-servizi:focus-visible {
+    background: rgba(46, 164, 79, 0.14);
+    border-color: var(--accent-green);
     color: #fff;
 }
 
@@ -1402,30 +1432,6 @@ body {
         flex-direction: row;
         flex-wrap: wrap;
     }
-}
-
-.servizi-section {
-    display: flex;
-    justify-content: center;
-    margin: 0.5rem 0 4.5rem;
-}
-
-.services-open {
-    appearance: none;
-    background: transparent;
-    border: 1px solid rgba(46, 164, 79, 0.55);
-    border-radius: 999px;
-    padding: 0.85rem 1.7rem;
-    color: var(--accent-green);
-    font-size: 0.95rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    cursor: pointer;
-}
-
-.services-open:hover,
-.services-open:focus-visible {
-    color: #ffffff;
 }
 
 body.modal-open {
