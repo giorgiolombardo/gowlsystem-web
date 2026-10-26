@@ -1404,19 +1404,23 @@ body {
     }
 }
 
+.servizi-section {
+    display: flex;
+    justify-content: center;
+    margin: 0.5rem 0 4.5rem;
+}
+
 .services-open {
     appearance: none;
-    background: none;
-    border: 0;
-    padding: 0;
-    font: inherit;
-    font-size: inherit;
-    font-weight: inherit;
-    letter-spacing: 0.06em;
+    background: transparent;
+    border: 1px solid rgba(46, 164, 79, 0.55);
+    border-radius: 999px;
+    padding: 0.85rem 1.7rem;
     color: var(--accent-green);
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
     cursor: pointer;
-    text-decoration: underline;
-    text-underline-offset: 0.18em;
 }
 
 .services-open:hover,
@@ -1484,48 +1488,82 @@ body.modal-open {
     color: #ffffff;
 }
 
+.servizi-intro,
+.servizi-note {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.55;
+}
+
+.servizi-intro {
+    margin: 0 0 1.1rem;
+}
+
 .servizi-list {
-    display: grid;
-    gap: 0.5rem;
-    margin-bottom: 1.15rem;
+    list-style: decimal;
+    margin: 0 0 1.15rem;
+    padding-left: 1.35rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
 }
 
-.servizi-list details {
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    background: rgba(255, 255, 255, 0.03);
+.servizi-list li {
+    color: var(--accent-green);
+    font-weight: 700;
 }
 
-.servizi-list summary {
+.servizi-list li::marker {
+    color: var(--accent-green);
+}
+
+.servizio-row {
+    appearance: none;
+    display: flex;
+    width: 100%;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.75rem;
+    border: 0;
+    background: none;
+    padding: 0.45rem 0 0.35rem;
+    text-align: left;
     cursor: pointer;
-    list-style: none;
-    padding: 0.8rem 0.95rem;
     color: #ffffff;
+}
+
+.servizio-title {
     font-weight: 700;
     line-height: 1.35;
 }
 
-.servizi-list summary::-webkit-details-marker {
-    display: none;
+.servizio-title strong {
+    font-weight: 700;
 }
 
-.servizi-list summary::after {
+.servizio-row::after {
     content: "+";
-    float: right;
-    margin-left: 0.75rem;
+    flex: 0 0 auto;
     color: var(--accent-green);
+    font-weight: 700;
 }
 
-.servizi-list details[open] summary::after {
+.servizio-row[aria-expanded="true"]::after {
     content: "–";
 }
 
-.servizi-list details p {
-    margin: 0;
-    padding: 0 0.95rem 0.9rem;
+.servizio-text {
+    margin: 0 0 0.7rem;
     color: var(--text-muted);
     font-size: 0.95rem;
+    font-weight: 400;
     line-height: 1.55;
+}
+
+.servizi-note {
+    margin: 0 0 1.15rem;
+    padding-top: 0.85rem;
+    border-top: 1px solid var(--border-color);
 }
 
 .servizi-close {

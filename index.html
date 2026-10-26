@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>gOWLsystem — Intelligenza Geospaziale per la Gestione Agricola</title>
     <meta name="description" content="Diagnostica Spettrale Integrata G5 (NDVI, GNDVI, NDRE, NDWI) e Macro-zonazione VRA continua per ISOBUS TASKDATA. Telerilevamento, conformità PAC/SRH01 e tutela peritale.">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=servizi-slot">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -180,15 +180,11 @@
                 </section>
             </section>
 
-            <!-- SERVIZI -->
+            <!-- SERVIZI: stesso punto delle quattro card, subito sopra Viewer & Demo -->
             <section id="servizi" class="servizi-section">
-                <header class="section-head">
-                    <h2 class="section-title">
-                        <button type="button" class="services-open" id="open-servizi" aria-haspopup="dialog" aria-controls="servizi-dialog">
-                            SERVIZI &amp; SOLUZIONI
-                        </button>
-                    </h2>
-                </header>
+                <button type="button" class="services-open" id="open-servizi" aria-haspopup="dialog" aria-controls="servizi-dialog">
+                    SERVIZI &amp; SOLUZIONI
+                </button>
             </section>
 
             <!-- VIEWER & DEMO (Ardilla Violeta) -->
@@ -315,40 +311,58 @@
         <div class="modal-panel servizi-dialog" id="servizi-dialog" role="dialog" aria-modal="true" aria-labelledby="servizi-dialog-title">
             <button type="button" class="modal-close" id="close-servizi-x" aria-label="Chiudi">×</button>
             <h2 id="servizi-dialog-title">ELENCO DEI SERVIZI OFFERTI</h2>
-            <div class="servizi-list">
-                <details>
-                    <summary>1. gOWL-Processing (Data Processing &amp; VRA Bureau)</summary>
-                    <p>Ingestione di dataset fotogrammetrici grezzi (RGB e Multispettrali) da drone o satellite, con esecuzione della catena radiometrica e geometrica (ortomosaico, DSM/DTM e indici di vigoria).</p>
-                </details>
-                <details>
-                    <summary>2. Maschera Strict Canopy</summary>
-                    <p>Elaborazione avanzata per l'isolamento della vegetazione attiva tramite l'esclusione automatica del suolo nudo e delle ombre (soglia a −30 cm).</p>
-                </details>
-                <details>
-                    <summary>3. Catasto-GIS Sync &amp; Targa Catastale</summary>
-                    <p>Importazione dei fogli e particelle catastali ufficiali con sovrapposizione geometrica e calcolo automatico dei riferimenti catastali (Comune catastale, foglio, particella e confronto tra superficie catastale nominale e superficie reale colturale).</p>
-                </details>
-                <details>
-                    <summary>4. VRA Prescription Kit</summary>
-                    <p>Generazione di mappe di prescrizione multi-formato (.shp, ISO-XML, GeoJSON, KML) a rateo variabile, ottimizzate per terminali ISOBUS e droni spanditori (es. DJI Agras).</p>
-                </details>
-                <details>
-                    <summary>5. Scheda Operatore VRA &amp; Istruzioni di Campo</summary>
-                    <p>Generazione del documento operativo di sintesi per il driver della trattrice o il pilota del drone, contenente i dati catastali, le indicazioni di accesso e le tabelle di dosaggio per zona.</p>
-                </details>
-                <details>
-                    <summary>6. Storico Satellitare Retrospettivo (Fino a 5 Anni)</summary>
-                    <p>Analisi e fusione di serie storiche di dati satellitari multispettrali ad alta risoluzione (Sentinel/Planet) per ricostruire il trend di vigoria, stress idrico e produttività dell'appezzamento fino ai 5 anni precedenti.</p>
-                </details>
-                <details>
-                    <summary>7. Full Agronomic Intelligence &amp; Stima Resa</summary>
-                    <p>Modelli avanzati di analisi colturale, censimento di ceppi e fallanze, e stime quantitative della resa pre-raccolto/vendemmia.</p>
-                </details>
-                <details>
-                    <summary>8. Compliance, QdC &amp; Dossier Peritali</summary>
-                    <p>Reportistica formattata per la compilazione del Quaderno di Campagna (QdC), la rendicontazione PAC (Eco-schema SRH01) e supporto geospaziale per perizie assicurative e stima danni.</p>
-                </details>
-            </div>
+            <p class="servizi-intro">gOWLsystem è la piattaforma e il bureau B2B specializzato nella trasformazione di dati fotogrammetrici e telerilevati in mappe di prescrizione agronomica (VRA), analisi di vigoria ad alta precisione e conformità documentale per il settore agricolo e territoriale.</p>
+            <ol class="servizi-list">
+                <li>
+                    <button type="button" class="servizio-row" aria-expanded="false">
+                        <span class="servizio-title"><strong>gOWL-Processing (Data Processing &amp; VRA Bureau)</strong></span>
+                    </button>
+                    <p class="servizio-text" hidden>Ingestione di dataset fotogrammetrici grezzi (RGB e Multispettrali) da drone o satellite, con esecuzione della catena radiometrica e geometrica (ortomosaico, DSM/DTM e indici di vigoria).</p>
+                </li>
+                <li>
+                    <button type="button" class="servizio-row" aria-expanded="false">
+                        <span class="servizio-title"><strong>Maschera Strict Canopy</strong></span>
+                    </button>
+                    <p class="servizio-text" hidden>Elaborazione avanzata per l'isolamento della vegetazione attiva tramite l'esclusione automatica del suolo nudo e delle ombre (soglia a −30 cm).</p>
+                </li>
+                <li>
+                    <button type="button" class="servizio-row" aria-expanded="false">
+                        <span class="servizio-title"><strong>Catasto-GIS Sync &amp; Targa Catastale</strong></span>
+                    </button>
+                    <p class="servizio-text" hidden>Importazione dei fogli e particelle catastali ufficiali con sovrapposizione geometrica e calcolo automatico dei riferimenti catastali (Comune catastale, foglio, particella e confronto tra superficie catastale nominale e superficie reale colturale).</p>
+                </li>
+                <li>
+                    <button type="button" class="servizio-row" aria-expanded="false">
+                        <span class="servizio-title"><strong>VRA Prescription Kit</strong></span>
+                    </button>
+                    <p class="servizio-text" hidden>Generazione di mappe di prescrizione multi-formato (.shp, ISO-XML, GeoJSON, KML) a rateo variabile, ottimizzate per terminali ISOBUS e droni spanditori (es. DJI Agras).</p>
+                </li>
+                <li>
+                    <button type="button" class="servizio-row" aria-expanded="false">
+                        <span class="servizio-title"><strong>Scheda Operatore VRA &amp; Istruzioni di Campo</strong></span>
+                    </button>
+                    <p class="servizio-text" hidden>Generazione del documento operativo di sintesi per il driver della trattrice o il pilota del drone, contenente i dati catastali, le indicazioni di accesso e le tabelle di dosaggio per zona.</p>
+                </li>
+                <li>
+                    <button type="button" class="servizio-row" aria-expanded="false">
+                        <span class="servizio-title"><strong>Storico Satellitare Retrospettivo (Fino a 5 Anni)</strong></span>
+                    </button>
+                    <p class="servizio-text" hidden>Analisi e fusione di serie storiche di dati satellitari multispettrali ad alta risoluzione (Sentinel/Planet) per ricostruire il trend di vigoria, stress idrico e produttività dell'appezzamento fino ai 5 anni precedenti.</p>
+                </li>
+                <li>
+                    <button type="button" class="servizio-row" aria-expanded="false">
+                        <span class="servizio-title"><strong>Full Agronomic Intelligence &amp; Stima Resa</strong></span>
+                    </button>
+                    <p class="servizio-text" hidden>Modelli avanzati di analisi colturale, censimento di ceppi e fallanze, e stime quantitative della resa pre-raccolto/vendemmia.</p>
+                </li>
+                <li>
+                    <button type="button" class="servizio-row" aria-expanded="false">
+                        <span class="servizio-title"><strong>Compliance, QdC &amp; Dossier Peritali</strong></span>
+                    </button>
+                    <p class="servizio-text" hidden>Reportistica formattata per la compilazione del Quaderno di Campagna (QdC), la rendicontazione PAC (Eco-schema SRH01) e supporto geospaziale per perizie assicurative e stima danni.</p>
+                </li>
+            </ol>
+            <p class="servizi-note">Condizioni &amp; Contatti: Preventivi personalizzati su richiesta (tariffe a progetto, a ettaro o a pacchetto stagionale).</p>
             <button type="button" class="btn btn-secondary servizi-close" id="close-servizi">Chiudi</button>
         </div>
     </div>
@@ -427,8 +441,10 @@
                 overlay.classList.remove("is-open");
                 overlay.hidden = true;
                 document.body.classList.remove("modal-open");
-                dialog.querySelectorAll("details").forEach(function (item) {
-                    item.open = false;
+                dialog.querySelectorAll(".servizio-row").forEach(function (row) {
+                    row.setAttribute("aria-expanded", "false");
+                    var text = row.nextElementSibling;
+                    if (text) text.hidden = true;
                 });
                 openBtn.focus();
             }
@@ -439,12 +455,18 @@
             overlay.addEventListener("click", function (event) {
                 if (event.target === overlay) closeDialog();
             });
-            dialog.querySelectorAll("details").forEach(function (item) {
-                item.addEventListener("toggle", function () {
-                    if (!item.open) return;
-                    dialog.querySelectorAll("details").forEach(function (other) {
-                        if (other !== item) other.open = false;
+            dialog.querySelectorAll(".servizio-row").forEach(function (row) {
+                row.addEventListener("click", function () {
+                    var text = row.nextElementSibling;
+                    var open = row.getAttribute("aria-expanded") === "true";
+                    dialog.querySelectorAll(".servizio-row").forEach(function (other) {
+                        other.setAttribute("aria-expanded", "false");
+                        if (other.nextElementSibling) other.nextElementSibling.hidden = true;
                     });
+                    if (!open && text) {
+                        row.setAttribute("aria-expanded", "true");
+                        text.hidden = false;
+                    }
                 });
             });
             document.addEventListener("keydown", function (event) {
