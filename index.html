@@ -180,39 +180,15 @@
                 </section>
             </section>
 
-            <!-- SERVIZI MODULARI -->
+            <!-- SERVIZI -->
             <section id="servizi" class="servizi-section">
                 <header class="section-head">
-                    <h2 class="section-title">Servizi Modulari</h2>
-                    <p class="section-lead">Quattro ambiti componibili, attivabili in base alle esigenze aziendali.</p>
+                    <h2 class="section-title">
+                        <button type="button" class="services-open" id="open-servizi" aria-haspopup="dialog" aria-controls="servizi-dialog">
+                            SERVIZI &amp; SOLUZIONI
+                        </button>
+                    </h2>
                 </header>
-
-                <div class="services-grid">
-                    <article class="info-card">
-                        <h3>Telerilevamento</h3>
-                        <p>Rilievi UAV, censimento ceppi e fallanze, report storico satellitare per il monitoraggio pluriennale.</p>
-                    </article>
-                    <article class="info-card">
-                        <h3>Operatività ISOBUS</h3>
-                        <p>Mappe VRA ISOBUS (TaskData) e Scheda Operatore di campo per l’esecuzione in cantiere.</p>
-                    </article>
-                    <article class="info-card">
-                        <h3>Burocrazia / PAC</h3>
-                        <p>Quaderno di Campagna e dossier a supporto di bandi PSR / SRH01 e conformità documentale.</p>
-                    </article>
-                    <article class="info-card">
-                        <h3>Tutela Peritale</h3>
-                        <p>Gate Peritale Ante/Post, dossier assicurativo e Consuntivo ROI di fine anno.</p>
-                    </article>
-                </div>
-
-                <div class="cta-banner">
-                    <div>
-                        <h3>Servizio sartoriale su misura</h3>
-                        <p>Moduli e perimetro di intervento calibrati su estensione e obiettivi aziendali. Richiedi un preventivo personalizzato.</p>
-                    </div>
-                    <a class="btn btn-primary" href="mailto:info@gowlsystem.com?subject=Richiesta%20preventivo%20personalizzato%20gOWLsystem">info@gowlsystem.com</a>
-                </div>
             </section>
 
             <!-- VIEWER & DEMO (Ardilla Violeta) -->
@@ -335,6 +311,48 @@
         </footer>
     </div>
 
+    <div class="modal-overlay" id="servizi-overlay" hidden>
+        <div class="modal-panel servizi-dialog" id="servizi-dialog" role="dialog" aria-modal="true" aria-labelledby="servizi-dialog-title">
+            <button type="button" class="modal-close" id="close-servizi-x" aria-label="Chiudi">×</button>
+            <h2 id="servizi-dialog-title">ELENCO DEI SERVIZI OFFERTI</h2>
+            <div class="servizi-list">
+                <details>
+                    <summary>1. gOWL-Processing (Data Processing &amp; VRA Bureau)</summary>
+                    <p>Ingestione di dataset fotogrammetrici grezzi (RGB e Multispettrali) da drone o satellite, con esecuzione della catena radiometrica e geometrica (ortomosaico, DSM/DTM e indici di vigoria).</p>
+                </details>
+                <details>
+                    <summary>2. Maschera Strict Canopy</summary>
+                    <p>Elaborazione avanzata per l'isolamento della vegetazione attiva tramite l'esclusione automatica del suolo nudo e delle ombre (soglia a −30 cm).</p>
+                </details>
+                <details>
+                    <summary>3. Catasto-GIS Sync &amp; Targa Catastale</summary>
+                    <p>Importazione dei fogli e particelle catastali ufficiali con sovrapposizione geometrica e calcolo automatico dei riferimenti catastali (Comune catastale, foglio, particella e confronto tra superficie catastale nominale e superficie reale colturale).</p>
+                </details>
+                <details>
+                    <summary>4. VRA Prescription Kit</summary>
+                    <p>Generazione di mappe di prescrizione multi-formato (.shp, ISO-XML, GeoJSON, KML) a rateo variabile, ottimizzate per terminali ISOBUS e droni spanditori (es. DJI Agras).</p>
+                </details>
+                <details>
+                    <summary>5. Scheda Operatore VRA &amp; Istruzioni di Campo</summary>
+                    <p>Generazione del documento operativo di sintesi per il driver della trattrice o il pilota del drone, contenente i dati catastali, le indicazioni di accesso e le tabelle di dosaggio per zona.</p>
+                </details>
+                <details>
+                    <summary>6. Storico Satellitare Retrospettivo (Fino a 5 Anni)</summary>
+                    <p>Analisi e fusione di serie storiche di dati satellitari multispettrali ad alta risoluzione (Sentinel/Planet) per ricostruire il trend di vigoria, stress idrico e produttività dell'appezzamento fino ai 5 anni precedenti.</p>
+                </details>
+                <details>
+                    <summary>7. Full Agronomic Intelligence &amp; Stima Resa</summary>
+                    <p>Modelli avanzati di analisi colturale, censimento di ceppi e fallanze, e stime quantitative della resa pre-raccolto/vendemmia.</p>
+                </details>
+                <details>
+                    <summary>8. Compliance, QdC &amp; Dossier Peritali</summary>
+                    <p>Reportistica formattata per la compilazione del Quaderno di Campagna (QdC), la rendicontazione PAC (Eco-schema SRH01) e supporto geospaziale per perizie assicurative e stima danni.</p>
+                </details>
+            </div>
+            <button type="button" class="btn btn-secondary servizi-close" id="close-servizi">Chiudi</button>
+        </div>
+    </div>
+
     <script src="beta-form.js" defer></script>
     <script>
         (function () {
@@ -386,6 +404,51 @@
                 tab.addEventListener('click', function () {
                     activate(tab.getAttribute('data-panel'));
                 });
+            });
+        })();
+    </script>
+    <script>
+        (function () {
+            var overlay = document.getElementById("servizi-overlay");
+            var openBtn = document.getElementById("open-servizi");
+            var dialog = document.getElementById("servizi-dialog");
+            var closeX = document.getElementById("close-servizi-x");
+            var closeBtn = document.getElementById("close-servizi");
+            if (!overlay || !openBtn || !dialog || !closeX || !closeBtn) return;
+
+            function openDialog() {
+                overlay.hidden = false;
+                overlay.classList.add("is-open");
+                document.body.classList.add("modal-open");
+                closeX.focus();
+            }
+
+            function closeDialog() {
+                overlay.classList.remove("is-open");
+                overlay.hidden = true;
+                document.body.classList.remove("modal-open");
+                dialog.querySelectorAll("details").forEach(function (item) {
+                    item.open = false;
+                });
+                openBtn.focus();
+            }
+
+            openBtn.addEventListener("click", openDialog);
+            closeX.addEventListener("click", closeDialog);
+            closeBtn.addEventListener("click", closeDialog);
+            overlay.addEventListener("click", function (event) {
+                if (event.target === overlay) closeDialog();
+            });
+            dialog.querySelectorAll("details").forEach(function (item) {
+                item.addEventListener("toggle", function () {
+                    if (!item.open) return;
+                    dialog.querySelectorAll("details").forEach(function (other) {
+                        if (other !== item) other.open = false;
+                    });
+                });
+            });
+            document.addEventListener("keydown", function (event) {
+                if (event.key === "Escape" && overlay.classList.contains("is-open")) closeDialog();
             });
         })();
     </script>
