@@ -1576,8 +1576,7 @@ body.modal-open {
     margin-top: 0.25rem;
 }
 
-
-/* Finestre Operative · Meteo-VRA (fallback nativo oltre Tailwind CDN) */
+/* Finestre Operative · Meteo-VRA */
 #finestre-operative {
     padding: 3rem 0;
     background: #111827;
@@ -1590,6 +1589,38 @@ body.modal-open {
     margin-right: auto;
     padding-left: 1rem;
     padding-right: 1rem;
+}
+
+.meteo-controls .btn,
+.meteo-file-label {
+    white-space: nowrap;
+}
+
+.meteo-file-label {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.meteo-tabs .meteo-tab {
+    background: rgba(17, 24, 39, 0.9);
+    border: 1px solid #374151;
+    color: #9ca3af;
+    border-radius: 999px;
+    padding: 0.45rem 0.9rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.meteo-tabs .meteo-tab.is-active {
+    color: #a7f3d0;
+    border-color: rgba(16, 185, 129, 0.55);
+    background: rgba(6, 78, 59, 0.45);
+}
+
+.meteo-panel[hidden] {
+    display: none !important;
 }
 
 #finestre-operative .grid {
@@ -1624,11 +1655,39 @@ body.modal-open {
     font-weight: 700;
 }
 
-#meteo-status {
+#meteo-search {
+    min-width: 0;
+}
+
+.meteo-table th,
+.meteo-table td {
+    vertical-align: top;
+}
+
+.meteo-badge {
     display: inline-block;
-    margin-top: 0.25rem;
-    padding: 0.25rem 0.5rem;
-    border-radius: 0.25rem;
-    font-size: 0.75rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 0.35rem;
+    font-size: 0.72rem;
     font-weight: 700;
+}
+
+.meteo-badge.ok {
+    color: #a7f3d0;
+    background: #064e3b;
+}
+
+.meteo-badge.warn {
+    color: #fde68a;
+    background: #78350f;
+}
+
+.meteo-badge.bad {
+    color: #fecaca;
+    background: #7f1d1d;
+}
+
+#viewer.meteo-drop-active {
+    outline: 2px dashed rgba(16, 185, 129, 0.7);
+    outline-offset: 6px;
 }
