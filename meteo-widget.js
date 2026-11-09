@@ -23,6 +23,7 @@
     selectedDay: "",
     hourly: null,
     dailyDates: [],
+    lastKp: null,
   };
 
   var el = {
@@ -35,7 +36,20 @@
     temp: document.getElementById("meteo-temp"),
     wind: document.getElementById("meteo-wind"),
     hum: document.getElementById("meteo-hum"),
+    deltat: document.getElementById("meteo-deltat"),
+    leaf: document.getElementById("meteo-leaf"),
+    light: document.getElementById("meteo-light"),
+    radiation: document.getElementById("meteo-radiation"),
+    kp: document.getElementById("meteo-kp"),
     status: document.getElementById("meteo-status"),
+    wind02: document.getElementById("meteo-wind-02"),
+    wind20: document.getElementById("meteo-wind-20"),
+    wind40: document.getElementById("meteo-wind-40"),
+    wind80120: document.getElementById("meteo-wind-80120"),
+    wind02sem: document.getElementById("meteo-wind-02-sem"),
+    wind20sem: document.getElementById("meteo-wind-20-sem"),
+    wind40sem: document.getElementById("meteo-wind-40-sem"),
+    wind80120sem: document.getElementById("meteo-wind-80120-sem"),
     histBody: document.getElementById("meteo-history-body"),
     fcBody: document.getElementById("meteo-forecast-body"),
     daySelect: document.getElementById("meteo-day-select"),
@@ -189,15 +203,77 @@
     return { text: "APERTA · ottimale", cls: "ok" };
   }
 
-  /** Semaforo agronomico tassativo (vento 10 m + UR). */
-  function evaluateSemaforo(windSpeed, humidity) {
-    var wind = Number(windSpeed);
-    var hum = Number(humidity);
-    if (wind >= 15) {
+  /** Stima wet-bulb (°C) da T e UR — Stull 2011 approx. */
+  function wetBulbC(tC, rh) {
+    var T = Number(tC);
+    var RH = Math.max(1, Math.min(100, Number(rh)));
+    var Tw =
+      T * Math.atan(0.151977 * Math.sqrt(RH + 8.313659)) +
+      Math.atan(T + RH) -
+      Math.atan(RH - 1.676331) +
+      0.00391838 * Math.pow(RH, 1.5) * Math.atan(0.023101 * RH) -
+      4.686035;
+    return Tw;
+  }
+
+  function computeDeltaT(tC, rh) {
+    return Number(tC) - wetBulbC(tC, rh);
+  }
+
+  function leafWetnessLabel(rh, precip) {
+    if ((precip != null && precip > 0) || rh > 85) return "Bagnata";
+    if (rh >= 75) return "Umida";
+    return "Asciutta";
+  }
+
+  function lightFromClouds(cloudPct, radiation) {
+    var c = cloudPct == null ? 50 : Number(cloudPct);
+    if (c < 30 && (radiation == null || radiation > 200)) {
+      return { label: "Idonea (ciel sereno)", ok: true, warn: false };
+    }
+    if (c <= 70) {
+      return { label: "Nubi sparse (DLS)", ok: false, warn: true };
+    }
+    return { label: "Nuvoloso / scarsa", ok: false, warn: false };
+  }
+
+  function windTone(kmh) {
+    if (kmh >= 15) return "bad";
+    if (kmh >= 10) return "warn";
+    return "ok";
+  }
+
+  function setDot(node, tone) {
+    if (!node) return;
+    node.className = "meteo-dot is-" + tone;
+    node.textContent = "●";
+    node.title = tone === "ok" ? "OK" : tone === "warn" ? "Attenzione" : "Pericolo";
+  }
+
+  function evaluateSemaforo(p) {
+    var wind = Number(p.wind10);
+    var windAloft = Number(p.windAloft != null ? p.windAloft : wind);
+    var hum = Number(p.humidity);
+    var dT = Number(p.deltaT);
+    var kp = p.kp == null || isNaN(Number(p.kp)) ? 0 : Number(p.kp);
+    var lightWarn = !!p.lightWarn;
+    var lightOk = p.lightOk !== false;
+
+    if (wind >= 15 || windAloft >= 15) {
       return { cls: "bad", short: "ROSSO", text: "VENTO FORTE (RISCHIO DERIVA)" };
     }
     if (hum > 85) {
       return { cls: "bad", short: "ROSSO", text: "UMIDITÀ ECCESSIVA (RISCHIO DILAVAMENTO)" };
+    }
+    if (dT < 2 || dT > 10) {
+      return {
+        cls: "bad",
+        short: "ROSSO",
+        text: dT < 2 ? "∆T BASSO (GOCCIA INSTABILE)" : "∆T ALTO (EVAPORAZIONE FORTE)",
+      };
+    }
+    if (kp > 3) {
+      return { cls: "bad", short: "ROSSO", text: "KP > 3 (INSTABILITÀ GNSS/RTK)" };
     }
     if (hum < 50) {
       return { cls: "warn", short: "GIALLO", text: "ARIA SECCA (RISCHIO EVAPORAZIONE)" };
@@ -205,20 +281,35 @@
     if (hum >= 75 && hum <= 85) {
       return { cls: "warn", short: "GIALLO", text: "UMIDITÀ ALTA (CONDIZIONE LIMITE)" };
     }
-    return { cls: "ok", short: "VERDE", text: "OTTIMO (FINESTRA APERTA)" };
+    if (dT >= 8 && dT <= 10) {
+      return { cls: "warn", short: "GIALLO", text: "∆T ELEVATO (EVAPORAZIONE MEDIA)" };
+    }
+    if (windAloft >= 10 && windAloft < 15) {
+      return { cls: "warn", short: "GIALLO", text: "VENTO IN QUOTA (ATTENZIONE)" };
+    }
+    if (lightWarn) {
+      return { cls: "warn", short: "GIALLO", text: "NUBI SPARSE (DLS VARIABILE)" };
+    }
+    if (
+      wind < 15 &&
+      windAloft < 15 &&
+      hum >= 50 &&
+      hum < 75 &&
+      dT >= 2 &&
+      dT < 8 &&
+      kp <= 3 &&
+      lightOk
+    ) {
+      return { cls: "ok", short: "VERDE", text: "OTTIMO (FINESTRA APERTA)" };
+    }
+    return { cls: "warn", short: "GIALLO", text: "CONDIZIONE LIMITE" };
   }
 
-  function setLiveStatus(windSpeed, humidity) {
+  function setLiveStatus(sem) {
     var statusEl = el.status;
     if (!statusEl) return;
-    var s = evaluateSemaforo(windSpeed, humidity);
-    var classMap = {
-      bad: "text-xs font-bold text-red-300 bg-red-900 px-2 py-1 rounded inline-block mt-1",
-      warn: "text-xs font-bold text-amber-200 bg-amber-900 px-2 py-1 rounded inline-block mt-1",
-      ok: "text-xs font-bold text-emerald-300 bg-emerald-900 px-2 py-1 rounded inline-block mt-1",
-    };
-    statusEl.innerText = s.text;
-    statusEl.className = classMap[s.cls];
+    statusEl.innerText = sem.text;
+    statusEl.className = "meteo-status-pill is-" + sem.cls;
   }
 
   function fmtDay(iso) {
@@ -355,7 +446,22 @@
         hourly.wind_speed_80m ? hourly.wind_speed_80m[i] : null,
         hourly.wind_speed_120m ? hourly.wind_speed_120m[i] : null
       );
-      var sem = evaluateSemaforo(u10, hum);
+      var dT = computeDeltaT(
+        hourly.temperature_2m ? hourly.temperature_2m[i] : 20,
+        hum
+      );
+      var u80h = hourly.wind_speed_80m ? hourly.wind_speed_80m[i] : null;
+      var u120h = hourly.wind_speed_120m ? hourly.wind_speed_120m[i] : null;
+      var aloft = Math.max(Number(u80h) || 0, Number(u120h) || 0);
+      var sem = evaluateSemaforo({
+        wind10: u10,
+        windAloft: aloft,
+        humidity: hum,
+        deltaT: dT,
+        kp: state.lastKp,
+        lightOk: true,
+        lightWarn: false,
+      });
       out.push({
         time: hourly.time[i],
         hour: Number(hourly.time[i].slice(11, 13)),
@@ -582,24 +688,96 @@
     });
   }
 
+  async function fetchKpIndex() {
+    try {
+      var res = await fetch(
+        "https://services.swpc.noaa.gov/json/planetary_k_index_1m.json",
+        { cache: "no-store" }
+      );
+      if (!res.ok) throw new Error("KP HTTP " + res.status);
+      var arr = await res.json();
+      if (!arr || !arr.length) return null;
+      var last = arr[arr.length - 1];
+      var kp = last.kp_index != null ? last.kp_index : last.Kp;
+      return kp == null ? null : Number(kp);
+    } catch (e) {
+      console.warn("KP fetch fallback", e);
+      return null;
+    }
+  }
+
   async function loadForecast() {
     setPlace();
     var url =
       "https://api.open-meteo.com/v1/forecast?" +
       "latitude=" + encodeURIComponent(state.lat) +
       "&longitude=" + encodeURIComponent(state.lon) +
-      "&current=temperature_2m,relative_humidity_2m,wind_speed_10m,precipitation" +
-      "&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m,wind_speed_80m,wind_speed_120m,precipitation" +
+      "&current=temperature_2m,relative_humidity_2m,dew_point_2m,wind_speed_10m,wind_speed_80m,wind_speed_120m,precipitation,cloud_cover,shortwave_radiation" +
+      "&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m,wind_speed_80m,wind_speed_120m,precipitation,cloud_cover,shortwave_radiation" +
       "&daily=precipitation_sum,wind_speed_10m_max,temperature_2m_max,temperature_2m_min" +
       "&past_days=3&forecast_days=7&timezone=auto";
     var res = await fetch(url);
     var data = await res.json();
     if (!data || !data.current) throw new Error("Risposta meteo non valida");
 
-    el.temp.innerText = data.current.temperature_2m + " °C";
-    el.wind.innerText = data.current.wind_speed_10m + " km/h";
-    el.hum.innerText = data.current.relative_humidity_2m + " %";
-    setLiveStatus(data.current.wind_speed_10m, data.current.relative_humidity_2m);
+    var cur = data.current;
+    var t = cur.temperature_2m;
+    var rh = cur.relative_humidity_2m;
+    var dT = computeDeltaT(t, rh);
+    var u10 = cur.wind_speed_10m;
+    var u80 = cur.wind_speed_80m;
+    var u120 = cur.wind_speed_120m;
+    var profile = buildWindProfile(u10, u80, u120);
+    var byZ = {};
+    profile.forEach(function (p) { byZ[p.z] = p.wind; });
+    var w02 = byZ[0] != null && byZ[20] != null
+      ? byZ[0] + (byZ[20] - byZ[0]) * (2 / 20)
+      : logWindFrom10(2, u10);
+    var w20 = byZ[20] != null ? byZ[20] : logWindFrom10(20, u10);
+    var w40 = byZ[40] != null ? byZ[40] : logWindFrom10(40, u10);
+    var w80120 = Math.max(
+      byZ[80] != null ? byZ[80] : Number(u80) || 0,
+      byZ[120] != null ? byZ[120] : Number(u120) || 0
+    );
+
+    var kp = await fetchKpIndex();
+    state.lastKp = kp;
+    var light = lightFromClouds(cur.cloud_cover, cur.shortwave_radiation);
+
+    if (el.temp) el.temp.textContent = Number(t).toFixed(1) + " °C";
+    if (el.hum) el.hum.textContent = Number(rh).toFixed(0) + " %";
+    if (el.deltat) el.deltat.textContent = dT.toFixed(1) + " °C";
+    if (el.leaf) el.leaf.textContent = leafWetnessLabel(rh, cur.precipitation);
+    if (el.wind) el.wind.textContent = Number(u10).toFixed(1) + " km/h";
+    if (el.wind02) el.wind02.textContent = w02.toFixed(1) + " km/h";
+    if (el.wind20) el.wind20.textContent = w20.toFixed(1) + " km/h";
+    if (el.wind40) el.wind40.textContent = w40.toFixed(1) + " km/h";
+    if (el.wind80120) el.wind80120.textContent = w80120.toFixed(1) + " km/h";
+    setDot(el.wind02sem, windTone(w02));
+    setDot(el.wind20sem, windTone(w20));
+    setDot(el.wind40sem, windTone(w40));
+    setDot(el.wind80120sem, windTone(w80120));
+    if (el.light) el.light.textContent = light.label;
+    if (el.radiation) {
+      el.radiation.textContent =
+        cur.shortwave_radiation != null
+          ? Number(cur.shortwave_radiation).toFixed(0) + " W/m²"
+          : "-- W/m²";
+    }
+    if (el.kp) {
+      el.kp.textContent = kp == null ? "n/d" : Number(kp).toFixed(1);
+    }
+
+    var sem = evaluateSemaforo({
+      wind10: u10,
+      windAloft: w80120,
+      humidity: rh,
+      deltaT: dT,
+      kp: kp,
+      lightOk: light.ok,
+      lightWarn: light.warn,
+    });
+    setLiveStatus(sem);
 
     state.hourly = data.hourly || null;
 
@@ -611,9 +789,10 @@
     if (todayIdx < 0) todayIdx = Math.min(3, daily.time.length - 1);
 
     state.dailyDates = daily.time.slice();
-    var preferred = state.selectedDay && state.dailyDates.indexOf(state.selectedDay) >= 0
-      ? state.selectedDay
-      : daily.time[todayIdx];
+    var preferred =
+      state.selectedDay && state.dailyDates.indexOf(state.selectedDay) >= 0
+        ? state.selectedDay
+        : daily.time[todayIdx];
     populateDaySelect(state.dailyDates, preferred);
     state.selectedDay = preferred;
 

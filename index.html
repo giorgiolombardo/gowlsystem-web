@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>gOWLsystem — Intelligenza Geospaziale per la Gestione Agricola</title>
     <meta name="description" content="Diagnostica Spettrale Integrata G5 (NDVI, GNDVI, NDRE, NDWI) e Macro-zonazione VRA continua per ISOBUS TASKDATA. Telerilevamento, conformità PAC/SRH01 e tutela peritale.">
-    <link rel="stylesheet" href="style.css?v=finestre-operative-v5">
+    <link rel="stylesheet" href="style.css?v=meteo-ops-v1">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = { corePlugins: { preflight: false } };
@@ -193,8 +193,7 @@
                 <div class="text-center mb-6">
                   <span class="text-emerald-400 text-xs font-semibold uppercase tracking-wider">Meteo-VRA &amp; Trattamenti</span>
                   <h2 id="meteo-title" class="text-2xl font-bold text-white mt-1">Finestre Operative &amp; Forecast</h2>
-                  <p id="meteo-subtitle" class="text-sm text-gray-400 mt-2">Monitoraggio microclimatico (Open-Meteo) · deriva, vento e bagnatura fogliare.</p>
-                  <p id="meteo-place" class="text-xs text-emerald-300/90 mt-1">Località: in rilevamento…</p>
+                  <p id="meteo-subtitle" class="text-sm text-gray-400 mt-2">Monitoraggio microclimatico (Open-Meteo) · ∆T, profilo vento e GNSS.</p>
                 </div>
 
                 <div class="meteo-controls flex flex-col md:flex-row gap-2 mb-4">
@@ -215,42 +214,63 @@
                 </div>
 
                 <div id="meteo-panel-live" class="meteo-panel is-active" role="tabpanel">
-                  <div class="grid grid-cols-1 md:grid-cols-4 gap-4 bg-gray-800/60 p-6 rounded-xl border border-gray-700">
-                    <div class="p-4 bg-gray-900/80 rounded-lg border border-gray-700 text-center">
-                      <span class="text-xs text-gray-400 block">Temperatura</span>
-                      <span id="meteo-temp" class="text-xl font-bold text-emerald-400">-- °C</span>
+                  <div class="meteo-live-header">
+                    <div class="meteo-live-coords">
+                      <span class="meteo-live-kicker">Stato live</span>
+                      <p id="meteo-place" class="meteo-live-place">Località: in rilevamento…</p>
                     </div>
-                    <div class="p-4 bg-gray-900/80 rounded-lg border border-gray-700 text-center">
-                      <span class="text-xs text-gray-400 block">Vento (Rischio Deriva)</span>
-                      <span id="meteo-wind" class="text-xl font-bold text-emerald-400">-- km/h</span>
-                    </div>
-                    <div class="p-4 bg-gray-900/80 rounded-lg border border-gray-700 text-center">
-                      <span class="text-xs text-gray-400 block">Umidità Relativa</span>
-                      <span id="meteo-hum" class="text-xl font-bold text-emerald-400">-- %</span>
-                    </div>
-                    <div class="p-4 bg-gray-900/80 rounded-lg border border-gray-700 text-center">
-                      <span class="text-xs text-gray-400 block">Stato Trattamento</span>
-                      <span id="meteo-status" class="text-sm font-bold text-emerald-400 bg-emerald-950 px-2 py-1 rounded inline-block mt-1">VERIFICANDO...</span>
-                    </div>
+                    <span id="meteo-status" class="meteo-status-pill">VERIFICANDO...</span>
                   </div>
 
-                <aside class="meteo-legend mt-6 p-5 rounded-xl border border-gray-700 bg-gray-900/70" aria-labelledby="meteo-legend-title">
-                  <h3 id="meteo-legend-title" class="text-sm font-semibold text-white mb-3 tracking-wide">Legenda Semaforo Trattamento</h3>
-                  <ul class="meteo-legend-list space-y-3 text-sm text-gray-300">
-                    <li class="flex gap-3 items-start">
-                      <span class="meteo-badge ok shrink-0" aria-hidden="true">VERDE</span>
-                      <span><strong class="text-emerald-300">Ottimo</strong>: Vento &lt; 15 km/h e Umidità 50%–75% (Condizioni ideali, finestra aperta).</span>
-                    </li>
-                    <li class="flex gap-3 items-start">
-                      <span class="meteo-badge warn shrink-0" aria-hidden="true">GIALLO</span>
-                      <span><strong class="text-amber-200">Attenzione</strong>: Umidità &lt; 50% (Rischio evaporazione) o Umidità 75%–85% (Condizione limite).</span>
-                    </li>
-                    <li class="flex gap-3 items-start">
-                      <span class="meteo-badge bad shrink-0" aria-hidden="true">ROSSO</span>
-                      <span><strong class="text-red-300">Pericolo / Sconsigliato</strong>: Vento ≥ 15 km/h (Rischio deriva) o Umidità &gt; 85% (Rischio dilavamento / foglia zuppa).</span>
-                    </li>
-                  </ul>
-                </aside>
+                  <div class="meteo-ops-grid">
+                    <article class="meteo-ops-card" aria-labelledby="card-goccia-title">
+                      <h3 id="card-goccia-title" class="meteo-ops-title">Goccia &amp; Trattamento</h3>
+                      <dl class="meteo-ops-dl">
+                        <div><dt>Temperatura</dt><dd id="meteo-temp">-- °C</dd></div>
+                        <div><dt>Umidità Relativa</dt><dd id="meteo-hum">-- %</dd></div>
+                        <div><dt>∆T</dt><dd id="meteo-deltat">-- °C</dd></div>
+                        <div><dt>Bagnatura Fogliare</dt><dd id="meteo-leaf">--</dd></div>
+                      </dl>
+                    </article>
+
+                    <article class="meteo-ops-card" aria-labelledby="card-vento-title">
+                      <h3 id="card-vento-title" class="meteo-ops-title">Vento &amp; Profilo Verticale</h3>
+                      <ul class="meteo-wind-levels" id="meteo-wind-levels">
+                        <li><span>0–2 m</span><strong id="meteo-wind-02">--</strong><em id="meteo-wind-02-sem" class="meteo-dot">·</em></li>
+                        <li><span>20 m</span><strong id="meteo-wind-20">--</strong><em id="meteo-wind-20-sem" class="meteo-dot">·</em></li>
+                        <li><span>40 m</span><strong id="meteo-wind-40">--</strong><em id="meteo-wind-40-sem" class="meteo-dot">·</em></li>
+                        <li><span>80–120 m</span><strong id="meteo-wind-80120">--</strong><em id="meteo-wind-80120-sem" class="meteo-dot">·</em></li>
+                      </ul>
+                      <p class="meteo-wind-ref">Rif. 10 m: <strong id="meteo-wind">-- km/h</strong></p>
+                    </article>
+
+                    <article class="meteo-ops-card" aria-labelledby="card-gnss-title">
+                      <h3 id="card-gnss-title" class="meteo-ops-title">Rilievo &amp; GNSS</h3>
+                      <dl class="meteo-ops-dl">
+                        <div><dt>Luce / DLS</dt><dd id="meteo-light">--</dd></div>
+                        <div><dt>Radiazione</dt><dd id="meteo-radiation">-- W/m²</dd></div>
+                        <div><dt>Indice KP</dt><dd id="meteo-kp">--</dd></div>
+                      </dl>
+                    </article>
+                  </div>
+
+                  <aside class="meteo-legend mt-6" aria-labelledby="meteo-legend-title">
+                    <h3 id="meteo-legend-title">Legenda Semaforo Trattamento</h3>
+                    <ul class="meteo-legend-list">
+                      <li>
+                        <span class="meteo-badge ok">VERDE</span>
+                        <span><strong>Ottimo</strong>: Vento &lt; 15 km/h (anche in quota entro limiti), Umidità 50%–75%, ∆T 2°C–8°C (goccia stabile), KP ≤ 3 e luce idonea.</span>
+                      </li>
+                      <li>
+                        <span class="meteo-badge warn">GIALLO</span>
+                        <span><strong>Attenzione</strong>: Umidità &lt; 50% o 75%–85%, ∆T 8°C–10°C, vento in quota 10–15 km/h, oppure nubi sparse (DLS).</span>
+                      </li>
+                      <li>
+                        <span class="meteo-badge bad">ROSSO</span>
+                        <span><strong>Pericolo / Sconsigliato</strong>: Vento ≥ 15 km/h (o forte in quota), Umidità &gt; 85%, ∆T &lt; 2°C o &gt; 10°C, KP &gt; 3 (instabilità GNSS/RTK).</span>
+                      </li>
+                    </ul>
+                  </aside>
                 </div>
 
                 <div id="meteo-panel-hourly" class="meteo-panel" role="tabpanel" hidden>
@@ -261,7 +281,7 @@
                         <select id="meteo-day-select" class="meteo-day-select" aria-label="Seleziona giorno per fasce orarie"></select>
                       </label>
                       <p class="meteo-hourly-hint text-xs text-gray-400">
-                        Semaforo su vento a 10&nbsp;m e UR. Profilo verticale 0–120&nbsp;m (Open-Meteo 10/80/120&nbsp;m + profilo logaritmico vigneto z₀=0.2&nbsp;m).
+                        Fasce orarie con semaforo (vento, UR, ∆T, KP) e profilo verticale.
                       </p>
                     </div>
                     <div id="meteo-hourly-bands" class="meteo-hourly-bands" aria-live="polite">
@@ -318,7 +338,7 @@
               </div>
             </section>
 
-            <script src="meteo-widget.js?v=5" defer></script>
+            <script src="meteo-widget.js?v=6" defer></script>
 
             <!-- VIEWER & DEMO (Ardilla Violeta) -->
             <section id="viewer" class="video-section">
