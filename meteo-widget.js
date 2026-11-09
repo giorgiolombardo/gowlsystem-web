@@ -180,7 +180,6 @@
     var green =
       "text-xs font-bold text-emerald-300 bg-emerald-900 px-2 py-1 rounded inline-block mt-1";
 
-    // Priorità tassativa: vento → umidità eccessiva → aria secca → limite → ottimo
     if (wind >= 15) {
       statusEl.innerText = "VENTO FORTE (RISCHIO DERIVA)";
       statusEl.className = red;
@@ -194,7 +193,6 @@
       statusEl.innerText = "UMIDITÀ ALTA (CONDIZIONE LIMITE)";
       statusEl.className = yellow;
     } else {
-      // windSpeed < 15 E humidity tra 50 e 75
       statusEl.innerText = "OTTIMO (FINESTRA APERTA)";
       statusEl.className = green;
     }
