@@ -1575,3 +1575,60 @@ body.modal-open {
 .servizi-close {
     margin-top: 0.25rem;
 }
+
+
+/* Finestre Operative · Meteo-VRA (fallback nativo oltre Tailwind CDN) */
+#finestre-operative {
+    padding: 3rem 0;
+    background: #111827;
+    border-top: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+#finestre-operative .max-w-6xl {
+    max-width: 72rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+#finestre-operative .grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    background: rgba(31, 41, 55, 0.6);
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    border: 1px solid #374151;
+}
+
+@media (min-width: 768px) {
+    #finestre-operative .grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}
+
+#finestre-operative .grid > div {
+    padding: 1rem;
+    background: rgba(17, 24, 39, 0.8);
+    border-radius: 0.5rem;
+    border: 1px solid #374151;
+    text-align: center;
+}
+
+#meteo-temp,
+#meteo-wind,
+#meteo-hum {
+    color: #34d399;
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+#meteo-status {
+    display: inline-block;
+    margin-top: 0.25rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
