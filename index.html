@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>gOWLsystem — Intelligenza Geospaziale per la Gestione Agricola</title>
     <meta name="description" content="Diagnostica Spettrale Integrata G5 (NDVI, GNDVI, NDRE, NDWI) e Macro-zonazione VRA continua per ISOBUS TASKDATA. Telerilevamento, conformità PAC/SRH01 e tutela peritale.">
-    <link rel="stylesheet" href="style.css?v=finestre-operative-v4">
+    <link rel="stylesheet" href="style.css?v=finestre-operative-v5">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = { corePlugins: { preflight: false } };
@@ -209,6 +209,7 @@
 
                 <div class="meteo-tabs flex gap-2 mb-4 justify-center flex-wrap" role="tablist" aria-label="Pannelli meteo">
                   <button type="button" class="meteo-tab is-active" data-tab="live" role="tab" aria-selected="true">Semaforo live</button>
+                  <button type="button" class="meteo-tab" data-tab="hourly" role="tab" aria-selected="false">Fasce orarie</button>
                   <button type="button" class="meteo-tab" data-tab="history" role="tab" aria-selected="false">Storico 3 gg</button>
                   <button type="button" class="meteo-tab" data-tab="forecast" role="tab" aria-selected="false">Forecast 7 gg</button>
                 </div>
@@ -250,6 +251,28 @@
                     </li>
                   </ul>
                 </aside>
+                </div>
+
+                <div id="meteo-panel-hourly" class="meteo-panel" role="tabpanel" hidden>
+                  <div class="meteo-hourly-shell bg-gray-800/60 p-4 md:p-5 rounded-xl border border-gray-700">
+                    <div class="meteo-hourly-toolbar">
+                      <label class="meteo-hourly-date-label" for="meteo-day-select">
+                        Data
+                        <select id="meteo-day-select" class="meteo-day-select" aria-label="Seleziona giorno per fasce orarie"></select>
+                      </label>
+                      <p class="meteo-hourly-hint text-xs text-gray-400">
+                        Semaforo su vento a 10&nbsp;m e UR. Profilo verticale 0–120&nbsp;m (Open-Meteo 10/80/120&nbsp;m + profilo logaritmico vigneto z₀=0.2&nbsp;m).
+                      </p>
+                    </div>
+                    <div id="meteo-hourly-bands" class="meteo-hourly-bands" aria-live="polite">
+                      <p class="text-sm text-gray-500">Caricamento fasce orarie…</p>
+                    </div>
+                    <div id="meteo-profile-focus" class="meteo-profile-focus" hidden>
+                      <h4 class="meteo-profile-title">Profilo verticale vento</h4>
+                      <p id="meteo-profile-meta" class="text-xs text-gray-400 mb-3"></p>
+                      <div id="meteo-profile-chart" class="meteo-profile-chart" role="img" aria-label="Profilo vento per altezza"></div>
+                    </div>
+                  </div>
                 </div>
 
                 <div id="meteo-panel-history" class="meteo-panel" role="tabpanel" hidden>
@@ -295,7 +318,7 @@
               </div>
             </section>
 
-            <script src="meteo-widget.js?v=4" defer></script>
+            <script src="meteo-widget.js?v=5" defer></script>
 
             <!-- VIEWER & DEMO (Ardilla Violeta) -->
             <section id="viewer" class="video-section">
