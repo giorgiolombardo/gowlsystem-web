@@ -6,6 +6,10 @@
     <title>gOWLsystem — Intelligenza Geospaziale per la Gestione Agricola</title>
     <meta name="description" content="Diagnostica Spettrale Integrata G5 (NDVI, GNDVI, NDRE, NDWI) e Macro-zonazione VRA continua per ISOBUS TASKDATA. Telerilevamento, conformità PAC/SRH01 e tutela peritale.">
     <link rel="stylesheet" href="style.css?v=hero-servizi">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = { corePlugins: { preflight: false } };
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -17,6 +21,7 @@
             <nav class="nav-links" aria-label="Principale">
                 <a href="#mission">La Mission</a>
                 <a href="#metodo">Il Metodo</a>
+                <a href="#finestre-operative">Finestre Operative</a>
                 <a href="#viewer">Viewer &amp; Demo</a>
                 <a href="#beta">Accesso Beta</a>
             </nav>
@@ -180,6 +185,62 @@
                     </div>
                 </section>
             </section>
+
+
+            <!-- FINESTRE OPERATIVE (Meteo-VRA) -->
+            <section id="finestre-operative" class="py-12 bg-gray-900 border-t border-emerald-500/20">
+              <div class="max-w-6xl mx-auto px-4">
+                <div class="text-center mb-8">
+                  <span class="text-emerald-400 text-xs font-semibold uppercase tracking-wider">Meteo-VRA &amp; Trattamenti</span>
+                  <h2 class="text-2xl font-bold text-white mt-1">Finestre Operative &amp; Forecast in Tempo Reale</h2>
+                  <p class="text-sm text-gray-400 mt-2">Monitoraggio microclimatico (Open-Meteo) per la gestione della deriva, vento e bagnatura fogliare.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 bg-gray-800/60 p-6 rounded-xl border border-gray-700">
+                  <div class="p-4 bg-gray-900/80 rounded-lg border border-gray-700 text-center">
+                    <span class="text-xs text-gray-400 block">Temperatura</span>
+                    <span id="meteo-temp" class="text-xl font-bold text-emerald-400">-- °C</span>
+                  </div>
+                  <div class="p-4 bg-gray-900/80 rounded-lg border border-gray-700 text-center">
+                    <span class="text-xs text-gray-400 block">Vento (Rischio Deriva)</span>
+                    <span id="meteo-wind" class="text-xl font-bold text-emerald-400">-- km/h</span>
+                  </div>
+                  <div class="p-4 bg-gray-900/80 rounded-lg border border-gray-700 text-center">
+                    <span class="text-xs text-gray-400 block">Umidità Relativa</span>
+                    <span id="meteo-hum" class="text-xl font-bold text-emerald-400">-- %</span>
+                  </div>
+                  <div class="p-4 bg-gray-900/80 rounded-lg border border-gray-700 text-center">
+                    <span class="text-xs text-gray-400 block">Stato Trattamento</span>
+                    <span id="meteo-status" class="text-sm font-bold text-emerald-400 bg-emerald-950 px-2 py-1 rounded inline-block mt-1">VERIFICANDO...</span>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <script>
+              async function loadForecastWidget() {
+                try {
+                  const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=45.6983&longitude=9.6773&current=temperature_2m,relative_humidity_2m,wind_speed_10m');
+                  const data = await res.json();
+                  if (data && data.current) {
+                    document.getElementById('meteo-temp').innerText = data.current.temperature_2m + ' °C';
+                    document.getElementById('meteo-wind').innerText = data.current.wind_speed_10m + ' km/h';
+                    document.getElementById('meteo-hum').innerText = data.current.relative_humidity_2m + ' %';
+
+                    const wind = data.current.wind_speed_10m;
+                    const statusEl = document.getElementById('meteo-status');
+                    if (wind < 15) {
+                      statusEl.innerText = "OTTIMO (FINESTRA APERTA)";
+                      statusEl.className = "text-xs font-bold text-emerald-300 bg-emerald-900 px-2 py-1 rounded inline-block mt-1";
+                    } else {
+                      statusEl.innerText = "VENTO FORTE (RISCHIO DERIVA)";
+                      statusEl.className = "text-xs font-bold text-red-300 bg-red-900 px-2 py-1 rounded inline-block mt-1";
+                    }
+                  }
+                } catch (e) { console.error("Meteo load error", e); }
+              }
+              loadForecastWidget();
+            </script>
 
             <!-- VIEWER & DEMO (Ardilla Violeta) -->
             <section id="viewer" class="video-section">
