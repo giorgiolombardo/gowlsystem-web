@@ -167,21 +167,36 @@
     return { text: "APERTA · ottimale", cls: "ok" };
   }
 
-  function setLiveStatus(wind, rain) {
+  function setLiveStatus(windSpeed, humidity) {
     var statusEl = el.status;
     if (!statusEl) return;
-    if (wind < 15 && (rain == null || rain < 1)) {
-      statusEl.innerText = "OTTIMO (FINESTRA APERTA)";
-      statusEl.className =
-        "text-xs font-bold text-emerald-300 bg-emerald-900 px-2 py-1 rounded inline-block mt-1";
-    } else if (wind >= 15) {
+
+    var wind = Number(windSpeed);
+    var hum = Number(humidity);
+    var red =
+      "text-xs font-bold text-red-300 bg-red-900 px-2 py-1 rounded inline-block mt-1";
+    var yellow =
+      "text-xs font-bold text-amber-200 bg-amber-900 px-2 py-1 rounded inline-block mt-1";
+    var green =
+      "text-xs font-bold text-emerald-300 bg-emerald-900 px-2 py-1 rounded inline-block mt-1";
+
+    // Priorità tassativa: vento → umidità eccessiva → aria secca → limite → ottimo
+    if (wind >= 15) {
       statusEl.innerText = "VENTO FORTE (RISCHIO DERIVA)";
-      statusEl.className =
-        "text-xs font-bold text-red-300 bg-red-900 px-2 py-1 rounded inline-block mt-1";
+      statusEl.className = red;
+    } else if (hum > 85) {
+      statusEl.innerText = "UMIDITÀ ECCESSIVA (RISCHIO DILAVAMENTO)";
+      statusEl.className = red;
+    } else if (hum < 50) {
+      statusEl.innerText = "ARIA SECCA (RISCHIO EVAPORAZIONE)";
+      statusEl.className = yellow;
+    } else if (hum >= 75 && hum <= 85) {
+      statusEl.innerText = "UMIDITÀ ALTA (CONDIZIONE LIMITE)";
+      statusEl.className = yellow;
     } else {
-      statusEl.innerText = "UMIDITÀ/PIOGGIA (ATTENDERE)";
-      statusEl.className =
-        "text-xs font-bold text-amber-200 bg-amber-900 px-2 py-1 rounded inline-block mt-1";
+      // windSpeed < 15 E humidity tra 50 e 75
+      statusEl.innerText = "OTTIMO (FINESTRA APERTA)";
+      statusEl.className = green;
     }
   }
 
@@ -254,7 +269,9 @@
     el.temp.innerText = data.current.temperature_2m + " °C";
     el.wind.innerText = data.current.wind_speed_10m + " km/h";
     el.hum.innerText = data.current.relative_humidity_2m + " %";
-    setLiveStatus(data.current.wind_speed_10m, data.current.precipitation);
+    var windSpeed = data.current.wind_speed_10m;
+    var humidity = data.current.relative_humidity_2m;
+    setLiveStatus(windSpeed, humidity);
 
     var daily = data.daily;
     if (!daily || !daily.time) return;

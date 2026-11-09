@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>gOWLsystem — Intelligenza Geospaziale per la Gestione Agricola</title>
     <meta name="description" content="Diagnostica Spettrale Integrata G5 (NDVI, GNDVI, NDRE, NDWI) e Macro-zonazione VRA continua per ISOBUS TASKDATA. Telerilevamento, conformità PAC/SRH01 e tutela peritale.">
-    <link rel="stylesheet" href="style.css?v=finestre-operative-v3">
+    <link rel="stylesheet" href="style.css?v=finestre-operative-v4">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = { corePlugins: { preflight: false } };
@@ -232,6 +232,24 @@
                       <span id="meteo-status" class="text-sm font-bold text-emerald-400 bg-emerald-950 px-2 py-1 rounded inline-block mt-1">VERIFICANDO...</span>
                     </div>
                   </div>
+
+                <aside class="meteo-legend mt-6 p-5 rounded-xl border border-gray-700 bg-gray-900/70" aria-labelledby="meteo-legend-title">
+                  <h3 id="meteo-legend-title" class="text-sm font-semibold text-white mb-3 tracking-wide">Legenda Semaforo Trattamento</h3>
+                  <ul class="meteo-legend-list space-y-3 text-sm text-gray-300">
+                    <li class="flex gap-3 items-start">
+                      <span class="meteo-badge ok shrink-0" aria-hidden="true">VERDE</span>
+                      <span><strong class="text-emerald-300">Ottimo</strong>: Vento &lt; 15 km/h e Umidità 50%–75% (Condizioni ideali, finestra aperta).</span>
+                    </li>
+                    <li class="flex gap-3 items-start">
+                      <span class="meteo-badge warn shrink-0" aria-hidden="true">GIALLO</span>
+                      <span><strong class="text-amber-200">Attenzione</strong>: Umidità &lt; 50% (Rischio evaporazione) o Umidità 75%–85% (Condizione limite).</span>
+                    </li>
+                    <li class="flex gap-3 items-start">
+                      <span class="meteo-badge bad shrink-0" aria-hidden="true">ROSSO</span>
+                      <span><strong class="text-red-300">Pericolo / Sconsigliato</strong>: Vento ≥ 15 km/h (Rischio deriva) o Umidità &gt; 85% (Rischio dilavamento / foglia zuppa).</span>
+                    </li>
+                  </ul>
+                </aside>
                 </div>
 
                 <div id="meteo-panel-history" class="meteo-panel" role="tabpanel" hidden>
@@ -293,7 +311,7 @@
               </div>
             </section>
 
-            <script src="meteo-widget.js?v=2" defer></script>
+            <script src="meteo-widget.js?v=3" defer></script>
 
             <!-- VIEWER & DEMO (Ardilla Violeta) -->
             <section id="viewer" class="video-section">
